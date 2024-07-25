@@ -57,11 +57,17 @@ function PaymentList({ paymentGroup }: { paymentGroup: IPaymentGroup[] }) {
                     </p>
                   </div>
                   {item.fee_amount > 0 && (
-                    <>
-                      <p className="text-xs font-medium text-muted-foreground">
-                        +{priceMask(item.fee_amount)}
-                      </p>
-                    </>
+                    <p className="text-xs font-medium text-muted-foreground">
+                      {!data.product && "+"}
+                      {data.product
+                        ? data.product.discounted_price
+                          ? priceMask(
+                              item.fee_amount +
+                                data.product.discounted_price
+                            )
+                          : priceMask(item.fee_amount + data.product.price)
+                        : priceMask(item.fee_amount)}
+                    </p>
                   )}
                 </div>
               ))}
