@@ -174,7 +174,7 @@ function Promo({ categoryUuid }: { categoryUuid: string }) {
                 </DialogContent>
             </Dialog>
             <PromoDetail
-                id={selectedDetailPromo?.id}
+                p={selectedDetailPromo}
                 onClose={() => setSelectedDetailPromo(undefined)}
             />
         </>
