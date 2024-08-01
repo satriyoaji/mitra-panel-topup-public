@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { priceMask } from "@/Helpers";
 import { useCountdown } from "@/Hooks";
 import { IPromo } from "@/types/transaction";
+import { Cross1Icon } from "@radix-ui/react-icons";
 import { min } from "date-fns";
 import React from "react";
 
@@ -13,14 +14,14 @@ function PromoCard({
     setSelected,
     isSecret,
     onDetailClicked,
-    hasDetail,
+    onClose,
 }: {
     promo: IPromo;
     selected?: IPromo;
     setSelected: (promo?: IPromo) => void;
     isSecret?: boolean;
     onDetailClicked?: (promo?: IPromo) => void;
-    hasDetail?: boolean;
+    onClose?: () => void;
 }) {
     const { days, hours, minutes, seconds, isExpired } = useCountdown(
         promo.time_finish
@@ -30,12 +31,17 @@ function PromoCard({
         return (
             <>
                 <div
-                    className={`rounded-xl shadow-sm cursor-pointer text-theme-secondary-900 hover:bg-slate-50 ${
+                    className={`rounded-xl relative shadow-sm cursor-pointer text-theme-secondary-900 hover:bg-slate-50 ${
                         promo.id == selected?.id
                             ? "border-2 border-theme-secondary"
                             : "border-2"
                     }`}
                 >
+                    {onClose && (
+                        <div className="absolute right-2 top-2">
+                        <Cross1Icon className="w-3 h-3" onClick={onClose} />
+                        </div>
+                    )}
                     <div
                         className="flex"
                         onClick={() => {
@@ -66,8 +72,8 @@ function PromoCard({
                                             size="sm"
                                             variant="link"
                                             className="text-theme-secondary-900 text-xs"
-                                            onClick={() => {
-                                                console.log("clicked");
+                                            onClick={(e) => {
+                                                e.stopPropagation();
                                                 onDetailClicked(promo);
                                             }}
                                         >
