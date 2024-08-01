@@ -11,8 +11,8 @@ function Description({ description }: { description: string }) {
         className={`text-xs pt-[64px] text-muted-foreground leading-5 ${
           !show ? "overflow-ellipsis line-clamp-3" : null
         } `}
+        dangerouslySetInnerHTML={{ __html: description }}
       >
-        {description}
       </p>
       <div className="flex items-center justify-center mt-3">
         {description && (

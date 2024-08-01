@@ -9,30 +9,32 @@ import {
     DialogHeader,
     DialogTitle,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
 import TransactionContext, { ITransactionContext } from "@/infrastructures/context/transaction/transaction.context";
 import { IPromo, IPromoDetail } from "@/types/transaction";
 import { parseISO } from "date-fns";
 import Image from "next/image";
 import React, { useContext, useEffect, useState } from "react";
 
-function PromoDetail({ p, onClose }: { p?: IPromo; onClose: () => void }) {
+function PromoDetail({
+    p,
+    onBack,
+    onSelected,
+    open,
+    onOpenChange,
+}: {
+    p?: IPromo;
+    onBack: () => void;
+    onSelected: () => void;
+    open: boolean;
+    onOpenChange: (val: boolean) => void;
+}) {
     const [promo, setPromo] = useState<IPromoDetail | undefined>(undefined);
-    const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
-    const { data, dispatch } = useContext(
-      TransactionContext
-    ) as ITransactionContext;
-
-    const onPromoSelected = (e?: IPromo) => {
-        dispatch({
-            action: "SET_PROMO",
-            payload: e,
-        });
-    };
 
     const getData = async (idIn: string) => {
+        setLoading(true);
         var res = await fetch(`/api/products/promo/${idIn}`);
+        setLoading(false);
         if (res.ok) {
             var data = await res.json();
             setPromo(data.data);
@@ -44,29 +46,16 @@ function PromoDetail({ p, onClose }: { p?: IPromo; onClose: () => void }) {
 
     useEffect(() => {
         if (p) {
-          getData(p.id);
-          setOpen(true);
-        } else {
-          setPromo(undefined);
-          setOpen(false);
-          onClose();
+            getData(p.id);
         }
-      }, [p]);
-
-    const onOpenChange = (val: boolean) => {
-        setOpen(val);
-        if (!val) {
-            onClose();
-            setPromo(undefined);
-        }
-    };
+    }, [p]);
 
     if (p)
         return (
             <Dialog open={open} onOpenChange={onOpenChange}>
                 <DialogContent>
                     {loading ? (
-                        <p>Loading...</p>
+                        <p className="text-center w-full">Loading...</p>
                     ) : (
                         promo && (
                             <>
@@ -106,15 +95,26 @@ function PromoDetail({ p, onClose }: { p?: IPromo; onClose: () => void }) {
                                         ))}
                                     </div>
                                     <div>
-                                    <Button
-                                        className="w-full mt-2"
-                                        size="sm"
-                                        onClick={() => {
-                                            onPromoSelected(p);
-                                            setOpen(false);
-                                        }}
+                                        <Button
+                                            className="w-full mt-2"
+                                            size="sm"
+                                            onClick={() => {
+                                                onSelected();
+                                                onOpenChange(false);
+                                            }}
                                         >
-                                        Pakai Promo
+                                            Pakai Promo
+                                        </Button>
+                                        <Button
+                                            className="w-full mt-2"
+                                            variant="link"
+                                            size="sm"
+                                            onClick={() => {
+                                                onOpenChange(false);
+                                                onBack();
+                                            }}
+                                        >
+                                            Kembali ke list
                                         </Button>
                                     </div>
                                 </div>

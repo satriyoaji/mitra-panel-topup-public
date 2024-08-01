@@ -27,6 +27,7 @@ function Promo({ categoryUuid }: { categoryUuid: string }) {
     const [hiddenPromoCode, setHiddenPromoCode] = useState<string>();
     const [loading, setLoading] = useState<boolean>(false);
     const [open, setOpen] = useState(false);
+    const [detailOpen, setDetailOpen] = useState(false);
     const { toast } = useToast();
     const { data, dispatch } = useContext(
         TransactionContext
@@ -102,7 +103,7 @@ function Promo({ categoryUuid }: { categoryUuid: string }) {
         onPromoSelected();
     }, [data.product, categoryUuid]);
 
-    const selectPromo = (isSecret: boolean, promo?: IPromo) => {
+    const selectPromo = (promo?: IPromo) => {
         setSelectedPromo(promo);
         onPromoSelected(promo);
         setOpen(false);
@@ -115,6 +116,7 @@ function Promo({ categoryUuid }: { categoryUuid: string }) {
                     selected={selectedPromo}
                     promo={selectedPromo}
                     setSelected={() => setOpen(true)}
+                    onClose={() => setSelectedPromo(undefined)}
                 />
             ) : (
                 <div
@@ -155,9 +157,13 @@ function Promo({ categoryUuid }: { categoryUuid: string }) {
                                 <PromoCard
                                     promo={hiddenPromo}
                                     selected={selectedPromo}
-                                    setSelected={(e) => selectPromo(true, e)}
+                                    setSelected={(e) => selectPromo(e)}
                                     isSecret
-                                    onDetailClicked={setSelectedDetailPromo}
+                                    onDetailClicked={(p) => {
+                                        setSelectedDetailPromo(p);
+                                        setOpen(false);
+                                        setDetailOpen(true);
+                                    }}
                                 />
                             ) : null}
                             {promos.map((i) => (
@@ -165,8 +171,12 @@ function Promo({ categoryUuid }: { categoryUuid: string }) {
                                     key={i.promo_code}
                                     promo={i}
                                     selected={selectedPromo}
-                                    setSelected={(e) => selectPromo(true, e)}
-                                    onDetailClicked={setSelectedDetailPromo}
+                                    setSelected={(e) => selectPromo(e)}
+                                    onDetailClicked={(p) => {
+                                        setSelectedDetailPromo(p);
+                                        setOpen(false);
+                                        setDetailOpen(true);
+                                    }}
                                 />
                             ))}
                         </div>
@@ -175,7 +185,13 @@ function Promo({ categoryUuid }: { categoryUuid: string }) {
             </Dialog>
             <PromoDetail
                 p={selectedDetailPromo}
-                onClose={() => setSelectedDetailPromo(undefined)}
+                onSelected={() => selectPromo(selectedDetailPromo)}
+                onBack={() => {
+                    setDetailOpen(false);
+                    setOpen(true);
+                }}
+                open={detailOpen}
+                onOpenChange={setDetailOpen}
             />
         </>
     );
