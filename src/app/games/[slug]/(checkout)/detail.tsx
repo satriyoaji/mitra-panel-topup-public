@@ -1,6 +1,5 @@
 "use client";
 
-import { getTotalPrice, priceMask } from "@/Helpers";
 import TransactionDetail from "@/components/transaction-detail";
 import { Button } from "@/components/ui/button";
 import {
@@ -20,6 +19,9 @@ import {
 } from "@/types/transaction";
 import { useState } from "react";
 import Swal from "@/components/swal";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { InfoCircledIcon } from "@radix-ui/react-icons";
+import { useSession } from "next-auth/react";
 
 interface IDetailProp extends ITransaction {
   isOpen: boolean;
@@ -40,6 +42,7 @@ export function Purchase({
   const [alertOpen, setAlertOpen] = useState(false);
   const { toast } = useToast();
   const router = useRouter();
+  const { data: session } = useSession();
 
   const createTransaction = async () => {
     if (!account || !payment || !product || !category) return false;
@@ -104,6 +107,15 @@ export function Purchase({
               Cek pesanan anda terlebih dahulu sebelum melanjutkan pembayaran.
             </DialogDescription>
           </DialogHeader>
+          {!session && (
+            <Alert className="bg-theme-primary-50 text-theme-primary-900">
+              <InfoCircledIcon className="text-white" />
+              <AlertTitle>Penting!</AlertTitle>
+              <AlertDescription className="text-xs">
+                Pastikan anda menyimpan nomor transaksi dan email serta nomor telpon yang anda gunakan dalam proses transaksi.
+              </AlertDescription>
+            </Alert>
+          )}
           <TransactionDetail
             payment={payment}
             category={category}
@@ -111,6 +123,12 @@ export function Purchase({
             product={product}
             promo={promo}
           />
+          <Alert className="bg-theme-secondary-50 text-theme-secondary-900">
+              <InfoCircledIcon className="text-white" />
+              <AlertDescription className="text-xs">
+                Jika transaksi gagal, saldo anda akan dikembalikan dalam bentuk saldo point
+              </AlertDescription>
+            </Alert>
           <div className="flex justify-between items-center">
             <Button
               type="submit"
@@ -118,7 +136,7 @@ export function Purchase({
               size="sm"
               onClick={createTransaction}
             >
-              Bayar
+              <div>Bayar</div>
             </Button>
           </div>
         </DialogContent>
