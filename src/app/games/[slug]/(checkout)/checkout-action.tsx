@@ -6,7 +6,7 @@ import TransactionContext, {
   ITransactionContext,
 } from "@/infrastructures/context/transaction/transaction.context";
 import { useSession } from "next-auth/react";
-import React, { RefObject, useContext, useMemo, useState } from "react";
+import React, { RefObject, useCallback, useContext, useState } from "react";
 import { Purchase } from "./detail";
 
 function CheckoutAction({
@@ -100,7 +100,7 @@ function CheckoutAction({
     return setIsCheckoutOpen(true);
   };
 
-  const getTotal: string = useMemo(() => {
+  const getTotal = useCallback(() => {
     let num = 0;
 
     if (data.product)
@@ -114,7 +114,7 @@ function CheckoutAction({
       <div className="sticky bottom-0 w-full pb-1 pt-1.5 rounded-xl bg-theme-secondary flex items-center justify-between px-4">
         <div>
           <p className="text-white text-xs">Total Bayar</p>
-          <h4 className="text-white text-lg font-semibold">{getTotal}</h4>
+          <h4 className="text-white text-lg font-semibold">{getTotal()}</h4>
         </div>
         <div className="">
           <Button variant="secondary" size="sm" onClick={checkout}>
