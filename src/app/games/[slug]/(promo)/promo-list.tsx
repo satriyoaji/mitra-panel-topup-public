@@ -116,7 +116,7 @@ function Promo({ categoryUuid }: { categoryUuid: string }) {
                     selected={selectedPromo}
                     promo={selectedPromo}
                     setSelected={() => setOpen(true)}
-                    onClose={() => setSelectedPromo(undefined)}
+                    onClose={() => selectPromo(undefined)}
                 />
             ) : (
                 <div
@@ -144,11 +144,7 @@ function Promo({ categoryUuid }: { categoryUuid: string }) {
                                     setHiddenPromoCode(e.target.value)
                                 }
                             />
-                            <Button
-                                disabled={loading}
-                                size="sm"
-                                onClick={getHiddenPromo}
-                            >
+                            <Button disabled={loading} size="sm" onClick={getHiddenPromo}>
                                 {loading ? "Loading..." : "Get Promo"}
                             </Button>
                         </div>
