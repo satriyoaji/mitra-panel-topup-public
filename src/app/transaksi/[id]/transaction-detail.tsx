@@ -181,7 +181,7 @@ function TransactionHistoryDetail({ id }: { id: string }) {
                     )}
                   </div>
                   <>
-                    {data.payment_information.guide ? (
+                    {data.payment_information && data.payment_information.guide ? (
                       <div className="w-full bg-background h-full px-4 pt-4 pb-6 rounded-lg shadow flex-1">
                         <div
                           dangerouslySetInnerHTML={{

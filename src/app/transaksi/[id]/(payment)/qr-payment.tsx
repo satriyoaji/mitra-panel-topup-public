@@ -36,9 +36,12 @@ function QRPayment({ payment }: { payment: IPaymentInfo }) {
           </div>
         </div>
         <div className="flex justify-center items-center mt-2">
-          <p className="text-xs bg-red-400 text-white p-1 mt-1 rounded-lg px-2">
+          {
+            payment.expired_at && <div>Expired at: {payment.expired_at}</div>
+          }
+          {/* <p className="text-xs bg-red-400 text-white p-1 mt-1 rounded-lg px-2">
             {hours} : {minutes} : {seconds}
-          </p>
+          </p> */}
         </div>
       </div>
     );
