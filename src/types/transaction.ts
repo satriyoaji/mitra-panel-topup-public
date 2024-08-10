@@ -1,5 +1,15 @@
 import { IProductCategory, LooseObject, TProduct, TProductItem } from "@/Type";
 
+export enum ETransactionStatus {
+  Pending,
+  Paid,
+  "On Process",
+  Delivered,
+  Failed,
+  Refunded,
+  Aborted,
+}
+
 export interface ICategoryForm {
   key: string;
   value: string;
@@ -20,6 +30,30 @@ export interface ITransactionHistory {
   status: number;
   status_name: string;
   timestamp: string;
+}
+
+export interface IBasePaymentInformation {
+    invoice_code: string;
+    payment_channel: string;
+    payment_amount: number;
+    expired_at: string;
+    guide: string;
+    image_url: string;
+}
+
+export interface IVAPayment extends IBasePaymentInformation {
+    payment_method: "VIRTUAL_ACCOUNT";
+    virtual_account_number: string;
+    virtual_account_name: string;
+}
+export interface ILinkPayment extends IBasePaymentInformation {
+    payment_method: "EWALLET";
+    web_url: string;
+    mobile_url: string;
+}
+export interface IQRPayment extends IBasePaymentInformation {
+    payment_method: "QR_CODE";
+    qr_code: string;
 }
 
 export interface IPaymentInfo {
@@ -46,8 +80,10 @@ export interface ITransactionHistoryDetail {
   customer_data: string;
   price: number;
   paid_price: number;
+  status_name: string;
+  status: number;
   history_status: ITransactionHistory[];
-  payment_information: IPaymentInfo;
+  payment_information: IVAPayment | ILinkPayment | IQRPayment;
 }
 
 // =========== TRANSACTION CONTEXT ================
