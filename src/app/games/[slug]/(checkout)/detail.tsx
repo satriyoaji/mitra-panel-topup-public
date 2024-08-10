@@ -9,7 +9,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 import {
@@ -124,11 +123,11 @@ export function Purchase({
             promo={promo}
           />
           <Alert className="bg-theme-secondary-50 text-theme-secondary-900">
-              <InfoCircledIcon className="text-white" />
-              <AlertDescription className="text-xs">
-                Jika transaksi gagal, saldo anda akan dikembalikan dalam bentuk saldo point
-              </AlertDescription>
-            </Alert>
+            <InfoCircledIcon className="text-white" />
+            <AlertDescription className="text-xs">
+              Jika transaksi gagal, saldo anda akan dikembalikan dalam bentuk saldo point
+            </AlertDescription>
+          </Alert>
           <div className="flex justify-between items-center">
             <Button
               type="submit"

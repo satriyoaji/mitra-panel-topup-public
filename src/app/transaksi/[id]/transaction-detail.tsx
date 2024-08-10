@@ -15,7 +15,7 @@ import HorizontalStepper from "@/components/ui/horizontal-stepper";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Loading from "@/app/loading";
-import { ITransactionHistoryDetail } from "@/types/transaction";
+import { ETransactionStatus, ITransactionHistoryDetail } from "@/types/transaction";
 import CopyToClipboard from "@/components/copy-to-clipboard";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -27,12 +27,15 @@ import {
 import VAPayment from "./(payment)/va-payment";
 import QRPayment from "./(payment)/qr-payment";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import LinkPayment from "./(payment)/link-payment";
+import { useSession } from "next-auth/react";
 
 function TransactionHistoryDetail({ id }: { id: string }) {
   const [data, setData] = useState<ITransactionHistoryDetail | undefined>(
     undefined
   );
   const [loading, setLoading] = useState(false);
+  const { data: session } = useSession();
 
   useEffect(() => {
     (async () => {
@@ -55,28 +58,38 @@ function TransactionHistoryDetail({ id }: { id: string }) {
 
   if (data)
     return (
-      <div className="pt-4 mx-2 flex w-full justify-center">
+      <div className="pt-4 mx-2 mt-2 flex w-full justify-center">
         <div className="max-w-5xl w-full">
           <div className="flex justify-between items-center">
             <div className="flex items-center">
               <p className="font-medium ml-2 text-lg">Detail Transaksi 📃</p>
             </div>
-            {canRefund() && (
+            {/* {canRefund() && (
               <Link href="/redeem-coupon">
                 <Button size="sm">Refund</Button>
               </Link>
-            )}
+            )} */}
           </div>
+          {!session && (
           <div className="w-full my-2">
-            <Alert className="bg-theme-secondary-50 text-theme-secondary-900">
+            <div className="bg-red-50 text-red-900 flex justify-center items-center gap-2 p-1.5">
+              <div className="animate-pulse flex justify-center items-center bg-red-500 h-4 w-4 rounded-full text-white">
+                <p className="text-xs font-bold">i</p>
+              </div>
+              <h5 className="text-sm">
+                Pastikan anda menyimpan nomor transaksi dan email serta nomor telpon yang anda gunakan dalam proses transaksi.
+              </h5>
+            </div>
+            {/* <Alert className="bg-theme-secondary-50 text-theme-secondary-900">
               <InfoCircledIcon className="text-white" />
               <AlertTitle>Penting!</AlertTitle>
               <AlertDescription>
                 Pastikan anda menyimpan nomor transaksi dan email serta nomor
                 telpon yang anda gunakan dalam proses transaksi.
               </AlertDescription>
-            </Alert>
+            </Alert> */}
           </div>
+          )}
           <div className="flex flex-row justify-center items-center">
             <div className="flex md:flex-row flex-col w-full bg-background p-4">
               <div className="w-full">
@@ -129,13 +142,44 @@ function TransactionHistoryDetail({ id }: { id: string }) {
                 </Table>
               </div>
             )} */}
-                    {data.payment_information && (
-                      <>
-                        <VAPayment payment={data.payment_information} />
-                        <QRPayment payment={data.payment_information} />
-                      </>
-                    )}
+                {
+                  data.payment_information && (
+                    <div>
+                      {
+                        data.payment_information.payment_method ==
+                        "VIRTUAL_ACCOUNT" ? (
+                          <VAPayment payment={data.payment_information} />
+                        ) : data.payment_information.payment_method == "EWALLET" ? (
+                          <LinkPayment payment={data.payment_information} />
+                        ) : (
+                          <QRPayment payment={data.payment_information} />
+                        )
+                      }
+                    </div>
+                  )
+                }
                   </Card>
+                  <div className="w-full bottom-0 mt-0">
+                    {data.status !== ETransactionStatus.Refunded ? (
+                      <div className="bg-amber-50 border flex items-center rounded-b-lg space-x-2 text-amber-800 px-4 py-1.5">
+                        <InfoCircledIcon />
+                        <p className="text-xs">
+                          Jika transaksi gagal, saldo anda akan dikembalikan dalam
+                          bentuk point
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="bg-blue-50 border flex items-center rounded-b-lg space-x-2 text-blue-800 px-4 py-1.5">
+                        <InfoCircledIcon />
+                        <p className="text-xs">
+                          Saldo anda sudah dikembalikan. Silahkan cek{" "}
+                          <Link href="/profile" className="font-semibold">
+                            Saldo Point
+                          </Link>
+                        </p>
+                      </div>
+                    )}
+                  </div>
                   <Table>
                     <TableBody className="text-xs">
                       {data.payment_information && (
