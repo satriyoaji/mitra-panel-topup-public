@@ -160,15 +160,7 @@ function TransactionHistoryDetail({ id }: { id: string }) {
                 }
                   </Card>
                   <div className="w-full bottom-0 mt-0">
-                    {data.status !== ETransactionStatus.Refunded ? (
-                      <div className="bg-amber-50 border flex items-center rounded-b-lg space-x-2 text-amber-800 px-4 py-1.5">
-                        <InfoCircledIcon />
-                        <p className="text-xs">
-                          Jika transaksi gagal, saldo anda akan dikembalikan dalam
-                          bentuk point
-                        </p>
-                      </div>
-                    ) : (
+                    {data.status === ETransactionStatus.Refunded ? (
                       <div className="bg-blue-50 border flex items-center rounded-b-lg space-x-2 text-blue-800 px-4 py-1.5">
                         <InfoCircledIcon />
                         <p className="text-xs">
@@ -178,8 +170,27 @@ function TransactionHistoryDetail({ id }: { id: string }) {
                           </Link>
                         </p>
                       </div>
+                    ) : (
+                      <div className="bg-amber-50 border flex items-center rounded-b-lg space-x-2 text-amber-800 px-4 py-1.5">
+                        <InfoCircledIcon />
+                        <p className="text-xs">
+                          Jika transaksi gagal, saldo anda akan dikembalikan dalam
+                          bentuk point
+                        </p>
+                      </div>
                     )}
                   </div>
+                  <>
+                    {data.payment_information.guide ? (
+                      <div className="w-full bg-background h-full px-4 pt-4 pb-6 rounded-lg shadow flex-1">
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: data.payment_information.guide,
+                          }}
+                        ></div>
+                      </div>
+                    ) : null}
+                  </>
                   <Table>
                     <TableBody className="text-xs">
                       {data.payment_information && (
