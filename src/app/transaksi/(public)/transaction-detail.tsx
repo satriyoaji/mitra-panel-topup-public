@@ -151,7 +151,7 @@ function TransactionHistoryDetail({ id }: { id: string }) {
                 <div className="flex items-center gap-1.5">
                   <p className="font-medium text-xl -mt-1">💳</p>
                   <p className="font-medium text-xs">
-                    {data.payment_information.payment_channel}
+                    {data.payment_information && data.payment_information.payment_channel}
                   </p>
                 </div>
                 <Separator className="my-2" />
