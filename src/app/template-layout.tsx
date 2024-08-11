@@ -4,6 +4,7 @@ import HelpButton from "@/components/help-button";
 import BottomNav from "@/components/bottom-nav";
 import { GetCookie } from "@/infrastructures/cookieStore";
 import PageHeaderWrapper from "@/components/header/page-header-wrapper";
+import PWAAlert from "@/components/header/pwa-header";
 
 export default function TemplateLayout({
   children,
@@ -14,6 +15,7 @@ export default function TemplateLayout({
 
   return (
     <>
+      <PWAAlert />
       <PageHeaderWrapper />
       <div className={`md:container md:max-w-7xl`}>
         <div className={`min-h-screen bg-background pt-2`}>{children}</div>

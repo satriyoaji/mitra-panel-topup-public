@@ -21,9 +21,10 @@ export async function generateMetadata(): Promise<Metadata> {
   if (res.ok) {
     var data = await res.json();
     var setting: ISiteProfile = data.data;
-    // optionally access and extend (rather than replace) parent metadata
+
     return {
-      title: setting.title,
+      manifest: "/api/manifest.json",
+      title: setting.name,
       description: setting.description,
       keywords: setting.keywords,
       openGraph: {
