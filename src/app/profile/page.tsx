@@ -68,11 +68,7 @@ function Page() {
   };
 
   return (
-    <div
-      className={`container ${
-        theme.version !== "1" ? "max-w-6xl" : "md:mx-2 px-4"
-      }`}
-    >
+    <div className={`container max-w-6xl`}>
       <div className="md:flex gap-4 h-full md:pt-4">
         <div className="md:border md:shadow min-w-[22rem] h-full rounded-xl p-2 md:p-4">
           <div className="flex justify-between items-center">
@@ -125,7 +121,7 @@ function Page() {
           <div className="mt-6 mb-4">
             <Dialog>
               <DialogTrigger className="md:hidden">
-                <p className="flex px-3 space-x-3 py-2 items-center text-sm cursor-pointer hover:bg-theme-secondary-50">
+                <p className="flex px-3 space-x-3 py-2 items-center text-sm cursor-pointer hover:bg-slate-50">
                   <DiscIcon className="mr-3" /> Saldo Point History
                 </p>
               </DialogTrigger>
@@ -137,13 +133,13 @@ function Page() {
             </Dialog>
             <Link
               href="/transaksi"
-              className="flex px-3 py-2 space-x-3 items-center text-sm hover:bg-theme-secondary-50"
+              className="flex px-3 py-2 space-x-3 items-center text-sm hover:bg-slate-50"
             >
               <ReaderIcon className="mr-3" /> Daftar Transaksi
             </Link>
             <p
               onClick={() => signOut()}
-              className="flex px-3 space-x-3 py-2 items-center text-sm cursor-pointer hover:bg-theme-secondary-50"
+              className="flex px-3 space-x-3 py-2 items-center text-sm cursor-pointer hover:bg-slate-50"
             >
               <ExitIcon className="mr-3" /> Logout
             </p>

@@ -6,6 +6,7 @@ import { Poppins as FontSans } from "next/font/google";
 import ThemeContext, {
   IThemeContext,
 } from "@/infrastructures/context/theme/theme.context";
+import { Toaster } from "@/components/ui/toaster";
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -16,21 +17,9 @@ function ThemeWrapper({ children }: { children: React.ReactNode }) {
   const { data } = useContext(ThemeContext) as IThemeContext;
 
   return (
-    <body
-      className={cn(
-        "min-h-screen bg-repeat antialiased",
-        data.primary.class,
-        data.secondary.class,
-        data.font.class.className
-      )}
-    >
-      <div
-        className={
-          data.version == "1" ? "bg-theme-primary-50" : "bg-background"
-        }
-      >
-        {children}
-      </div>
+    <body className={"min-h-screen bg-repeat antialiased"}>
+      <div className={"bg-slate-50"}>{children}</div>
+      <Toaster />
     </body>
   );
 }

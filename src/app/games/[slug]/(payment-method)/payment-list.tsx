@@ -30,9 +30,9 @@ function PaymentList({ paymentGroup }: { paymentGroup: IPaymentGroup[] }) {
               {group.payment_method.map((item) => (
                 <div
                   key={item.name}
-                  className={`text-center flex hover:bg-theme-secondary-50 rounded-lg justify-between items-center px-2 py-2 cursor-pointer ${
+                  className={`text-center flex hover:bg-slate-50 rounded-lg justify-between items-center px-2 py-2 cursor-pointer ${
                     data.payment?.payment_channel == item.payment_channel &&
-                    "border border-theme-secondary-500 bg-theme-secondary-50"
+                    "border border-primary"
                   }`}
                   onClick={(e) => {
                     dispatch({
@@ -62,8 +62,7 @@ function PaymentList({ paymentGroup }: { paymentGroup: IPaymentGroup[] }) {
                       {data.product
                         ? data.product.discounted_price
                           ? priceMask(
-                              item.fee_amount +
-                                data.product.discounted_price
+                              item.fee_amount + data.product.discounted_price
                             )
                           : priceMask(item.fee_amount + data.product.price)
                         : priceMask(item.fee_amount)}

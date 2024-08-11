@@ -19,11 +19,7 @@ export type TPaginationMeta = {
 };
 
 export interface ITheme {
-  primary: TPrimaryPallete;
-  secondary: TSecondaryPallete;
-  font: TFont;
-  logo: string;
-  version: string;
+  primary: string;
 }
 
 export interface IBanner {

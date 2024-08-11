@@ -68,141 +68,6 @@ html {
         --input: 240 3.7% 15.9%;
         --ring: 240 4.9% 83.9%;
     }
-
-    .theme-primary-red {
-        --theme-primary-50: 0 86% 97%;
-        --theme-primary-100: 0 93% 94%;
-        --theme-primary-200: 0 96% 89%;
-        --theme-primary-300: 0 94% 82%;
-        --theme-primary-400: 0 91% 71%;
-        --theme-primary-500: 0 84% 60%;
-        --theme-primary-600: 0 72% 51%;
-        --theme-primary-700: 0 74% 42%;
-        --theme-primary-800: 0 70% 35%;
-        --theme-primary-900: 0 63% 31%;
-        --theme-primary-950: 0 75% 15%;
-        --theme-primary-foreground: #fafafa;
-    }
-
-    .theme-primary-green {
-        --theme-primary-50: 138 76% 97%;
-        --theme-primary-100: 141 84% 93%;
-        --theme-primary-200: 141 79% 85%;
-        --theme-primary-300: 142 77% 73%;
-        --theme-primary-400: 142 69% 58%;
-        --theme-primary-500: 142 71% 45%;
-        --theme-primary-600: 142 76% 36%;
-        --theme-primary-700: 142 72% 29%;
-        --theme-primary-800: 163 88% 20%;
-        --theme-primary-900: 144 61% 20%;
-        --theme-primary-950: 145 80% 10%;
-        --theme-primary-foreground: #fafafa;
-    }
-
-    .theme-primary-blue {
-        --theme-primary-50: 214 100% 97%;
-        --theme-primary-100: 214 95% 93%;
-        --theme-primary-200: 213 97% 87%;
-        --theme-primary-300: 212 96% 78%;
-        --theme-primary-400: 213 94% 68%;
-        --theme-primary-500: 217 91% 60%;
-        --theme-primary-600: 221 83% 53%;
-        --theme-primary-700: 224 76% 48%;
-        --theme-primary-800: 226 71% 40%;
-        --theme-primary-900: 224 64% 33%;
-        --theme-primary-950: 226 57% 21%;
-        --theme-primary-foreground: #fafafa;
-    }
-
-    .theme-primary-violet {
-        --theme-primary-50: 250 100% 98%;
-        --theme-primary-100: 251 91% 95%;
-        --theme-primary-200: 251 95% 92%;
-        --theme-primary-300: 252 95% 85%;
-        --theme-primary-400: 255 92% 76%;
-        --theme-primary-500: 258 90% 66%;
-        --theme-primary-600: 262 83% 58%;
-        --theme-primary-700: 263 70% 50%;
-        --theme-primary-800: 263 69% 42%;
-        --theme-primary-900: 264 67% 35%;
-        --theme-primary-950: 261 73% 23%;
-        --theme-primary-foreground: #fafafa;
-    }
-
-    .theme-secondary-rose {
-        --theme-secondary-50: 356 100% 97%;
-        --theme-secondary-100: 356 100% 95%;
-        --theme-secondary-200: 353 96% 90%;
-        --theme-secondary-300: 353 96% 82%;
-        --theme-secondary-400: 351 95% 71%;
-        --theme-secondary-500: 350 89% 60%;
-        --theme-secondary-600: 347 77% 50%;
-        --theme-secondary-700: 345 83% 41%;
-        --theme-secondary-800: 343 80% 35%;
-        --theme-secondary-900: 342 75% 30%;
-        --theme-secondary-950: 343 88% 16%;
-        --theme-secondary-foreground: #fafafa;
-    }
-
-    .theme-secondary-orange {
-        --theme-secondary-50: 33 100% 96%;
-        --theme-secondary-100: 34 100% 92%;
-        --theme-secondary-200: 32 98% 83%;
-        --theme-secondary-300: 31 97% 72%;
-        --theme-secondary-400: 27 96% 61%;
-        --theme-secondary-500: 25 95% 53%;
-        --theme-secondary-600: 21 90% 48%;
-        --theme-secondary-700: 17 88% 40%;
-        --theme-secondary-800: 15 79% 34%;
-        --theme-secondary-900: 15 75% 28%;
-        --theme-secondary-950: 15 75% 28%;
-        --theme-secondary-foreground: #fafafa;
-    }
-
-    .theme-secondary-lime {
-        --theme-secondary-50: 78 92% 95%;
-        --theme-secondary-100: 80 89% 89%;
-        --theme-secondary-200: 81 88% 80%;
-        --theme-secondary-300: 82 85% 67%;
-        --theme-secondary-400: 83 78% 55%;
-        --theme-secondary-500: 84 81% 44%;
-        --theme-secondary-600: 85 85% 35%;
-        --theme-secondary-700: 86 78% 27%;
-        --theme-secondary-800: 86 69% 23%;
-        --theme-secondary-900: 88 61% 20%;
-        --theme-secondary-950: 89 80% 10%;
-        --theme-secondary-foreground: #fafafa;
-    }
-
-    .theme-secondary-teal {
-        --theme-secondary-50: 166 76% 97%;
-        --theme-secondary-100: 167 85% 89%;
-        --theme-secondary-200: 168 84% 78%;
-        --theme-secondary-300: 171 77% 64%;
-        --theme-secondary-400: 172 66% 50%;
-        --theme-secondary-500: 173 80% 40%;
-        --theme-secondary-600: 175 84% 32%;
-        --theme-secondary-700: 175 77% 26%;
-        --theme-secondary-800: 176 69% 22%;
-        --theme-secondary-900: 176 61% 19%;
-        --theme-secondary-950: 179 84% 10%;
-        --theme-secondary-foreground: #fafafa;
-    }
-
-    .theme-secondary-indigo {
-        --theme-secondary-50: 226 100% 97%;
-        --theme-secondary-100: 226 100% 94%;
-        --theme-secondary-200: 228 96% 89%;
-        --theme-secondary-300: 230 94% 82%;
-        --theme-secondary-400: 234 89% 74%;
-        --theme-secondary-500: 239 84% 67%;
-        --theme-secondary-600: 243 75% 59%;
-        --theme-secondary-700: 245 58% 51%;
-        --theme-secondary-800: 244 55% 41%;
-        --theme-secondary-900: 242 47% 34%;
-        --theme-secondary-950: 244 47% 20%;
-        --theme-secondary-foreground: #fafafa;
-    }
 }
 
 @layer base {
@@ -215,19 +80,19 @@ html {
     }
 
     h1 {
-        @apply text-4xl;
+        @apply text-4xl pb-2;
     }
     h2 {
-        @apply text-3xl;
+        @apply text-3xl pb-2;
     }
     h3 {
-        @apply text-2xl;
+        @apply text-2xl pb-2;
     }
     h4 {
-        @apply text-xl;
+        @apply text-xl pb-2;
     }
     h5 {
-        @apply text-lg;
+        @apply text-lg pb-2;
     }
     p {
         @apply text-sm;

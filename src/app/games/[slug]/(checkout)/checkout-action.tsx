@@ -111,13 +111,13 @@ function CheckoutAction({
 
   return (
     <>
-      <div className="sticky bottom-0 w-full pb-1 pt-1.5 rounded-xl bg-theme-secondary flex items-center justify-between px-4">
+      <div className="border sticky bottom-0 w-full pb-1 pt-1.5 rounded-xl bg-background flex items-center justify-between px-4">
         <div>
-          <p className="text-white text-xs">Total Bayar</p>
-          <h4 className="text-white text-lg font-semibold">{getTotal()}</h4>
+          <p className="text-xs text-muted-foreground">Total Bayar</p>
+          <h4 className="text-lg font-semibold">{getTotal()}</h4>
         </div>
         <div className="">
-          <Button variant="secondary" size="sm" onClick={checkout}>
+          <Button className="bg-green-500" size="sm" onClick={checkout}>
             Checkout
           </Button>
         </div>

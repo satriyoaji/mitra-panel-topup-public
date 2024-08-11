@@ -107,11 +107,12 @@ export function Purchase({
             </DialogDescription>
           </DialogHeader>
           {!session && (
-            <Alert className="bg-theme-primary-50 text-theme-primary-900">
+            <Alert className="bg-red-50 text-red-900">
               <InfoCircledIcon className="text-white" />
               <AlertTitle>Penting!</AlertTitle>
               <AlertDescription className="text-xs">
-                Pastikan anda menyimpan nomor transaksi dan email serta nomor telpon yang anda gunakan dalam proses transaksi.
+                Pastikan anda menyimpan nomor transaksi dan email serta nomor
+                telpon yang anda gunakan dalam proses transaksi.
               </AlertDescription>
             </Alert>
           )}
@@ -122,10 +123,11 @@ export function Purchase({
             product={product}
             promo={promo}
           />
-          <Alert className="bg-theme-secondary-50 text-theme-secondary-900">
+          <Alert className="bg-amber-50 text-amber-900">
             <InfoCircledIcon className="text-white" />
             <AlertDescription className="text-xs">
-              Jika transaksi gagal, saldo anda akan dikembalikan dalam bentuk saldo point
+              Jika transaksi gagal, saldo anda akan dikembalikan dalam bentuk
+              saldo point
             </AlertDescription>
           </Alert>
           <div className="flex justify-between items-center">

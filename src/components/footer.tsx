@@ -4,17 +4,18 @@ import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
 import { Separator } from "./ui/separator";
 import { usePathname } from "next/navigation";
-import { ISosmed } from "@/types/utils";
+import { ISiteProfile, ISosmed } from "@/types/utils";
 import Socmed from "./socmed-icon";
-import { nFormatter } from "@/Helpers";
-import ThemeContext, {
-  IThemeContext,
-} from "@/infrastructures/context/theme/theme.context";
+import {
+  ArrowRightIcon,
+  ChatBubbleIcon,
+  EnvelopeClosedIcon,
+} from "@radix-ui/react-icons";
+import Image from "next/image";
 
-function Footer() {
+function Footer({ profile }: { profile?: ISiteProfile }) {
   const path = usePathname();
   const [data, setData] = useState<ISosmed[]>([]);
-  const { data: theme } = useContext(ThemeContext) as IThemeContext;
 
   useEffect(() => {
     (async () => {
@@ -32,80 +33,93 @@ function Footer() {
   if (path.includes("/games/")) return <></>;
   return (
     <div
-      style={{ backgroundImage: 'url("/assets/illustration/v1/footer.svg")' }}
-      className="bg-no-repeat bg-right"
+      // style={{ backgroundImage: 'url("/assets/illustration/v1/footer.svg")' }}
+      className="bg-no-repeat bg-right bg-background pt-2 w-full border-t"
     >
-      <div
-        className={`bg-theme-primary-400/90 pt-4 px-4 pb-12 flex flex-col items-center ${
-          theme.version == "v1"
-            ? "rounded-t-2xl border-t-4 border-theme-secondary"
-            : ""
-        }`}
-      >
-        {theme.version !== "1" && (
-          <div className="md:flex gap-8 pb-4 px-8 items-center my-6">
-            <div className="md:mb-4 w-full">
-              <p className="text-white text-sm font-semibold mt-4">
-                Dipercaya oleh gamers Indonesia
-              </p>
-              <p className="text-white text-2xl mt-2 font-bold w-fit">
-                Termurah dan Terpercaya
-              </p>
-              <p className="text-slate-100 text-xs mt-1">
-                Menyediakan layanan Top up berbagai puluhan game dengan ribuan
-                produk dan Pulsa termurah dan terpercaya di Indonesia.
-              </p>
-            </div>
-            <div className="w-full h-full">
-              <div className="flex h-full items-center justify-between mt-8 px-6 mb-4 rounded-xl">
-                {/* <div className="flex flex-col items-center"> */}
-                <div>
-                  <p className="font-semibold md:text-3xl text-2xl text-white">
-                    {nFormatter(1000)}
-                  </p>
-                  <p className="font-semibold md:text-base text-xs text-slate-100">
-                    Pengguna
-                  </p>
+      <div className="flex justify-center w-full">
+        <div className="w-full mb-8 max-w-6xl">
+          <div className="max-w-6xl px-6">
+            <div className="grid my-4 md:grid-cols-5 sm:grid-cols-2 grid-cols-1 sm:gap-8">
+              <div className="md:col-span-2 mt-8">
+                {profile?.logo_url && (
+                  <Image
+                    src={profile?.logo_url}
+                    alt="logo"
+                    width={40}
+                    height={40}
+                  />
+                )}
+                {profile ? (
+                  <p
+                    className="text-muted-foreground text-xs mt-1.5 leading-5"
+                    dangerouslySetInnerHTML={{
+                      __html: profile?.description,
+                    }}
+                  ></p>
+                ) : null}
+              </div>
+              <div className={`bg-background flex flex-col mt-8`}>
+                <p className="font-bold text-foreground text-sm">
+                  Menu Lainnya
+                </p>
+                <div className="space-y-1 mt-2 text-sm">
+                  <Link
+                    href="/kebijakan"
+                    className="flex items-center space-x-2"
+                  >
+                    <ArrowRightIcon /> <p>Kebijakan Privasi</p>
+                  </Link>
+                  <Link
+                    href="/syarat-ketentuan"
+                    className="flex items-center space-x-2"
+                  >
+                    <ArrowRightIcon /> <p>Syarat Ketentuan</p>
+                  </Link>
                 </div>
-                {/* <div className="flex flex-col items-center"> */}
-                <div>
-                  <p className="font-semibold md:text-3xl text-2xl text-white">
-                    {nFormatter(9230)}
-                  </p>
-                  <p className="font-semibold md:text-base text-xs text-slate-100">
-                    Produk
-                  </p>
+              </div>
+              <div className={`bg-background flex flex-col mt-8`}>
+                <p className="font-bold text-foreground text-sm">Kontak</p>
+                <div className="space-y-1 mt-2 text-sm">
+                  <div className="flex items-center space-x-2">
+                    <EnvelopeClosedIcon /> <p>cs@topmur.com</p>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <ChatBubbleIcon /> <p>Hubungi CS</p>
+                  </div>
                 </div>
-                {/* <div className="flex flex-col items-center"> */}
-                <div>
-                  <p className="font-semibold md:text-3xl text-2xl text-white">
-                    {nFormatter(238000)}
-                  </p>
-                  <p className="font-semibold md:text-base text-xs text-slate-100">
-                    Transaksi
-                  </p>
+              </div>
+              <div className={`bg-background flex flex-col mt-8`}>
+                <p className="font-bold text-foreground text-sm">
+                  Ikuti kami di
+                </p>
+                <div className="flex flex-wrap mt-2">
+                  {data?.map((item, idx) => (
+                    <Link
+                      key={`${idx}`}
+                      className={`mr-2 mb-2 rounded-full`}
+                      href={item.value}
+                    >
+                      <div className="p-0.5">
+                        <div className="w-6 h-6">
+                          <Socmed type={item.key} />
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
-        )}
-        <p className="font-bold text-theme-primary-foreground">Follow Us On</p>
-        <div className="flex justify-center space-x-2 mt-2">
-          {data?.map((item, idx) => (
-            <Link
-              key={`${idx}`}
-              className="w-6 h-6 text-theme-primary-foreground"
-              href={item.value}
-            >
-              <Socmed type={item.key} />
-            </Link>
-          ))}
         </div>
-        <Separator className="mb-3 mt-6" />
-        <p className="text-theme-primary-foreground text-xs">
-          {`Copyright © ${new Date().getFullYear()}`}{" "}
-          <span className="font-semibold">Panel VC Gamers</span>
-          {` - All Right Reserved`}
+      </div>
+      <div
+        className={`w-full p-3 bg-primary flex justify-between items-center`}
+      >
+        <p className="text-white text-xs px-2">
+          {`Copyright © ${new Date().getFullYear()}. All Right Reserved`}
+        </p>
+        <p className="text-white text-xs px-2">
+          {`Designed by ${profile?.name}`}
         </p>
       </div>
     </div>

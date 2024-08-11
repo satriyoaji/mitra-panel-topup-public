@@ -40,7 +40,7 @@ const Carousel = ({ data }: { data: IBanner[] }) => {
   });
 
   return (
-    <div className="block bg-gradient-to-r from-theme-primary-50 via-theme-secondary-400 to-theme-primary-50 md:pt-6 pb-6 md:-mx-8 md:-mt-4">
+    <div className="block bg-slate-50 md:pt-4 pb-6 md:-mx-8 md:-mt-4">
       <div className="h-full md:pt-3 flex w-full justify-center items-center">
         <div
           {...swipeHandlers}
@@ -98,7 +98,7 @@ const Carousel = ({ data }: { data: IBanner[] }) => {
         </div>
       </div>
       {data.length > 1 ? (
-        <div className="flex justify-end mr-2">
+        <div className="flex justify-center mr-2">
           <div className="flex bg-background/95 ml-1 backdrop-blur supports-[backdrop-filter]:bg-background/60 p-1 rounded-xl mt-[-1.5rem] absolute cursor-pointer">
             <ChevronLeftIcon
               width={12}

@@ -93,7 +93,7 @@ function HeaderV2() {
           )}
         </div>
       </div>
-      <div className="bg-theme-secondary-500/90 hidden w-full md:flex pl-8 text-white items-center justify-center">
+      <div className="bg-primary hidden w-full md:flex pl-8 text-white items-center justify-center">
         <NavigationMenu>
           <NavigationMenuList>
             {paths.map((i) => (
@@ -107,18 +107,6 @@ function HeaderV2() {
                 </Link>
               </NavigationMenuItem>
             ))}
-            <NavigationMenuItem className="bg-transparent">
-              <NavigationMenuLink
-                className={`${navigationMenuTriggerStyle()} cursor-pointer`}
-                onClick={() => {
-                  dispatch({
-                    action: "RAND_THEME",
-                  });
-                }}
-              >
-                Theme
-              </NavigationMenuLink>
-            </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
       </div>

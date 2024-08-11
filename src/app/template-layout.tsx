@@ -15,17 +15,12 @@ export default function TemplateLayout({
   return (
     <>
       <PageHeaderWrapper />
-      <div className={`${version == "1" ? "md:container md:max-w-7xl" : ""}`}>
-        <div
-          className={`min-h-screen bg-background ${version == "1" ? "" : ""}`}
-        >
-          {children}
-        </div>
+      <div className={`md:container md:max-w-7xl`}>
+        <div className={`min-h-screen bg-background pt-2`}>{children}</div>
         <BottomNav />
       </div>
       <Footer />
       <HelpButton />
-      <Toaster />
     </>
   );
 }

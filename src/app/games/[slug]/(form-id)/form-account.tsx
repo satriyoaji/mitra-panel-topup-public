@@ -41,10 +41,10 @@ function FormAccount({ forms }: Prop) {
   return (
     <>
       <div className="flex gap-2 items-center">
-        <div className="bg-theme-primary-100 p-2 w-7 h-7 flex justify-center items-center rounded-full">
-          <h4 className="font-bold rounded-full text-theme-primary-500">1</h4>
+        <div className="bg-primary p-2 w-7 h-7 flex justify-center items-center rounded-full">
+          <h6 className="font-bold rounded-full text-white">1</h6>
         </div>
-        <h4 className="font-medium ml-1">Data Akun</h4>
+        <h6 className="font-medium ml-1">Data Akun</h6>
       </div>
       <Separator className="my-3" />
       <div className="grid w-full items-center gap-4">
