@@ -83,7 +83,7 @@ function PromoCard({
                 <p className="text-xs pl-1 pb-2">{promo.short_description}</p>
               </div>
               {isSecret ? (
-                <div className="bg-theme-primary-400 text-white mt-4 rounded-br">
+                <div className="bg-primarys text-white mt-4 rounded-br">
                   <p className="text-center text-xs font-semibold">
                     Secret Promo
                   </p>

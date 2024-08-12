@@ -76,7 +76,7 @@ function List() {
                 <Button
                   variant="ghost"
                   className={`${
-                    (filter.search || filter.status) && "text-theme-primary-400"
+                    (filter.search || filter.status) && "text-primary"
                   }`}
                   size="sm"
                 >
