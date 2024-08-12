@@ -19,6 +19,7 @@ export type TPaginationMeta = {
 };
 
 export interface ITheme {
+  version: string;
   primary: string;
 }
 
