@@ -7,7 +7,7 @@ function Stats() {
 
   if (version === "1")
     return (
-      <div className="md:w-full bg-theme-secondary space-y-2 pt-6 flex items-center justify-center">
+      <div className="md:w-full bg-primary space-y-2 pt-6 flex items-center justify-center">
         <div className="md:flex gap-8 pb-4 px-8 items-center">
           <div className="md:mb-4 w-full">
             <p className="text-white text-sm font-semibold mt-4">

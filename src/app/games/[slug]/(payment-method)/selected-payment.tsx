@@ -16,7 +16,7 @@ function SelectedPayment({ onClick }: { onClick?: () => void }) {
 
   return (
     <div
-      className="cursor-pointer rounded-xl hover:bg-slate-50 border-2 border-theme-secondary"
+      className="cursor-pointer rounded-xl hover:bg-slate-50 border-2 border-primary"
       role="button"
       onClick={() => onClick && onClick()}
     >

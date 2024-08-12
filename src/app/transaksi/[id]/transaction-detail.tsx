@@ -15,7 +15,10 @@ import HorizontalStepper from "@/components/ui/horizontal-stepper";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Loading from "@/app/loading";
-import { ETransactionStatus, ITransactionHistoryDetail } from "@/types/transaction";
+import {
+  ETransactionStatus,
+  ITransactionHistoryDetail,
+} from "@/types/transaction";
 import CopyToClipboard from "@/components/copy-to-clipboard";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -48,12 +51,6 @@ function TransactionHistoryDetail({ id }: { id: string }) {
     })();
   }, [id]);
 
-  const canRefund = () => {
-    if (!data?.history_status) return false;
-    const status = data.history_status.findLast((i) => true);
-    return status?.status == 2 || status?.status == 3;
-  };
-
   if (loading) return <Loading />;
 
   if (data)
@@ -71,28 +68,21 @@ function TransactionHistoryDetail({ id }: { id: string }) {
             )} */}
           </div>
           {!session && (
-          <div className="w-full my-2">
-            <div className="bg-red-50 text-red-900 flex justify-center items-center gap-2 p-1.5">
-              <div className="animate-pulse flex justify-center items-center bg-red-500 h-4 w-4 rounded-full text-white">
-                <p className="text-xs font-bold">i</p>
+            <div className="w-full my-2">
+              <div className="bg-red-50 text-red-900 flex justify-center items-center gap-2 p-1.5">
+                <div className="animate-pulse flex justify-center items-center bg-red-500 h-4 w-4 rounded-full text-white">
+                  <p className="text-xs font-bold">i</p>
+                </div>
+                <h5 className="text-sm">
+                  Pastikan anda menyimpan nomor transaksi dan email serta nomor
+                  telpon yang anda gunakan dalam proses transaksi.
+                </h5>
               </div>
-              <h5 className="text-sm">
-                Pastikan anda menyimpan nomor transaksi dan email serta nomor telpon yang anda gunakan dalam proses transaksi.
-              </h5>
             </div>
-            {/* <Alert className="bg-theme-secondary-50 text-theme-secondary-900">
-              <InfoCircledIcon className="text-white" />
-              <AlertTitle>Penting!</AlertTitle>
-              <AlertDescription>
-                Pastikan anda menyimpan nomor transaksi dan email serta nomor
-                telpon yang anda gunakan dalam proses transaksi.
-              </AlertDescription>
-            </Alert> */}
-          </div>
           )}
           <div className="flex flex-row justify-center items-center">
-            <div className="flex md:flex-row flex-col w-full bg-background p-4">
-              <div className="w-full">
+            <div className="grid grid-cols-1 md:grid-cols-3 w-full bg-background p-4">
+              <div className="w-full col-span-2">
                 <div className="grid gap-4 pb-4">
                   <div>
                     <p className="text-xs mb-0.5 text-muted-foreground">
@@ -142,22 +132,19 @@ function TransactionHistoryDetail({ id }: { id: string }) {
                 </Table>
               </div>
             )} */}
-                {
-                  data.payment_information && (
-                    <div>
-                      {
-                        data.payment_information.payment_method ==
+                    {data.payment_information && (
+                      <div>
+                        {data.payment_information.payment_method ==
                         "VIRTUAL_ACCOUNT" ? (
                           <VAPayment payment={data.payment_information} />
-                        ) : data.payment_information.payment_method == "EWALLET" ? (
+                        ) : data.payment_information.payment_method ==
+                          "EWALLET" ? (
                           <LinkPayment payment={data.payment_information} />
                         ) : (
                           <QRPayment payment={data.payment_information} />
-                        )
-                      }
-                    </div>
-                  )
-                }
+                        )}
+                      </div>
+                    )}
                   </Card>
                   <div className="w-full bottom-0 mt-0">
                     {data.status === ETransactionStatus.Refunded ? (
@@ -174,14 +161,15 @@ function TransactionHistoryDetail({ id }: { id: string }) {
                       <div className="bg-amber-50 border flex items-center rounded-b-lg space-x-2 text-amber-800 px-4 py-1.5">
                         <InfoCircledIcon />
                         <p className="text-xs">
-                          Jika transaksi gagal, saldo anda akan dikembalikan dalam
-                          bentuk point
+                          Jika transaksi gagal, saldo anda akan dikembalikan
+                          dalam bentuk point
                         </p>
                       </div>
                     )}
                   </div>
                   <>
-                    {data.payment_information && data.payment_information.guide ? (
+                    {data.payment_information &&
+                    data.payment_information.guide ? (
                       <div className="w-full bg-background h-full px-4 pt-4 pb-6 rounded-lg shadow flex-1">
                         <div
                           dangerouslySetInnerHTML={{

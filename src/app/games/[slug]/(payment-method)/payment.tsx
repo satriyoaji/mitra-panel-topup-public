@@ -35,12 +35,10 @@ function Payment({ number }: { number: number }) {
     <Card className="w-full">
       <CardContent>
         <div className="flex gap-2 items-center mt-3">
-          <div className="bg-theme-primary-100 p-2 w-7 h-7 flex justify-center items-center rounded-full">
-            <h4 className="font-bold rounded-full text-theme-primary-500">
-              {number}
-            </h4>
+          <div className="bg-primary p-2 w-7 h-7 flex justify-center items-center rounded-full">
+            <h6 className="font-bold rounded-full text-white">{number}</h6>
           </div>
-          <h4 className="font-medium ml-1">Metode Pembayaran</h4>
+          <h6 className="font-medium ml-1">Metode Pembayaran</h6>
         </div>
         <Separator className="my-3" />
         <PaymentList paymentGroup={paymentGroups} />

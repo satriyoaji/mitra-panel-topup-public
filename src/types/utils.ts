@@ -19,11 +19,8 @@ export type TPaginationMeta = {
 };
 
 export interface ITheme {
-  primary: TPrimaryPallete;
-  secondary: TSecondaryPallete;
-  font: TFont;
-  logo: string;
   version: string;
+  primary: string;
 }
 
 export interface IBanner {
@@ -46,4 +43,5 @@ export interface ISiteProfile {
   keywords: string;
   description: string;
   terms_condition: string;
+  theme_color: string;
 }

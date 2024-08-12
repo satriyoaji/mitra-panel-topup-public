@@ -83,7 +83,7 @@ export default function ListGame() {
 
   return (
     <ListGameWrapper>
-      <div className="md:flex md:items-end md:justify-between sticky z-10 top-6 py-2 rounded-t-lg bg-theme-primary-100/80 backdrop-blur-md">
+      <div className="md:flex md:items-end md:justify-between sticky z-10 top-6 py-2 rounded-t-lg bg-background backdrop-blur-md">
         <div className="flex md:block items-end justify-between mt-4">
           <h5 className="mr-8 font-semibold px-2 mb-2">Kategori</h5>
           <div
