@@ -24,7 +24,7 @@ function CountdownCard({
     return (
       <div
         className={`flex rounded-xl py-1 px-2 space-x-1 text-center text-xs items-center justify-center ${
-          theme === "red" ? "bg-red-500 text-white" : "bg-white/90 text-red-500"
+          theme === "red" ? "bg-red-500 text-white" : "bg-white/95 text-red-500"
         } backdrop-blur  font-medium`}
       >
         <TimerIcon
@@ -43,7 +43,7 @@ function CountdownCard({
       className={`flex rounded-full py-0.5 pr-2 space-x-1 text-center text-xs items-center justify-center ${
         theme === "red"
           ? "bg-red-500 text-white pl-1.5"
-          : "bg-white/90 text-red-500 pl-2"
+          : "bg-white/95 text-red-500 pl-2"
       } backdrop-blur font-medium`}
     >
       {theme === "red" ? <TimerIcon className={`text-white`} /> : null}

@@ -8,6 +8,7 @@ import TransactionContext, {
 import { useSession } from "next-auth/react";
 import React, { RefObject, useCallback, useContext, useState } from "react";
 import { Purchase } from "./detail";
+import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 
 function CheckoutAction({
   formRef,
@@ -111,26 +112,31 @@ function CheckoutAction({
 
   return (
     <>
-      <div className="border sticky bottom-0 w-full pb-1 pt-1.5 rounded-xl bg-background flex items-center justify-between px-4">
+      <div className="border sticky bottom-0 w-full pb-1 pt-1.5 rounded-xl bg-background flex justify-between px-4">
         <div>
-            <p className="text-muted-foreground text-xs">Total Belanja</p>
-            <p className="text-foreground font-medium text-md">
-              {priceMask(data.product?.discounted_price || data.product?.price)}
-            </p>
-          </div>
-          <div>
-            <p className="text-muted-foreground text-xs">Payment Charge</p>
-            <p className="text-foreground font-medium text-md">
-              {priceMask(data.payment?.fee_amount)}
-            </p>
-          </div>
+          <p className="text-muted-foreground text-xs">Total Belanja</p>
+          <p className="text-foreground font-medium text-md">
+            {priceMask(data.product?.discounted_price || data.product?.price)}
+          </p>
+        </div>
+        <div>
+          <p className="text-muted-foreground text-xs">Payment Charge</p>
+          <p className="text-foreground font-medium text-md">
+            {priceMask(data.payment?.fee_amount)}
+          </p>
+        </div>
         <div>
           <p className="text-xs text-muted-foreground">Total Bayar</p>
-          <h4 className="text-lg font-semibold">{getTotal()}</h4>
+          <h4 className="text-lg font-semibold text-green-500">{getTotal()}</h4>
         </div>
         <div className="">
-          <Button className="bg-green-500" size="sm" onClick={checkout}>
-            Checkout
+          <Button
+            size="sm"
+            className="w-full mt-2 md:mt-0 bg-green-500 hover:bg-green-600 space-x-2"
+            onClick={checkout}
+          >
+            <div className="text-white">Pesan Sekarang</div>
+            <ShoppingCartIcon className="text-white h-4 w-4" />
           </Button>
         </div>
       </div>

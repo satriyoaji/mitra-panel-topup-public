@@ -23,6 +23,10 @@ export type path = {
 
 const paths: path[] = [
   {
+    name: "Home",
+    path: "/",
+  },
+  {
     name: "Price List",
     path: "/games",
   },
@@ -101,7 +105,7 @@ function HeaderV1() {
             </div>
           ) : (
             <Link href="/auth/login" className="m-2 hidden md:block">
-              <Button size="sm" variant="outline">
+              <Button size="sm" variant="white">
                 Login
               </Button>
             </Link>
