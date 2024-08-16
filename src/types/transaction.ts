@@ -1,15 +1,5 @@
 import { IProductCategory, LooseObject, TProduct, TProductItem } from "@/Type";
 
-export enum ETransactionStatus {
-  Pending,
-  Paid,
-  "On Process",
-  Delivered,
-  Failed,
-  Refunded,
-  Aborted,
-}
-
 export interface ICategoryForm {
   key: string;
   value: string;
