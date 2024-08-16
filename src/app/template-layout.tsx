@@ -2,7 +2,6 @@ import { Toaster } from "@/components/ui/toaster";
 import Footer from "@/components/footer";
 import HelpButton from "@/components/help-button";
 import BottomNav from "@/components/bottom-nav";
-import { GetCookie } from "@/infrastructures/cookieStore";
 import PageHeaderWrapper from "@/components/header/page-header-wrapper";
 import PWAAlert from "@/components/header/pwa-header";
 
@@ -11,8 +10,6 @@ export default function TemplateLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const version = GetCookie("version");
-
   return (
     <>
       <PWAAlert />
@@ -23,6 +20,7 @@ export default function TemplateLayout({
       </div>
       <Footer />
       <HelpButton />
+      <Toaster />
     </>
   );
 }

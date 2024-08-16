@@ -23,9 +23,6 @@ import { IProfile } from "@/Type";
 import TransactionContext, {
   ITransactionContext,
 } from "@/infrastructures/context/transaction/transaction.context";
-import ThemeContext, {
-  IThemeContext,
-} from "@/infrastructures/context/theme/theme.context";
 
 function Page() {
   const { data: session } = useSession();
@@ -35,7 +32,6 @@ function Page() {
   const [loading, setLoading] = useState(false);
   const [dataProfile, setDataProfile] = useState<IProfile | null>(null);
   const [profileOpen, setProfileOpen] = useState<boolean>(false);
-  const { data: theme } = useContext(ThemeContext) as IThemeContext;
 
   useEffect(() => {
     getData();

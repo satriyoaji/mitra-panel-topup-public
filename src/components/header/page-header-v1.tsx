@@ -12,9 +12,6 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "../ui/navigation-menu";
-import ThemeContext, {
-  IThemeContext,
-} from "@/infrastructures/context/theme/theme.context";
 import Image from "next/image";
 import { ISiteProfile } from "@/types/utils";
 import Searchbar from "@/app/dashboard/searchbar";
@@ -39,7 +36,6 @@ function HeaderV1() {
   const { data: session } = useSession();
   const router = useRouter();
   const [profile, setProfile] = useState<ISiteProfile>();
-  const { dispatch, data } = useContext(ThemeContext) as IThemeContext;
 
   const getProfile = async () => {
     var res = await fetch("/api/site-profile");

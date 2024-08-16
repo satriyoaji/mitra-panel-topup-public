@@ -12,9 +12,6 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "../ui/navigation-menu";
-import ThemeContext, {
-  IThemeContext,
-} from "@/infrastructures/context/theme/theme.context";
 import Image from "next/image";
 import { ISiteProfile } from "@/types/utils";
 import Searchbar from "@/app/dashboard/searchbar";
@@ -39,7 +36,6 @@ function HeaderV2() {
   const { data: session } = useSession();
   const router = useRouter();
   const [profile, setProfile] = useState<ISiteProfile>();
-  const { dispatch, data } = useContext(ThemeContext) as IThemeContext;
 
   const getProfile = async () => {
     var res = await fetch("/api/site-profile");
@@ -54,7 +50,7 @@ function HeaderV2() {
   }, []);
 
   return (
-    <header className="w-full z-20 shadow bg-theme-primary-400/80 backdrop-blur-md items-center top-0 sticky">
+    <header className="w-full z-20 shadow bg-primary backdrop-blur-md items-center top-0 sticky">
       <div className="w-full flex sm:container items-center justify-between">
         <div className="md:hidden w-full"></div>
         <div className="flex md:w-fit w-full justify-center md:justify-start">

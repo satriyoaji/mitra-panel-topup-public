@@ -16,7 +16,6 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Loading from "@/app/loading";
 import {
-  ETransactionStatus,
   ITransactionHistoryDetail,
 } from "@/types/transaction";
 import CopyToClipboard from "@/components/copy-to-clipboard";
@@ -32,8 +31,17 @@ import QRPayment from "./(payment)/qr-payment";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import LinkPayment from "./(payment)/link-payment";
 import { useSession } from "next-auth/react";
+import { ISiteProfile } from "@/types/utils";
+import PrintInvoice from "./print-invoice";
+import { ETransactionStatus } from "@/types/enums";
 
-function TransactionHistoryDetail({ id }: { id: string }) {
+function TransactionHistoryDetail({
+  id,
+  profile,
+}: {
+  id: string;
+  profile?: ISiteProfile;
+})  {
   const [data, setData] = useState<ITransactionHistoryDetail | undefined>(
     undefined
   );
@@ -66,6 +74,7 @@ function TransactionHistoryDetail({ id }: { id: string }) {
                 <Button size="sm">Refund</Button>
               </Link>
             )} */}
+            <PrintInvoice {...data} profile={profile} />
           </div>
           {!session && (
             <div className="w-full my-2">

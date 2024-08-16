@@ -1,0 +1,198 @@
+import { Badge } from "@/components/ui/badge";
+import { PrinterIcon } from "@heroicons/react/24/outline";
+import React, { useRef } from "react";
+import { useReactToPrint } from "react-to-print";
+import Image from "next/image";
+import { priceMask } from "@/Helpers";
+import { Separator } from "@/components/ui/separator";
+import VAPayment from "./(payment)/va-payment";
+import LinkPayment from "./(payment)/link-payment";
+import QRPayment from "./(payment)/qr-payment";
+import { InfoCircledIcon } from "@radix-ui/react-icons";
+import { ITransactionHistoryDetail } from "@/types/transaction";
+import { ISiteProfile } from "@/types/utils";
+
+interface Props extends ITransactionHistoryDetail {
+  profile?: ISiteProfile;
+}
+
+function PrintInvoice(data: Props) {
+  const componentRef = useRef<HTMLDivElement>(null);
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
+
+  return (
+    <>
+      <div
+        className="text-muted-foreground flex space-x-1 cursor-pointer"
+        onClick={handlePrint}
+      >
+        <PrinterIcon className="w-4 h-4 text-muted-foreground" />
+        <p className="p-0 text-xs">Cetak</p>
+      </div>
+      <div className="hidden">
+        <div ref={componentRef} className="p-8">
+          <div className="flex justify-between items-center mb-4">
+            {data.profile?.logo_url && (
+              <Image
+                src={data.profile?.logo_url}
+                alt="logo"
+                width={40}
+                height={40}
+              />
+            )}
+            <div className="text-right space-x-2">
+              <p className="font-medium ml-2 text-xl">Detail Transaksi</p>
+              <p className="text-xs text-muted-foreground">
+                {data.transaction_code}
+              </p>
+            </div>
+          </div>
+          <div className="w-full mt-2">
+            <div className="bg-red-50 text-red-900 flex justify-center items-center gap-2 p-1.5">
+              <div className="flex justify-center items-center bg-red-500 h-4 w-4 rounded-full text-white">
+                <p className="text-xs font-bold">i</p>
+              </div>
+              <p className="text-xs">
+                Transaksi tanpa login, wajib simpan ID transaksi & No HP.
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-row justify-stretch items-center mt-2">
+            <div className="grid w-full gap-3 h-full mt-1 grid-rows-2">
+              <div className="w-full bg-background h-full px-4 pt-4 pb-6 rounded-lg border flex-1 row-span-full">
+                <p className="font-medium text-lg text-primary">
+                  Rincian Transaksi
+                </p>
+                <div className="mt-4 space-y-4 h-full">
+                  <div className="flex justify-between w-full">
+                    <p className="text-muted-foreground text-sm">
+                      Order Expired at
+                    </p>
+                    {data.payment_information &&
+                    data.payment_information.expired_at ? (
+                      data.payment_information.expired_at
+                    ) : (
+                      <Badge variant="destructive">Expired</Badge>
+                    )}
+                  </div>
+                  <div className="flex justify-between w-full">
+                    <p className="text-muted-foreground text-sm">Produk</p>
+                    <p className="">{data.category_name}</p>
+                  </div>
+                  <div className="flex justify-between w-full">
+                    <p className="text-muted-foreground text-sm">Item</p>
+                    <p className="">{data.product_name}</p>
+                  </div>
+                  <div className="flex justify-between w-full">
+                    <p className="text-muted-foreground text-sm">Informasi</p>
+                    <div>
+                      <p>{data.customer_data}</p>
+                    </div>
+                  </div>
+                  <div className="flex justify-between w-full">
+                    <p className="text-muted-foreground text-sm">
+                      Informasi Kontak
+                    </p>
+                    <div className="text-right space-y-1">
+                      <p>{data.email}</p>
+                      <p>{data.phone}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {data.payment_information ? (
+                <>
+                  <div className="w-full bg-background h-full pt-4 rounded-lg border flex-1 relative overflow-clip">
+                    <div className="px-4">
+                      <p className="font-medium text-lg text-primary">
+                        Rincian Pembayaran
+                      </p>
+                      <div className="mt-4 space-y-4 h-full">
+                        <div className="flex justify-between w-full">
+                          <p className="text-muted-foreground text-sm">
+                            Pilihan Pembayaran
+                          </p>
+                          <div className="flex flex-col items-end">
+                            <p className="text-sm">
+                              {`${data.payment_information.payment_method.replace(
+                                "_",
+                                " "
+                              )} - ${data.payment_information.payment_channel}`}
+                            </p>
+                            {data.payment_information.image_url ? (
+                              <Image
+                                className="mt-1.5"
+                                alt={data.payment_information.payment_method}
+                                src={data.payment_information.image_url}
+                                width={50}
+                                height={50}
+                              />
+                            ) : (
+                              <p className="text-xl text-left">💳</p>
+                            )}
+                          </div>
+                        </div>
+                        <div className="flex justify-between w-full">
+                          <p className="text-muted-foreground text-sm">
+                            Total Pembayaran
+                          </p>
+                          <p className="font-semibold text-green-600">
+                            {priceMask(data.payment_information.payment_amount)}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <Separator className="my-3 w-full" />
+                    <div className="px-4">
+                      <p className="font-medium text-lg text-primary">
+                        Tujuan Pembayaran
+                      </p>
+                      <div className="mt-4 space-y-4 h-full">
+                        {data.payment_information.payment_method ==
+                        "VIRTUAL_ACCOUNT" ? (
+                          <VAPayment
+                            payment={data.payment_information}
+                            printable={true}
+                          />
+                        ) : data.payment_information.payment_method ==
+                          "EWALLET" ? (
+                          <LinkPayment payment={data.payment_information} />
+                        ) : (
+                          <QRPayment payment={data.payment_information} />
+                        )}
+                      </div>
+                    </div>
+                    <div className="w-full bottom-0 mt-6">
+                      <div className="bg-amber-50 border flex items-center rounded-b-lg space-x-2 text-amber-800 px-4 py-1.5">
+                        <InfoCircledIcon />
+                        <p className="text-xs">
+                          Jika transaksi gagal, saldo anda akan dikembalikan
+                          dalam bentuk point
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <>
+                    {data.payment_information.guide ? (
+                      <div className="w-full bg-background h-full px-4 pt-4 pb-6 rounded-lg border flex-1 text-muted-foreground">
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: data.payment_information.guide,
+                          }}
+                        ></div>
+                      </div>
+                    ) : null}
+                  </>
+                </>
+              ) : null}
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default PrintInvoice;

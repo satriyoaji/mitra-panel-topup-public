@@ -1,5 +1,4 @@
 import RootTemplateLayout from "./root-layout";
-import ThemeWrapper from "./theme-wrapper";
 import TemplateLayout from "./template-layout";
 import { Metadata } from "next";
 import { GetCredHeader } from "./api/api-utils";
@@ -45,10 +44,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <RootTemplateLayout>
-      <ThemeWrapper>
-        <TemplateLayout>{children}</TemplateLayout>
-      </ThemeWrapper>
-    </RootTemplateLayout>
+    <html lang="en" suppressHydrationWarning>
+      <body className="min-h-screen bg-repeat antialiased">
+        <RootTemplateLayout>
+          <div className="bg-zinc-50">
+            <TemplateLayout>{children}</TemplateLayout>
+          </div>
+        </RootTemplateLayout>
+      </body>
+    </html>
   );
 }

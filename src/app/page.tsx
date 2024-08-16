@@ -7,7 +7,7 @@ import Promo from "./dashboard/promo";
 export default async function Home() {
   return (
     <>
-      <div className="bg-theme-primary-50">
+      <div className="bg-slate-50">
         <CarouselWrapper />
         <FlashSaleWrapper />
         <ListGame />
