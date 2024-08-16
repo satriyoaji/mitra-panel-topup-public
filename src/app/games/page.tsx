@@ -75,7 +75,7 @@ function Page() {
                         discountedPrice={item.discounted_price}
                         name={item.name}
                         imageURL={item.image_url}
-                        price={`${priceMask(item.price)}`}
+                        price={item.price}
                         onClick={() =>
                           route.push(
                             `/games/${category?.value}?item=${item.key}`

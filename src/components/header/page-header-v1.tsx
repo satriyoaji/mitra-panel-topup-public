@@ -101,7 +101,9 @@ function HeaderV1() {
             </div>
           ) : (
             <Link href="/auth/login" className="m-2 hidden md:block">
-              <Button size="sm">Login</Button>
+              <Button size="sm" variant="outline">
+                Login
+              </Button>
             </Link>
           )}
         </div>

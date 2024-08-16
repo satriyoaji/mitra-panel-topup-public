@@ -44,7 +44,7 @@ const Carousel = ({ data }: { data: IBanner[] }) => {
       <div className="h-full md:pt-3 flex w-full justify-center items-center">
         <div
           {...swipeHandlers}
-          className="overflow-hidden relative w-auto max-w-5xl md:rounded-xl h-full"
+          className="overflow-hidden relative w-full sm:mx-8 md:rounded-xl h-full"
           style={{ aspectRatio: 3 / 1 }}
         >
           {/* <Image
@@ -71,7 +71,7 @@ const Carousel = ({ data }: { data: IBanner[] }) => {
               style={{
                 aspectRatio: 3 / 1,
               }}
-              className={`object-cover transition-all duration-500 ease-in-out ${
+              className={`object-cover w-full transition-all duration-500 ease-in-out ${
                 index === activeIndex ? "h-full" : "h-0"
               }`}
             />

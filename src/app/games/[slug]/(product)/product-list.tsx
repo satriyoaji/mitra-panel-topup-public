@@ -139,7 +139,7 @@ function ProductList(prop: IProductList) {
                     discountedPrice={val.discounted_price}
                     name={val.name}
                     imageURL={val.image_url}
-                    price={priceMask(val.price)}
+                    price={val.price}
                   />
                 </div>
               );
