@@ -55,16 +55,16 @@ function HeaderV1() {
 
   return (
     <header className="w-full z-20 shadow bg-primary rounded-b-2xl items-center top-0 sticky">
-      <div className="w-full flex sm:container items-center justify-between">
+      <div className="w-full flex max-w-6xl mx-auto px-2 lg:px-0 items-center justify-between">
         <div className="md:hidden w-full"></div>
-        <div className="flex md:w-fit w-full justify-center md:justify-start">
-          <Link href="/" className="p-1">
+        <div className="flex w-full justify-center md:justify-start">
+          <Link href="/" className="m-1.5">
             {profile?.logo_url && (
               <Image
                 src={profile?.logo_url}
                 alt="logo"
-                width={40}
-                height={40}
+                width={35}
+                height={35}
               />
             )}
           </Link>

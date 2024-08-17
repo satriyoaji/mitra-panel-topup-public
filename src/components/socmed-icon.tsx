@@ -2,11 +2,15 @@ import React from "react";
 import {
   CubeIcon,
   DiscordLogoIcon,
+  EnvelopeClosedIcon,
   InstagramLogoIcon,
+  TwitterLogoIcon,
 } from "@radix-ui/react-icons";
 
 function Socmed({ type }: { type: string }) {
   switch (type) {
+    case "email":
+      return <EnvelopeClosedIcon className="w-5 h-5 text-primary" />;
     case "instagram":
       return <InstagramLogoIcon className="w-6 h-6 text-primary" />;
     case "twitter":
@@ -26,7 +30,7 @@ function Socmed({ type }: { type: string }) {
       return (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6 text-primary"
+          className="h-5 w-5 text-primary"
           fill="currentColor"
           viewBox="0 0 24 24"
         >
@@ -93,7 +97,7 @@ function Socmed({ type }: { type: string }) {
         </svg>
       );
     default:
-      return <CubeIcon className="w-6 h-6 text-white" />;
+      return <CubeIcon className="w-6 h-6 text-primary" />;
   }
 }
 

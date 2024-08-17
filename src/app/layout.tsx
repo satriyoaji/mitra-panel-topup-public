@@ -47,7 +47,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className="min-h-screen bg-repeat antialiased">
         <RootTemplateLayout>
-          <div className="bg-zinc-50">
+          <div className="bg-background">
             <TemplateLayout>{children}</TemplateLayout>
           </div>
         </RootTemplateLayout>

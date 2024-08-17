@@ -40,11 +40,11 @@ const Carousel = ({ data }: { data: IBanner[] }) => {
   });
 
   return (
-    <div className="block bg-slate-50 md:pt-4 pb-6 md:-mx-8 md:-mt-4">
-      <div className="h-full md:pt-3 flex w-full justify-center items-center">
+    <div className="mb-4">
+      <div className="h-full md:pt-2 flex w-full justify-center items-center">
         <div
           {...swipeHandlers}
-          className="overflow-hidden relative w-full sm:mx-8 md:rounded-xl h-full"
+          className="overflow-hidden relative w-full md:rounded-xl h-full flex"
           style={{ aspectRatio: 3 / 1 }}
         >
           {/* <Image
@@ -66,14 +66,10 @@ const Carousel = ({ data }: { data: IBanner[] }) => {
               src={item.image_url}
               alt={item.name}
               key={index}
-              width={900}
-              height={300}
-              style={{
-                aspectRatio: 3 / 1,
-              }}
-              className={`object-cover w-full transition-all duration-500 ease-in-out ${
-                index === activeIndex ? "h-full" : "h-0"
-              }`}
+              fill={index === activeIndex}
+              height={index === activeIndex ? undefined : 0}
+              width={index === activeIndex ? undefined : 0}
+              className={`object-cover h-full transition-all duration-500 ease-in-out`}
             />
           ))}
           {/* <div>
@@ -98,7 +94,7 @@ const Carousel = ({ data }: { data: IBanner[] }) => {
         </div>
       </div>
       {data.length > 1 ? (
-        <div className="flex justify-center mr-2">
+        <div className="flex justify-end mr-2">
           <div className="flex bg-background/95 ml-1 backdrop-blur supports-[backdrop-filter]:bg-background/60 p-1 rounded-xl mt-[-1.5rem] absolute cursor-pointer">
             <ChevronLeftIcon
               width={12}

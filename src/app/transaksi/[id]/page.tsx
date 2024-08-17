@@ -28,7 +28,11 @@ const getData = async () => {
 
 async function DetailPage({ params }: { params: { id: string } }) {
   var profile: ISiteProfile | undefined = await getData();
-  return <TransactionHistoryDetail id={params.id} profile={profile} />;
+  return (
+    <div className="px-2 md:px-4">
+      <TransactionHistoryDetail id={params.id} profile={profile} />
+    </div>
+  );
 }
 
 export default DetailPage;

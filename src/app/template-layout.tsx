@@ -14,8 +14,10 @@ export default function TemplateLayout({
     <>
       <PWAAlert />
       <PageHeaderWrapper />
-      <div className={`md:container md:max-w-7xl`}>
-        <div className={`min-h-screen bg-background pt-2`}>{children}</div>
+      <div className={`w-full flex justify-center`}>
+        <div className={`min-h-screen md:max-w-6xl bg-background pt-2 w-full`}>
+          {children}
+        </div>
         <BottomNav />
       </div>
       <Footer />
