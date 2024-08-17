@@ -25,7 +25,7 @@ function useCategory(id: string): IUseCategoryData {
         TransactionContext
     ) as ITransactionContext;
     const [products, setProducts] = useState<TProductItem[]>([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const searchParams = useSearchParams();
 
     const formRef = useRef<HTMLDivElement>(null);

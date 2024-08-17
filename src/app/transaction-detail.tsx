@@ -16,6 +16,7 @@ function TransactionDetail({
   promo,
   form,
   payment,
+  account,
 }: ITransaction) {
   const { data: session } = useSession();
 
@@ -27,8 +28,8 @@ function TransactionDetail({
   if (product && category) {
     return (
       <div>
-        <div className="grid gap-4 pt-4">
-          <Card className="bg-slate-50 p-4">
+        <div className="grid gap-4">
+          <Card className="bg-zinc-50 p-4">
             <div className="text-xs mb-4 flex items-center space-x-4">
               {/* {val.logo_image !== "" ? (
                                             <img
@@ -42,13 +43,13 @@ function TransactionDetail({
               </div>
               {/* )} */}
               <div>
-                <p>{category.name}</p>
+                <p className="text-xs">{category.name}</p>
                 <p className="font-semibold">{product.name}</p>
               </div>
             </div>
             {form && category.forms ? (
               <div className="mt-6">
-                <p className="text-xs font-semibold">Data Tambahan</p>
+                <p className="text-xs font-semibold">Informasi</p>
                 <Table className="border-y bg-background rounded mt-1">
                   <TableBody className="text-xs">
                     {Object.keys(form).map((key) => (
@@ -63,6 +64,18 @@ function TransactionDetail({
                         </TableCell>
                       </TableRow>
                     ))}
+                    <TableRow>
+                      <TableCell>Email</TableCell>
+                      <TableCell className="text-right space-y-1">
+                        {account?.email ?? session?.profile.email}
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>No. Whatsapp</TableCell>
+                      <TableCell className="text-right space-y-1">
+                        {account?.noWhatsapp ?? session?.profile.phone}
+                      </TableCell>
+                    </TableRow>
                   </TableBody>
                 </Table>
               </div>
@@ -72,7 +85,7 @@ function TransactionDetail({
             <TableBody className="text-xs">
               <TableRow>
                 <TableCell>
-                  <p>Metode Pembayaran</p>
+                  <p className="text-xs">Metode Pembayaran</p>
                 </TableCell>
                 <TableCell className="space-y-1">
                   <div className="flex justify-end">
@@ -94,16 +107,18 @@ function TransactionDetail({
                 <TableCell className="text-right space-y-1">
                   {product.discounted_price > 0 ? (
                     <>
-                      <div className="flex space-x-2 justify-end">
-                        <p className="text-red-500">Discount</p>
-                        <p className="line-through">
+                      <div className="flex space-x-2 justify-end text-xs">
+                        <p className="text-red-500 text-xs">Discount</p>
+                        <p className="line-through text-xs">
                           {priceMask(product.price)}
                         </p>
                       </div>
-                      <p>{priceMask(product.discounted_price)}</p>
+                      <p className="text-xs">
+                        {priceMask(product.discounted_price)}
+                      </p>
                     </>
                   ) : (
-                    <>{priceMask(product.price)}</>
+                    <p className="text-xs">{priceMask(product.price)}</p>
                   )}
                 </TableCell>
               </TableRow>
@@ -131,7 +146,9 @@ function TransactionDetail({
             <TableFooter>
               <TableRow>
                 <TableCell>Total Harga</TableCell>
-                <TableCell className="text-right">{priceMask(total)}</TableCell>
+                <TableCell className="text-right font-semibold">
+                  {priceMask(total)}
+                </TableCell>
               </TableRow>
             </TableFooter>
           </Table>

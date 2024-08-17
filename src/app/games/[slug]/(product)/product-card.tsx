@@ -26,8 +26,6 @@ function ProductCard(props: prop) {
     return null;
   }, [props.discountedPrice, props.price]);
 
-  console.log(props);
-
   return (
     <div
       className={`min-h-[4rem] overflow-clip flex items-center py-1 pr-1 relative h-full bg-white hover:bg-slate-50 rounded-xl cursor-pointer ${

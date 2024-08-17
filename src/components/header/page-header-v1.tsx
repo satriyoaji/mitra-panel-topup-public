@@ -68,23 +68,23 @@ function HeaderV1() {
               />
             )}
           </Link>
-        </div>
-        <div className="hidden md:flex pl-8 text-white">
-          <NavigationMenu>
-            <NavigationMenuList className="w-fit">
-              {paths.map((i) => (
-                <NavigationMenuItem className="bg-transparent" key={i.path}>
-                  <Link href={i.path} legacyBehavior passHref>
-                    <NavigationMenuLink
-                      className={`${navigationMenuTriggerStyle()}`}
-                    >
-                      {i.name}
-                    </NavigationMenuLink>
-                  </Link>
-                </NavigationMenuItem>
-              ))}
-            </NavigationMenuList>
-          </NavigationMenu>
+          <div className="hidden md:flex pl-8 text-white">
+            <NavigationMenu>
+              <NavigationMenuList className="w-fit">
+                {paths.map((i) => (
+                  <NavigationMenuItem className="bg-transparent" key={i.path}>
+                    <Link href={i.path} legacyBehavior passHref>
+                      <NavigationMenuLink
+                        className={`${navigationMenuTriggerStyle()}`}
+                      >
+                        {i.name}
+                      </NavigationMenuLink>
+                    </Link>
+                  </NavigationMenuItem>
+                ))}
+              </NavigationMenuList>
+            </NavigationMenu>
+          </div>
         </div>
         <div className="flex w-full justify-end items-center gap-2">
           <Searchbar />

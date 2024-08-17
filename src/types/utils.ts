@@ -43,5 +43,6 @@ export interface ISiteProfile {
   keywords: string;
   description: string;
   terms_condition: string;
+  privacy_policy: string;
   theme_color: string;
 }

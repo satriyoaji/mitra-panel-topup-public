@@ -2,8 +2,8 @@
 
 import { IBanner } from "@/types/utils";
 import { useEffect, useState } from "react";
-import CarouselV1 from "./v1/carousel";
-import { Skeleton } from "@/components/ui/skeleton";
+import Carousel from "./carousel";
+import Loading from "./loading";
 
 const CarouselWrapper = () => {
   const [banners, setBanners] = useState<IBanner[]>([]);
@@ -24,14 +24,13 @@ const CarouselWrapper = () => {
 
   if (loading)
     return (
-      <div className="mb-4">
-        <div className="h-full md:pt-2 flex w-full justify-center items-center">
-          <Skeleton className="h-full w-full" style={{ aspectRatio: 3 / 1 }} />
-        </div>
+      <div className="bg-background flex justify-center items-center md:py-4">
+        <Loading />
       </div>
     );
+
   if (banners && banners.length > 0) {
-    return <CarouselV1 data={banners} />;
+    return <Carousel data={banners} />;
   }
 };
 
