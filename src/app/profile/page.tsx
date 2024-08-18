@@ -23,6 +23,7 @@ import TransactionContext, {
   ITransactionContext,
 } from "@/infrastructures/context/transaction/transaction.context";
 import { DocumentTextIcon, ShieldCheckIcon } from "@heroicons/react/24/outline";
+import Password from "./password";
 
 function Page() {
   const { data: session } = useSession();
@@ -112,6 +113,22 @@ function Page() {
           <SaldoCard balance={dataProfile?.saldo ?? 0} />
         </div>
         <div className="mt-6 mb-4">
+          <Dialog>
+            <DialogTrigger className="w-full">
+              <p className="flex px-3 space-x-3 py-2 items-center text-sm w-full cursor-pointer hover:bg-slate-50">
+                <DiscIcon className="mr-3" /> Reset Password
+              </p>
+            </DialogTrigger>
+            <DialogContent>
+              <div>
+                <h4 className="font-semibold p-0">Keamanan Akun</h4>
+                <p className="text-xs text-muted-foreground">
+                  Ubah Keamanan Akun
+                </p>
+              </div>
+              <Password />
+            </DialogContent>
+          </Dialog>
           <Dialog>
             <DialogTrigger className="md:hidden w-full">
               <p className="flex px-3 space-x-3 py-2 items-center text-sm w-full cursor-pointer hover:bg-slate-50">
