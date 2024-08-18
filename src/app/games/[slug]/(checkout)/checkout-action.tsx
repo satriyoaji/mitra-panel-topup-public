@@ -118,7 +118,7 @@ function CheckoutAction({
 
   return (
     <>
-      <div className="sticky bottom-12 md:bottom-0 w-full pb-1 shadow pt-2 rounded-xl bg-background md:flex items-center justify-between px-4">
+      <div className="sticky bottom-12 md:bottom-0 w-full pb-1 border shadow pt-2 rounded-xl bg-background md:flex items-center justify-between px-4">
         <div className="grid grid-cols-3 w-full ml-2">
           <div>
             <p className="text-muted-foreground text-xs">Total Belanja</p>

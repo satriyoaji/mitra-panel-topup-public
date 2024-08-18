@@ -15,7 +15,7 @@ function Page({ params }: { params: { slug: string } }) {
   else if (data.data.category !== null && data.data.category !== undefined) {
     return (
       <div className="flex justify-center w-full">
-        <div className="w-full mb-12 sm:mb-0 mx-2 lg:mx-0">
+        <div className="w-full mb-12 sm:mb-0">
           <DetailCategory session={session} {...data} />
         </div>
       </div>
