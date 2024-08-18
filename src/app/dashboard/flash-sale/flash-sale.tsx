@@ -18,7 +18,7 @@ import Image from "next/image";
 function FlashSale({ data }: { data: IFlashSaleInfo }) {
   if (data)
     return (
-      <div className="relative md:rounded-xl bg-cover mb-2">
+      <div className="relative md:rounded-xl bg-cover mb-2 mt-4">
         <div className="w-full md:rounded-xl bg-gradient-to-tl from-zinc-300 to-zinc-100 overflow-clip pb-1">
           <div className="flex justify-between items-center">
             <div className="flex items-center bg-red-500 backdrop-blur-sm py-1 pr-1 rounded-2xl">

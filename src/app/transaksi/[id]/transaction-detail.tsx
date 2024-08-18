@@ -1,6 +1,10 @@
 "use client";
 
-import { InfoCircledIcon, SketchLogoIcon } from "@radix-ui/react-icons";
+import {
+  ArrowLeftIcon,
+  InfoCircledIcon,
+  SketchLogoIcon,
+} from "@radix-ui/react-icons";
 import { priceMask } from "@/Helpers";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -21,6 +25,7 @@ import PrintInvoice from "./print-invoice";
 import { ISiteProfile } from "@/types/utils";
 import { ETransactionStatus } from "@/types/enums";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { useRouter } from "next/navigation";
 
 function TransactionHistoryDetail({
   id,
@@ -34,6 +39,7 @@ function TransactionHistoryDetail({
   );
   const [loading, setLoading] = useState(true);
   const { data: session } = useSession();
+  const router = useRouter();
 
   useEffect(() => {
     (async () => {
@@ -51,17 +57,23 @@ function TransactionHistoryDetail({
   if (data)
     return (
       <>
-        <div className="flex justify-between items-center">
-          <div className="sm:flex items-center space-x-2">
-            <p className="font-medium ml-2 text-xl text-primary">
-              Detail Transaksi
-            </p>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <p className="text-xs text-muted-foreground">
-                  {data.transaction_code}
-                </p>
-                <CopyToClipboard text={data.transaction_code} />
+        <div className="flex justify-between items-center pt-4">
+          <div className="flex items-center space-x-1">
+            <ArrowLeftIcon
+              className="h-5 w-5 text-primary cursor-pointer"
+              onClick={() => router.back()}
+            />
+            <div className="sm:flex items-center space-x-2">
+              <h4 className="font-medium ml-2 p-0 text-primary">
+                Detail Transaksi
+              </h4>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <p className="text-xs text-muted-foreground">
+                    {data.transaction_code}
+                  </p>
+                  <CopyToClipboard text={data.transaction_code} />
+                </div>
               </div>
             </div>
           </div>

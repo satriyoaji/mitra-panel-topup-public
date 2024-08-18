@@ -5,7 +5,7 @@ import { ISiteProfile } from "@/types/utils";
 const getData = async () => {
   const credentialHeader = GetCredHeader();
 
-  const res = await fetch(`${process.env.API}/v2/panel/site-profile`, {
+  const res = await fetch(`${process.env.API}/site-profile`, {
     headers: {
       "Content-Type": "application/json",
       "X-Sign": credentialHeader.sign,
@@ -27,16 +27,16 @@ const getData = async () => {
 
 async function Page() {
   var data: ISiteProfile | undefined = await getData();
+  console.log(data);
   return (
-    <div className="flex justify-center w-full px-2">
+    <div className="flex justify-center w-full px-4">
       <div className="max-w-6xl w-full my-4 flex flex-col justify-center items-center">
-        <div className="max-w-4xl w-full space-y-4">
-          <div className="bg-background rounded-lg p-4 w-full">
+        <div className="w-full space-y-4">
+          <div className="bg-background rounded-lg w-full">
             <h3 className="font-semibold text-primary">Kebijkan Privasi</h3>
           </div>
           {data ? (
             <div
-              className="px-4"
               dangerouslySetInnerHTML={{
                 __html: data?.privacy_policy,
               }}

@@ -3,7 +3,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import {
   NavigationMenu,
@@ -36,22 +36,9 @@ const paths: path[] = [
   },
 ];
 
-function HeaderV1() {
+function Header({ profile }: { profile?: ISiteProfile }) {
   const { data: session } = useSession();
   const router = useRouter();
-  const [profile, setProfile] = useState<ISiteProfile>();
-
-  const getProfile = async () => {
-    var res = await fetch("/api/site-profile");
-    if (res.ok) {
-      var data = await res.json();
-      setProfile(data.data);
-    }
-  };
-
-  useEffect(() => {
-    getProfile();
-  }, []);
 
   return (
     <header className="w-full z-20 shadow bg-primary rounded-b-2xl items-center top-0 sticky">
@@ -116,4 +103,4 @@ function HeaderV1() {
   );
 }
 
-export default HeaderV1;
+export default Header;
