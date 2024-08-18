@@ -1,5 +1,4 @@
 import RootTemplateLayout from "./root-layout";
-import TemplateLayout from "./template-layout";
 import { Metadata } from "next";
 import { GetCredHeader } from "./api/api-utils";
 import { ISiteProfile } from "@/types/utils";
@@ -8,7 +7,7 @@ export async function generateMetadata(): Promise<Metadata> {
   var credentialHeader = GetCredHeader();
 
   // fetch data
-  const res = await fetch(`${process.env.API}/site-profile`, {
+  const res = await fetch(`${process.env.NEXT_API_URL}/v2/panel/site-profile`, {
     headers: {
       "Content-Type": "application/json",
       "X-Sign": credentialHeader.sign,
@@ -46,11 +45,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="min-h-screen bg-repeat antialiased">
-        <RootTemplateLayout>
-          <div className="bg-background">
-            <TemplateLayout>{children}</TemplateLayout>
-          </div>
-        </RootTemplateLayout>
+        <RootTemplateLayout>{children}</RootTemplateLayout>
       </body>
     </html>
   );

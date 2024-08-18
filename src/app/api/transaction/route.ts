@@ -9,7 +9,8 @@ export async function GET(req: NextRequest) {
   var re: Response;
   if (qParams.get("isAdvance"))
     re = await fetch(
-      `${process.env.API}/transaction/advance-search?` + qParams,
+      `${process.env.NEXT_API_URL}/v2/panel/transaction/advance-search?` +
+        qParams,
       {
         headers: GetAuthHeader(req),
         cache: "no-store",
@@ -19,23 +20,29 @@ export async function GET(req: NextRequest) {
       }
     );
   else
-    re = await fetch(`${process.env.API}/transaction/list?` + qParams, {
-      headers: GetAuthHeader(req),
-      cache: "no-store",
-      // next: {
-      //   revalidate: 30,
-      // },
-    });
+    re = await fetch(
+      `${process.env.NEXT_API_URL}/v2/panel/transaction/list?` + qParams,
+      {
+        headers: GetAuthHeader(req),
+        cache: "no-store",
+        // next: {
+        //   revalidate: 30,
+        // },
+      }
+    );
   var result = await re.json();
   return NextResponse.json(result, { status: re.status });
 }
 
 export async function POST(req: NextRequest) {
-  var re = await fetch(`${process.env.API}/transaction/create`, {
-    method: "POST",
-    headers: GetAuthHeader(req),
-    body: JSON.stringify(await req.json()),
-  });
+  var re = await fetch(
+    `${process.env.NEXT_API_URL}/v2/panel/transaction/create`,
+    {
+      method: "POST",
+      headers: GetAuthHeader(req),
+      body: JSON.stringify(await req.json()),
+    }
+  );
   var result = await re.json();
   return NextResponse.json(result, { status: re.status });
 }

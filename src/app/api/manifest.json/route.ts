@@ -3,7 +3,7 @@ import { GetAuthHeader } from "../api-utils";
 import { ISiteProfile } from "@/types/utils";
 
 export async function GET(req: NextRequest) {
-  var re = await fetch(`${process.env.API}/site-profile`, {
+  var re = await fetch(`${process.env.NEXT_API_URL}/v2/panel/site-profile`, {
     headers: GetAuthHeader(req),
     next: {
       revalidate: 3600,

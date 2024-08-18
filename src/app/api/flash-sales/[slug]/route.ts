@@ -12,7 +12,7 @@ export async function GET(
   qParams.append("mitra_id", process.env.NEXT_MITRA_ID as string);
 
   // var re = await fetch(
-  //     `${process.env.API}/product-flash-sales/${params.slug}?` +
+  //     `${process.env.NEXT_API_URL}/v2/panel/product-flash-sales/${params.slug}?` +
   //         qParams,
   //     {
   //         headers: {

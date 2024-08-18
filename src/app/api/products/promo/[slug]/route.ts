@@ -9,9 +9,9 @@ export async function GET(
   const url = new URL(req.url as string);
   let qParams = url.searchParams;
 
-  let urlFetch = `${process.env.API}/promotion/detail/${slug}`;
+  let urlFetch = `${process.env.NEXT_API_URL}/v2/panel/promotion/detail/${slug}`;
   if (qParams.get("by-code"))
-    urlFetch = `${process.env.API}/promotion/get-by-code?promo_code=${slug}`;
+    urlFetch = `${process.env.NEXT_API_URL}/v2/panel/promotion/get-by-code?promo_code=${slug}`;
 
   var re = await fetch(urlFetch, {
     headers: GetAuthHeader(req),

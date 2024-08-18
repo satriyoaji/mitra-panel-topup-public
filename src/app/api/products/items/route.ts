@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 export async function GET(req: Request) {
   const url = new URL(req.url as string);
 
-  // const strUrl = `${process.env.API}/products?mitra_id=${process.env.NEXT_MITRA_ID}&${url.searchParams}`;
+  // const strUrl = `${process.env.NEXT_API_URL}/v2/panel/products?mitra_id=${process.env.NEXT_MITRA_ID}&${url.searchParams}`;
 
   // var re = await fetch(strUrl, {
   //     headers: {

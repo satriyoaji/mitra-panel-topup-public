@@ -15,19 +15,22 @@ export const options: NextAuthOptions = {
       ) {
         var credentialHeader = GetCredHeader();
 
-        const response = await fetch(`${process.env.API}/member/login`, {
-          method: "post",
-          headers: {
-            "Content-Type": "application/json",
-            "X-Sign": credentialHeader.sign,
-            "X-User-Id": credentialHeader.mitraid,
-            "X-Timestamp": credentialHeader.timestamp.toString(),
-          },
-          body: JSON.stringify({
-            email: credentials?.username,
-            password: credentials?.password,
-          }),
-        });
+        const response = await fetch(
+          `${process.env.NEXT_API_URL}/v2/panel/member/login`,
+          {
+            method: "post",
+            headers: {
+              "Content-Type": "application/json",
+              "X-Sign": credentialHeader.sign,
+              "X-User-Id": credentialHeader.mitraid,
+              "X-Timestamp": credentialHeader.timestamp.toString(),
+            },
+            body: JSON.stringify({
+              email: credentials?.username,
+              password: credentials?.password,
+            }),
+          }
+        );
 
         var res = await response.json();
         if (response.ok) return res.data;
@@ -46,15 +49,18 @@ export const options: NextAuthOptions = {
     session: async ({ session, token }) => {
       var credentialHeader = GetCredHeader();
 
-      let response = await fetch(`${process.env.API}/member/profile`, {
-        headers: {
-          "Content-Type": "application/json",
-          "X-Sign": credentialHeader.sign,
-          "X-User-Id": credentialHeader.mitraid,
-          "X-Timestamp": credentialHeader.timestamp.toString(),
-          Authorization: `Bearer ${token.token}`,
-        },
-      });
+      let response = await fetch(
+        `${process.env.NEXT_API_URL}/v2/panel/member/profile`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "X-Sign": credentialHeader.sign,
+            "X-User-Id": credentialHeader.mitraid,
+            "X-Timestamp": credentialHeader.timestamp.toString(),
+            Authorization: `Bearer ${token.token}`,
+          },
+        }
+      );
 
       var res = await response.json();
       if (response.ok) {
