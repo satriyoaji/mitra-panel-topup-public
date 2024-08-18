@@ -54,63 +54,58 @@ function Page() {
   }, [pageIndex, category]);
 
   return (
-    <div className="flex justify-center">
-      <div className="max-w-6xl bg-background px-2 md:px-4 w-full min-h-[92vh]">
-        {" "}
-        <div className="flex px-2 sticky top-10 py-4 bg-transparent backdrop-blur-lg rounded-b-xl flex-col space-y-1.5 mb-3 z-10">
-          <p className="font-semibold text-lg">Produk</p>
-          <Filter onChange={setCategory} />
-        </div>
-        <div className="min-h-[68vh]">
-          {loading ? (
-            <Loading />
-          ) : (
-            <>
-              {data.length > 0 ? (
-                <div className="grid sm:grid-cols-4 xl:grid-cols-6 grid-cols-2 gap-2 mx-2">
-                  {data.map((item, idx) => (
-                    <div className="w-full h-full" key={`${idx}`}>
-                      <ProductCard
-                        // category={item.category_alias}
-                        discountedPrice={item.discounted_price}
-                        name={item.name}
-                        imageURL={item.image_url}
-                        price={`${priceMask(item.price)}`}
-                        onClick={() =>
-                          route.push(
-                            `/games/${category?.value}?item=${item.key}`
-                          )
-                        }
-                      />
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="flex flex-col items-center justify-center h-full w-full">
-                  <Image
-                    src={
-                      "/assets/illustration/DrawKit Larry Character Illustration (10).svg"
-                    }
-                    className="opacity-50"
-                    alt="dw"
-                    width={500}
-                    height={500}
-                  />
-                  <h5 className="text-xl font-bold -mt-10">Item Kosong</h5>
-                </div>
-              )}
-            </>
-          )}
-        </div>
-        <Pagination
-          onChange={setPageIndex}
-          meta={{
-            limit: 12,
-            page: pageIndex,
-            total,
-          }}
-        />
+    <div className="bg-background w-full min-h-[92vh]">
+      <div className="flex px-2 sticky top-10 py-4 bg-background rounded-b-xl flex-col space-y-1.5 z-10">
+        <h4 className="font-semibold text-primary p-0">Produk 🕹️</h4>
+        <Filter onChange={setCategory} />
       </div>
+      <div className="min-h-[68vh]">
+        {loading ? (
+          <Loading />
+        ) : (
+          <>
+            {data.length > 0 ? (
+              <div className="grid sm:grid-cols-4 xl:grid-cols-6 grid-cols-2 gap-2 mx-2">
+                {data.map((item, idx) => (
+                  <div className="w-full h-full" key={`${idx}`}>
+                    <ProductCard
+                      // category={item.category_alias}
+                      discountedPrice={item.discounted_price}
+                      name={item.name}
+                      imageURL={item.image_url}
+                      price={item.price}
+                      onClick={() =>
+                        route.push(`/games/${category?.value}?item=${item.key}`)
+                      }
+                    />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="flex flex-col items-center justify-center h-full w-full">
+                <Image
+                  src={
+                    "/assets/illustration/DrawKit Larry Character Illustration (10).svg"
+                  }
+                  className="opacity-50"
+                  alt="dw"
+                  width={500}
+                  height={500}
+                />
+                <h5 className="text-xl font-bold -mt-10">Item Kosong</h5>
+              </div>
+            )}
+          </>
+        )}
+      </div>
+      <Pagination
+        onChange={setPageIndex}
+        meta={{
+          limit: 12,
+          page: pageIndex,
+          total,
+        }}
+      />
     </div>
   );
 }

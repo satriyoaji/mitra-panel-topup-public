@@ -5,7 +5,6 @@ import { priceMask } from "@/Helpers";
 import { useCountdown } from "@/Hooks";
 import { IPromo } from "@/types/transaction";
 import { Cross1Icon } from "@radix-ui/react-icons";
-import { min } from "date-fns";
 import React from "react";
 
 function PromoCard({
@@ -31,12 +30,12 @@ function PromoCard({
     return (
       <>
         <div
-          className={`rounded-xl relative shadow-sm cursor-pointer overflow-clip ${
+          className={`rounded-xl relative shadow-sm cursor-pointer text-primary-900 overflow-clip hover:bg-zinc-50 ${
             promo.id == selected?.id ? "border-2 border-primary" : "border-2"
           }`}
         >
           {onClose && (
-            <div className="absolute right-2 top-2">
+            <div className="absolute right-0 top-0 p-1.5 bg-primary-200 rounded-bl-xl text-primary-700">
               <Cross1Icon className="w-3 h-3" onClick={onClose} />
             </div>
           )}
@@ -47,59 +46,63 @@ function PromoCard({
               else setSelected();
             }}
           >
-            <div className="flex flex-col items-center justify-center p-4 w-[12rem] bg-background">
-              <p className="font-bold text-xl">
+            <div className="flex flex-col items-center justify-center p-4 w-[12rem] bg-primary">
+              <p className="font-bold text-3xl text-white">
                 {promo.discount_percent > 0
                   ? `${promo.discount_percent}%`
                   : priceMask(promo.discount_amount)}
               </p>
               {promo.stock && promo.stock > 0 ? (
-                <p className="text-xs text-center">Tersisa {promo.stock}</p>
+                <p className="text-center text-white">Tersisa {promo.stock}</p>
               ) : null}
             </div>
-            <div className="items-center justify-center rounded-br-xl w-full rounded-tr-xl bg-primary">
-              <div className="pr-4 pt-3 pl-6 space-y-2 bg-gradient-to-br from-white/90 to-white/70">
-                <div className="flex justify-between items-center">
-                  <p className="text-xs py-1 px-2 rounded text-primary font-medium w-fit">
+            <div className="items-center justify-center w-full bg-background">
+              <div className="pr-4 pl-6 space-y-2">
+                <div className="flex pt-3 justify-between items-center">
+                  <p className="text-xs py-1 px-2 bg-primary-200 text-primary-900 font-medium w-fit">
                     {promo.promo_code}
                   </p>
-                  {onDetailClicked && (
-                    <Button
-                      size="sm"
-                      variant="link"
-                      className="text-primary text-xs"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onDetailClicked(promo);
-                      }}
-                    >
-                      Detail
-                    </Button>
-                  )}
                 </div>
                 <div className="flex-row justify-between items-center rounded-xl px-2 py-1 bg-background">
                   <p className="text-sm font-medium">{promo.name}</p>
                 </div>
-                <p className="text-xs pl-1 pb-2">{promo.short_description}</p>
+                <p className="text-xs pl-1 pb-3">{promo.short_description}</p>
               </div>
               {isSecret ? (
-                <div className="bg-primarys text-white mt-4 rounded-br">
+                <div className="bg-primary-400 text-white mt-4 rounded-br">
                   <p className="text-center text-xs font-semibold">
                     Secret Promo
                   </p>
                 </div>
               ) : null}
-              <div className={`px-3 py-2 bg-red-500 text-white`}>
-                <p className="text-xs">
-                  Berakhir dalam
-                  <span className="font-semibold ml-1">
-                    {days != null && days != 0
-                      ? `${days} hari`
-                      : hours != null && hours != 0
-                      ? `${hours} jam`
-                      : `${minutes} menit`}
-                  </span>
-                </p>
+              <div className="flex justify-between">
+                <div
+                  className={`px-3 py-2 bg-red-500 text-white rounded-tr-xl`}
+                >
+                  <p className="text-xs">
+                    Berakhir dalam
+                    <span className="font-semibold ml-1">
+                      {days != null && days != 0
+                        ? `${days} hari`
+                        : hours != null && hours != 0
+                        ? `${hours} jam`
+                        : `${minutes} menit`}
+                    </span>
+                  </p>
+                </div>
+                {onDetailClicked && (
+                  <Button
+                    size="sm"
+                    variant="link"
+                    className="text-primary-900 text-xs mr-2"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onDetailClicked(promo);
+                    }}
+                  >
+                    Detail
+                  </Button>
+                )}
               </div>
             </div>
           </div>

@@ -62,27 +62,6 @@ function TransactionHistoryDetail({ id }: { id: string }) {
                     <p className="font-semibold">{data.product_name}</p>
                   </div>
                 </div>
-                {/* {form && category.forms && (
-              <div className="mt-6">
-                <p className="text-xs font-semibold">Data Tambahan</p>
-                <Table className="border-y bg-background rounded mt-1">
-                  <TableBody className="text-xs">
-                    {Object.keys(form).map((key) => (
-                      <TableRow key={key}>
-                        <TableCell>
-                          {category.forms
-                            ?.find((i) => i.key == key)
-                            ?.alias.replace(/_/g, " ")}
-                        </TableCell>
-                        <TableCell className="text-right space-y-1">
-                          {form[key]}
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-            )} */}
               </Card>
               <Table>
                 <TableBody className="text-xs">
@@ -104,26 +83,6 @@ function TransactionHistoryDetail({ id }: { id: string }) {
                       )}
                     </TableCell>
                   </TableRow>
-                  {/* {promo && (
-                <TableRow>
-                  <TableCell>Promo</TableCell>
-                  <TableCell className="text-right text-red-500">
-                    {promo.promo_type == "fix"
-                      ? `- ${priceMask(promo.promo_value)}`
-                      : `- ${promo.promo_value}%`}
-                  </TableCell>
-                </TableRow>
-              )} */}
-                  {/* {payment && payment.fee_amount ? (
-                <TableRow>
-                  <TableCell>Admin Fee</TableCell>
-                  <TableCell className="text-right">
-                    {`+ ${priceMask(payment.fee_amount)}`}
-                  </TableCell>
-                </TableRow>
-              ) : (
-                <></>
-              )} */}
                 </TableBody>
                 <TableFooter>
                   <TableRow>
@@ -138,20 +97,12 @@ function TransactionHistoryDetail({ id }: { id: string }) {
             <Separator className="my-4" />
             <p>Pembayaran</p>
             <div className="flex items-center w-full gap-4">
-              {/* {session && session.profile.saldo > 0 && (
-            <div className="p-2 w-full h-full rounded-lg border flex flex-col justify-center items-center">
-              <p className="font-medium text-xl ml-2">🪙</p>
-              <Separator className="my-2" />
-              <p className="font-medium text-sm">
-                {nPlainFormatter(20_000)} Points
-              </p>
-            </div>
-          )} */}
               <div className="p-4 w-full h-full rounded-lg border flex flex-col justify-center items-center">
                 <div className="flex items-center gap-1.5">
                   <p className="font-medium text-xl -mt-1">💳</p>
                   <p className="font-medium text-xs">
-                    {data.payment_information && data.payment_information.payment_channel}
+                    {data.payment_information &&
+                      data.payment_information.payment_channel}
                   </p>
                 </div>
                 <Separator className="my-2" />

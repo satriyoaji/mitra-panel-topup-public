@@ -6,8 +6,15 @@ import TransactionContext, {
   ITransactionContext,
 } from "@/infrastructures/context/transaction/transaction.context";
 import { useSession } from "next-auth/react";
-import React, { RefObject, useCallback, useContext, useState } from "react";
+import React, {
+  RefObject,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
 import { Purchase } from "./detail";
+import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 
 function CheckoutAction({
   formRef,
@@ -26,6 +33,25 @@ function CheckoutAction({
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
 
   const checkout = () => {
+    if (!data.payment)
+      return toast({
+        title: "Failed",
+        description: "Metode pembayaran belum dipilih",
+        variant: "destructive",
+        action: (
+          <ToastAction
+            onClick={() =>
+              paymentRef.current?.scrollIntoView({
+                behavior: "smooth",
+              })
+            }
+            altText="Go To Form"
+          >
+            Lengkapi Data
+          </ToastAction>
+        ),
+      });
+
     if (
       data.category?.forms &&
       data.form &&
@@ -40,25 +66,6 @@ function CheckoutAction({
           <ToastAction
             onClick={() =>
               formRef.current?.scrollIntoView({
-                behavior: "smooth",
-              })
-            }
-            altText="Go To Form"
-          >
-            Lengkapi Data
-          </ToastAction>
-        ),
-      });
-
-    if (!data.payment)
-      return toast({
-        title: "Failed",
-        description: "Metode pembayaran belum dipilih",
-        variant: "destructive",
-        action: (
-          <ToastAction
-            onClick={() =>
-              paymentRef.current?.scrollIntoView({
                 behavior: "smooth",
               })
             }
@@ -111,8 +118,9 @@ function CheckoutAction({
 
   return (
     <>
-      <div className="border sticky bottom-0 w-full pb-1 pt-1.5 rounded-xl bg-background flex items-center justify-between px-4">
-        <div>
+      <div className="sticky bottom-12 md:bottom-0 w-full pb-1 border shadow pt-2 rounded-xl bg-background md:flex items-center justify-between px-4">
+        <div className="grid grid-cols-3 w-full ml-2">
+          <div>
             <p className="text-muted-foreground text-xs">Total Belanja</p>
             <p className="text-foreground font-medium text-md">
               {priceMask(data.product?.discounted_price || data.product?.price)}
@@ -124,13 +132,21 @@ function CheckoutAction({
               {priceMask(data.payment?.fee_amount)}
             </p>
           </div>
-        <div>
-          <p className="text-xs text-muted-foreground">Total Bayar</p>
-          <h4 className="text-lg font-semibold">{getTotal()}</h4>
+          <div>
+            <p className="text-foreground text-xs">Total Bayar</p>
+            <p className="text-foreground text-lg text-green-500 font-medium">
+              {getTotal()}
+            </p>
+          </div>
         </div>
-        <div className="">
-          <Button className="bg-green-500" size="sm" onClick={checkout}>
-            Checkout
+        <div className="mb-2 md:mb-0">
+          <Button
+            size="sm"
+            className="w-full mt-2 md:mt-0 bg-green-500 hover:bg-green-600 space-x-2"
+            onClick={checkout}
+          >
+            <ShoppingCartIcon className="text-white h-4 w-4" />
+            <div className="text-white">Pesan Sekarang</div>
           </Button>
         </div>
       </div>

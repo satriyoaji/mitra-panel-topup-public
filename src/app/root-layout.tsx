@@ -7,6 +7,12 @@ import { useEffect, useState } from "react";
 import { ISiteProfile } from "@/types/utils";
 import { HexToHSL } from "@/Helpers";
 import Loading from "./loading";
+import Header from "@/components/header/page-header-v1";
+import PWAAlert from "@/components/header/pwa-header";
+import BottomNav from "@/components/bottom-nav";
+import Footer from "@/components/footer";
+import HelpButton from "@/components/help-button";
+import { Toaster } from "@/components/ui/toaster";
 
 export default function RootTemplateLayout({
   children,
@@ -44,7 +50,23 @@ export default function RootTemplateLayout({
         }}
       />
       <SessionProvider>
-        <TransactionProvider>{children}</TransactionProvider>
+        <TransactionProvider>
+          <div className="bg-background">
+            <PWAAlert profile={profile} />
+            <Header profile={profile} />
+            <div className={`w-full flex justify-center`}>
+              <div
+                className={`min-h-screen md:max-w-6xl bg-background pt-2 px-2 pb-4 w-full`}
+              >
+                {children}
+              </div>
+              <BottomNav />
+            </div>
+            <Footer profile={profile} />
+            <HelpButton />
+            <Toaster />
+          </div>
+        </TransactionProvider>
       </SessionProvider>
     </>
   );

@@ -1,39 +1,31 @@
 "use client";
 
-import { Card } from "@/components/ui/card";
-import { InfoCircledIcon, SketchLogoIcon } from "@radix-ui/react-icons";
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableFooter,
-  TableRow,
-} from "@/components/ui/table";
+  ArrowLeftIcon,
+  InfoCircledIcon,
+  SketchLogoIcon,
+} from "@radix-ui/react-icons";
 import { priceMask } from "@/Helpers";
-import { Button } from "@/components/ui/button";
-import HorizontalStepper from "@/components/ui/horizontal-stepper";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Loading from "@/app/loading";
-import {
-  ITransactionHistoryDetail,
-} from "@/types/transaction";
+import { ITransactionHistoryDetail } from "@/types/transaction";
 import CopyToClipboard from "@/components/copy-to-clipboard";
 import { Separator } from "@/components/ui/separator";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import VAPayment from "./(payment)/va-payment";
 import QRPayment from "./(payment)/qr-payment";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
+import BadgeTransaksi from "../badge-transaksi";
 import LinkPayment from "./(payment)/link-payment";
+import { isFuture, parseISO } from "date-fns";
+import CountdownCard from "@/app/dashboard/countdown-card";
 import { useSession } from "next-auth/react";
-import { ISiteProfile } from "@/types/utils";
 import PrintInvoice from "./print-invoice";
+import { ISiteProfile } from "@/types/utils";
 import { ETransactionStatus } from "@/types/enums";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { useRouter } from "next/navigation";
 
 function TransactionHistoryDetail({
   id,
@@ -41,12 +33,13 @@ function TransactionHistoryDetail({
 }: {
   id: string;
   profile?: ISiteProfile;
-})  {
+}) {
   const [data, setData] = useState<ITransactionHistoryDetail | undefined>(
     undefined
   );
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { data: session } = useSession();
+  const router = useRouter();
 
   useEffect(() => {
     (async () => {
@@ -63,100 +56,163 @@ function TransactionHistoryDetail({
 
   if (data)
     return (
-      <div className="pt-4 mx-2 mt-2 flex w-full justify-center">
-        <div className="max-w-5xl w-full">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center">
-              <p className="font-medium ml-2 text-lg">Detail Transaksi 📃</p>
-            </div>
-            {/* {canRefund() && (
-              <Link href="/redeem-coupon">
-                <Button size="sm">Refund</Button>
-              </Link>
-            )} */}
-            <PrintInvoice {...data} profile={profile} />
-          </div>
-          {!session && (
-            <div className="w-full my-2">
-              <div className="bg-red-50 text-red-900 flex justify-center items-center gap-2 p-1.5">
-                <div className="animate-pulse flex justify-center items-center bg-red-500 h-4 w-4 rounded-full text-white">
-                  <p className="text-xs font-bold">i</p>
+      <>
+        <div className="flex justify-between items-center pt-4">
+          <div className="flex items-center space-x-1">
+            <ArrowLeftIcon
+              className="h-5 w-5 text-primary cursor-pointer"
+              onClick={() => router.back()}
+            />
+            <div className="sm:flex items-center space-x-2">
+              <h4 className="font-medium ml-2 p-0 text-primary">
+                Detail Transaksi
+              </h4>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <p className="text-xs text-muted-foreground">
+                    {data.transaction_code}
+                  </p>
+                  <CopyToClipboard text={data.transaction_code} />
                 </div>
-                <h5 className="text-sm">
-                  Pastikan anda menyimpan nomor transaksi dan email serta nomor
-                  telpon yang anda gunakan dalam proses transaksi.
-                </h5>
               </div>
             </div>
-          )}
-          <div className="flex flex-row justify-center items-center">
-            <div className="grid grid-cols-1 md:grid-cols-3 w-full bg-background p-4">
-              <div className="w-full col-span-2">
-                <div className="grid gap-4 pb-4">
-                  <div>
-                    <p className="text-xs mb-0.5 text-muted-foreground">
-                      Kode Transaksi
+          </div>
+          <PrintInvoice {...data} profile={profile} />
+        </div>
+
+        <div className="flex flex-row justify-stretch items-center mt-2 mb-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-3 h-full mt-1">
+            <div className="h-max">
+              {!session ? (
+                <Alert className="bg-red-50 text-red-900 mb-3">
+                  <InfoCircledIcon className="text-white" />
+                  <AlertTitle>Penting!</AlertTitle>
+                  <AlertDescription className="text-xs">
+                    Pastikan anda menyimpan nomor transaksi dan email serta
+                    nomor telpon yang anda gunakan dalam proses transaksi.
+                  </AlertDescription>
+                </Alert>
+              ) : null}
+              <div className="w-full bg-background px-4 pt-3 pb-6 rounded-lg shadow border flex-1 h-full">
+                <p className="font-medium text-lg text-primary">
+                  Rincian Transaksi
+                </p>
+                <div className="mt-4 space-y-4 h-full">
+                  <div className="flex justify-between w-full">
+                    <p className="text-muted-foreground text-sm">
+                      Order Expired
                     </p>
-                    <div className="flex items-center">
-                      <p className="text-sm">{data.transaction_code}</p>
-                      <CopyToClipboard text={data.transaction_code} />
+                    {data.payment_information &&
+                    data.payment_information.expired_at &&
+                    isFuture(parseISO(data.payment_information.expired_at)) ? (
+                      <CountdownCard
+                        date={parseISO(data.payment_information.expired_at)}
+                      />
+                    ) : (
+                      <Badge variant="destructive">Expired</Badge>
+                    )}
+                  </div>
+                  <div className="flex justify-between w-full">
+                    <p className="text-muted-foreground text-sm">Produk</p>
+                    <p className="">{data.category_name}</p>
+                  </div>
+                  <div className="flex justify-between w-full">
+                    <p className="text-muted-foreground text-sm">Item</p>
+                    <p className="">{data.product_name}</p>
+                  </div>
+                  <div className="flex justify-between w-full">
+                    <p className="text-muted-foreground text-sm">Informasi</p>
+                    <div>
+                      <p>{data.customer_data}</p>
                     </div>
                   </div>
-                  <Card className="bg-slate-50  p-4">
-                    <div className="text-xs mb-4 flex items-center space-x-4">
-                      {/* {val.logo_image !== "" ? (
-                                            <img
-                                                alt="Remy Sharp"
-                                                className="rounded hover:scale-125 transition duration-300 hover:rotate-12"
-                                                src={val.logo_image}
-                                            />
-                                        ) : ( */}
-                      <div className="h-fit w-fit p-2">
-                        <SketchLogoIcon className="m-auto" />
+                  <div className="flex justify-between w-full">
+                    <p className="text-muted-foreground text-sm">Status</p>
+                    <div>
+                      <BadgeTransaksi status={data.status} />
+                    </div>
+                  </div>
+                  <div className="flex justify-between w-full">
+                    <p className="text-muted-foreground text-sm">
+                      Informasi Kontak
+                    </p>
+                    <div className="text-right space-y-1">
+                      <p>{data.email}</p>
+                      <p>{data.phone}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {data.payment_information ? (
+              <div className="h-max">
+                <div className="bg-background border h-full pt-3 rounded-lg shadow relative overflow-clip">
+                  <div className="px-4">
+                    <p className="font-medium text-lg text-primary">
+                      Rincian Pembayaran
+                    </p>
+                    <div className="mt-4 space-y-4 h-full">
+                      <div className="flex justify-between w-full">
+                        <p className="text-muted-foreground text-sm">
+                          Pilihan Pembayaran
+                        </p>
+                        <div className="flex flex-col items-end">
+                          <p className="text-sm">
+                            {`${data.payment_information.payment_method.replace(
+                              "_",
+                              " "
+                            )} - ${data.payment_information.payment_channel}`}
+                          </p>
+                          {data.payment_information.image_url ? (
+                            <Image
+                              className="mt-1.5"
+                              alt={data.payment_information.payment_method}
+                              src={data.payment_information.image_url}
+                              width={50}
+                              height={50}
+                            />
+                          ) : (
+                            <p className="text-xl text-left">💳</p>
+                          )}
+                        </div>
                       </div>
-                      {/* )} */}
-                      <div>
-                        <p>{data.category_name}</p>
-                        <p className="font-semibold">{data.product_name}</p>
+                      <div className="flex justify-between w-full">
+                        <p className="text-muted-foreground text-sm">
+                          Total Pembayaran
+                        </p>
+                        <p className="font-semibold text-green-600">
+                          {priceMask(data.payment_information.payment_amount)}
+                        </p>
                       </div>
                     </div>
-                    {/* {form && category.forms && (
-              <div className="mt-6">
-                <p className="text-xs font-semibold">Data Tambahan</p>
-                <Table className="border-y bg-background rounded mt-1">
-                  <TableBody className="text-xs">
-                    {Object.keys(form).map((key) => (
-                      <TableRow key={key}>
-                        <TableCell>
-                          {category.forms
-                            ?.find((i) => i.key == key)
-                            ?.alias.replace(/_/g, " ")}
-                        </TableCell>
-                        <TableCell className="text-right space-y-1">
-                          {form[key]}
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-            )} */}
-                    {data.payment_information && (
-                      <div>
-                        {data.payment_information.payment_method ==
-                        "VIRTUAL_ACCOUNT" ? (
-                          <VAPayment payment={data.payment_information} />
-                        ) : data.payment_information.payment_method ==
-                          "EWALLET" ? (
-                          <LinkPayment payment={data.payment_information} />
-                        ) : (
-                          <QRPayment payment={data.payment_information} />
-                        )}
+                  </div>
+                  <Separator className="my-3 w-full" />
+                  <div className="px-4 pb-12">
+                    <p className="font-medium text-lg text-primary">
+                      Tujuan Pembayaran
+                    </p>
+                    <div className="mt-4 space-y-4 h-full">
+                      {data.payment_information.payment_method ==
+                      "VIRTUAL_ACCOUNT" ? (
+                        <VAPayment payment={data.payment_information} />
+                      ) : data.payment_information.payment_method ==
+                        "EWALLET" ? (
+                        <LinkPayment payment={data.payment_information} />
+                      ) : (
+                        <QRPayment payment={data.payment_information} />
+                      )}
+                    </div>
+                  </div>
+                  <div className="w-full bottom-0 mt-6 absolute">
+                    {data.status !== ETransactionStatus.Refunded ? (
+                      <div className="bg-amber-50 border-t flex items-center rounded-b-lg space-x-2 text-amber-800 px-4 py-1.5">
+                        <InfoCircledIcon />
+                        <p className="text-xs">
+                          Jika transaksi gagal, saldo anda akan dikembalikan
+                          dalam bentuk point
+                        </p>
                       </div>
-                    )}
-                  </Card>
-                  <div className="w-full bottom-0 mt-0">
-                    {data.status === ETransactionStatus.Refunded ? (
+                    ) : (
                       <div className="bg-blue-50 border flex items-center rounded-b-lg space-x-2 text-blue-800 px-4 py-1.5">
                         <InfoCircledIcon />
                         <p className="text-xs">
@@ -166,109 +222,30 @@ function TransactionHistoryDetail({
                           </Link>
                         </p>
                       </div>
-                    ) : (
-                      <div className="bg-amber-50 border flex items-center rounded-b-lg space-x-2 text-amber-800 px-4 py-1.5">
-                        <InfoCircledIcon />
-                        <p className="text-xs">
-                          Jika transaksi gagal, saldo anda akan dikembalikan
-                          dalam bentuk point
-                        </p>
-                      </div>
                     )}
                   </div>
-                  <>
-                    {data.payment_information &&
-                    data.payment_information.guide ? (
-                      <div className="w-full bg-background h-full px-4 pt-4 pb-6 rounded-lg shadow flex-1">
-                        <div
-                          dangerouslySetInnerHTML={{
-                            __html: data.payment_information.guide,
-                          }}
-                        ></div>
-                      </div>
-                    ) : null}
-                  </>
-                  <Table>
-                    <TableBody className="text-xs">
-                      {data.payment_information && (
-                        <TableRow>
-                          <TableCell>Metode Pembayaran</TableCell>
-                          <TableCell className="text-right">
-                            {data.payment_information.payment_channel}
-                          </TableCell>
-                        </TableRow>
-                      )}
-                      <TableRow>
-                        <TableCell>Harga</TableCell>
-                        <TableCell className="text-right space-y-1">
-                          {data.price != data.paid_price ? (
-                            <>
-                              <div className="flex space-x-2 justify-end">
-                                <p className="text-red-500">Discount</p>
-                                <p className="line-through">
-                                  {priceMask(data.price)}
-                                </p>
-                              </div>
-                              <p>{priceMask(data.paid_price)}</p>
-                            </>
-                          ) : (
-                            <>{priceMask(data.paid_price)}</>
-                          )}
-                        </TableCell>
-                      </TableRow>
-                      {/* {promo && (
-                <TableRow>
-                  <TableCell>Promo</TableCell>
-                  <TableCell className="text-right text-red-500">
-                    {promo.promo_type == "fix"
-                      ? `- ${priceMask(promo.promo_value)}`
-                      : `- ${promo.promo_value}%`}
-                  </TableCell>
-                </TableRow>
-              )} */}
-                      {/* {payment && payment.fee_amount ? (
-                <TableRow>
-                  <TableCell>Admin Fee</TableCell>
-                  <TableCell className="text-right">
-                    {`+ ${priceMask(payment.fee_amount)}`}
-                  </TableCell>
-                </TableRow>
-              ) : (
-                <></>
-              )} */}
-                    </TableBody>
-                    <TableFooter>
-                      <TableRow>
-                        <TableCell>Total Harga</TableCell>
-                        <TableCell className="text-right">
-                          {priceMask(data.paid_price)}
-                        </TableCell>
-                      </TableRow>
-                    </TableFooter>
-                  </Table>
                 </div>
+                {data.payment_information.guide ? (
+                  <div className="bg-background mt-3 border px-4 pt-3 pb-6 rounded-lg shadow text-muted-foreground">
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: data.payment_information.guide,
+                      }}
+                    ></div>
+                  </div>
+                ) : null}
               </div>
-              <div className="md:mx-8 md:mb-8 mt-8 md:mt-0 mx-4 w-full">
-                <div className="hidden md:block">
-                  <p className="mb-4 font-medium">Order History</p>
-                  <HorizontalStepper list={data.history_status} />
-                </div>
-                <Accordion
-                  type="single"
-                  collapsible
-                  className="w-full md:hidden -ml-4"
-                >
-                  <AccordionItem value="item-1">
-                    <AccordionTrigger>Order History</AccordionTrigger>
-                    <AccordionContent>
-                      <HorizontalStepper list={data.history_status} />
-                    </AccordionContent>
-                  </AccordionItem>
-                </Accordion>
-              </div>
-            </div>
+            ) : null}
           </div>
         </div>
+      </>
+    );
+  else
+    return (
+      <div className="flex justify-center items-center h-[50vh]">
+        <h3 className="font-bold text-slate-300 text-center">
+          Transaksi Tidak Ada
+        </h3>
       </div>
     );
 }

@@ -55,8 +55,8 @@ export interface IProductCategory {
   // code: string;
   // alias: string;
   // status: number;
-  // banner_image: string;
   // logo_image: string;
+  banner_url: string;
   description: string;
   forms?: TProductForm[];
 

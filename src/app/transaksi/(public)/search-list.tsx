@@ -68,7 +68,7 @@ function SearchList() {
 
   return (
     <>
-      <div className="flex items-center w-full mt-2 gap-2 sticky top-12 -mx-2 px-2 bg-background py-4">
+      <div className="flex items-center w-full mt-2 gap-2 sticky top-12 bg-white/50 z-10 rounded-lg backdrop-blur-sm p-4">
         <Input
           className="w-full bg-background"
           placeholder="Masukkan nomor handphone atau invoice"
@@ -77,7 +77,7 @@ function SearchList() {
         />
         <Button onClick={getData}>Cari</Button>
       </div>
-      <div className="flex flex-col space-y-4 mt-4">
+      <div className="flex flex-col space-y-4 pt-4 -mt-2 px-4 bg-white/50 mb-4 rounded-b-lg backdrop-blur-md">
         {!loading ? (
           <>
             {list.map((val, idx) => (

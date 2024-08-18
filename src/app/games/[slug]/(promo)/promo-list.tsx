@@ -119,14 +119,17 @@ function Promo({ categoryUuid }: { categoryUuid: string }) {
       ) : (
         <div
           onClick={() => setOpen(true)}
-          className="rounded-lg cursor-pointer hover:bg-slate-50 py-2 px-4 border flex justify-between items-center"
+          className="rounded-lg cursor-pointer hover:bg-zinc-50 py-1.5 px-4 border-2 flex justify-between items-center"
         >
-          <p className="p-0 m-0">Pilih Promo</p>
+          <p className="p-0 m-0 text-sm">Pilih Promo</p>
           <ChevronRightIcon />
         </div>
       )}
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent>
+        <DialogContent
+          autoFocus={false}
+          onOpenAutoFocus={(e) => e.preventDefault()}
+        >
           <DialogHeader>
             <DialogTitle>Promo</DialogTitle>
             <DialogDescription>Pilih promo paling cuan.</DialogDescription>
@@ -136,6 +139,7 @@ function Promo({ categoryUuid }: { categoryUuid: string }) {
               <Input
                 placeholder="Punya Kode Promo? Masukan di sini"
                 value={hiddenPromoCode}
+                autoFocus={false}
                 onChange={(e) => setHiddenPromoCode(e.target.value)}
               />
               <Button disabled={loading} size="sm" onClick={getHiddenPromo}>

@@ -7,12 +7,15 @@ export async function GET(req: NextRequest) {
 
   let qParams = url.searchParams;
 
-  var re = await fetch(`${process.env.API}/flash-sale/products?` + qParams, {
-    headers: GetAuthHeader(req),
-    next: {
-      revalidate: 30,
-    },
-  });
+  var re = await fetch(
+    `${process.env.NEXT_API_URL}/v2/panel/flash-sale/products?` + qParams,
+    {
+      headers: GetAuthHeader(req),
+      next: {
+        revalidate: 30,
+      },
+    }
+  );
 
   var result = await re.json();
   return NextResponse.json(result, { status: 200 });

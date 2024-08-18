@@ -32,7 +32,7 @@ function SaldoPointHistory() {
 
   return (
     <>
-      <div className="gap-2 grid text-sm">
+      <div className="gap-2 grid text-sm max-h-[72vh] overflow-y-scroll">
         {balances.map((item, i) => (
           <Link
             href={`/transaksi/${item.transaction_code}`}

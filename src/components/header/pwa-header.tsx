@@ -35,7 +35,7 @@ function PWAAlert({ profile }: { profile?: ISiteProfile }) {
     return (
       <div className="bg-zinc-50">
         <div className="flex flex-row items-start justify-center w-full">
-          <div className="w-full flex justify-between container items-center p-1 space-x-2">
+          <div className="w-full flex justify-between max-w-6xl items-center p-1 space-x-2">
             <div className="flex items-center p-1 space-x-4">
               <Button className="flex space-x-1" size="sm" onClick={onClick}>
                 <DownloadIcon className="w-3 h-3" />
