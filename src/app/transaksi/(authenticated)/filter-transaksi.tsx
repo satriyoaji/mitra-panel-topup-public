@@ -11,7 +11,7 @@ export type TFilter = {
 };
 
 type Prop = {
-  onChange: (filter: string | undefined) => void;
+  onChange: (val: TFilter) => void;
   state: TFilter;
 };
 
@@ -19,7 +19,7 @@ function FilterTransaksi(prop: Prop) {
   const [filter, setFilter] = useState<TFilter>(prop.state);
 
   const onApply = () => {
-    // prop.onChange(filter.filter);
+    prop.onChange(filter);
   };
 
   const onClear = () => {
@@ -27,7 +27,10 @@ function FilterTransaksi(prop: Prop) {
       search: undefined,
       status: undefined,
     });
-    prop.onChange("");
+    prop.onChange({
+      search: undefined,
+      status: undefined,
+    });
   };
 
   return (

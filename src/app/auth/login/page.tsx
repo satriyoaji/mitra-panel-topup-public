@@ -35,7 +35,7 @@ function Page() {
         variant: "destructive",
       });
 
-    window.location.replace(searchParams.get("callback") || "/");
+    window.location.replace(searchParams.get("callback") ?? "/");
   };
 
   return (

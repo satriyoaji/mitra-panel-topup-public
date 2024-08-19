@@ -89,7 +89,7 @@ function List() {
                   onChange={(filter) => {
                     setFilter((prev) => ({
                       ...prev,
-                      filter,
+                      status: filter.status,
                     }));
                     setfilterOpen(false);
                   }}

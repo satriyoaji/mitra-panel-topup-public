@@ -31,7 +31,7 @@ function ItemsCard(props: TItemsCard) {
               />
               <p className="text-xs text-muted-foreground">{date}</p>
             </div>
-            <div className="hidden md:block">
+            <div className="hidden md:flex justify-end w-full">
               <BadgeTransaksi status={props.data.status} />
             </div>
           </div>
