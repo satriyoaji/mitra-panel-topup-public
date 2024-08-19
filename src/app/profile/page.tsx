@@ -154,13 +154,13 @@ function Page() {
           </Link>
           <Separator className="my-1 w-full" />
           <Link
-            href="/transaksi"
+            href="/kebijakan"
             className="flex px-3 py-2 space-x-3 items-center text-sm hover:bg-slate-50"
           >
             <ShieldCheckIcon className="mr-3 h-4 w-4" /> Kebijikan Privasi
           </Link>
           <Link
-            href="/transaksi"
+            href="/syarat-ketentuan"
             className="flex px-3 py-2 space-x-3 items-center text-sm hover:bg-slate-50"
           >
             <DocumentTextIcon className="mr-3 h-4 w-4" /> Syarat dan Ketentuan
