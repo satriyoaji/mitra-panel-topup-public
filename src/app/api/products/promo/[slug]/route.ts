@@ -10,9 +10,13 @@ export async function GET(
   let qParams = url.searchParams;
 
   let urlFetch = `${process.env.NEXT_API_URL}/v2/panel/promotion/detail/${slug}`;
-  if (qParams.get("by-code"))
-    urlFetch = `${process.env.NEXT_API_URL}/v2/panel/promotion/get-by-code?promo_code=${slug}`;
-
+  if (qParams.get("by-code")) {
+    urlFetch = `${
+      process.env.NEXT_API_URL
+    }/v2/panel/promotion/get-by-code?promo_code=${slug}&category_key=${qParams.get(
+      "category_key"
+    )}`;
+  }
   var re = await fetch(urlFetch, {
     headers: GetAuthHeader(req),
     next: {

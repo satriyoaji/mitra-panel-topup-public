@@ -6,10 +6,15 @@ import {
 } from "./Type";
 import { IPayment, IPromo } from "./types/transaction";
 
+const thousandMask = (val: number | undefined) => {
+  if (!val) return "0";
+  val = Math.round(val);
+  return val.toString().replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1.");
+};
+
 const priceMask = (val: number | undefined) => {
   if (!val) return "Rp 0";
-  val = Math.round(val);
-  return "Rp " + val.toString().replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1.");
+  return "Rp " + thousandMask(val);
 };
 
 const uniqeProduct = (arr: TProduct[], track = new Set()) => {
@@ -136,4 +141,5 @@ export {
   nPlainFormatter,
   getTotalPrice,
   HexToHSL,
+  thousandMask,
 };

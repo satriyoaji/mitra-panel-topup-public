@@ -132,4 +132,6 @@ export interface ITransactionHistoryList {
   status_name: string;
   price: number;
   payment_channel: string;
+  payment_logo: string;
+  expired_at: string;
 }

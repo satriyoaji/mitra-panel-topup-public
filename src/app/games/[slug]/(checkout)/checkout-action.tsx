@@ -13,8 +13,9 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import { Purchase } from "./detail";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+import { ChevronDownIcon } from "@radix-ui/react-icons";
+import { Purchase } from "./detail";
 
 function CheckoutAction({
   formRef,
@@ -25,12 +26,11 @@ function CheckoutAction({
   confirmationRef: RefObject<HTMLDivElement>;
   paymentRef: RefObject<HTMLDivElement>;
 }) {
-  const { data, dispatch } = useContext(
-    TransactionContext
-  ) as ITransactionContext;
+  const { data } = useContext(TransactionContext) as ITransactionContext;
   const { data: session } = useSession();
   const { toast } = useToast();
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const checkout = () => {
     if (!data.payment)
@@ -118,36 +118,68 @@ function CheckoutAction({
 
   return (
     <>
-      <div className="sticky bottom-12 md:bottom-0 w-full pb-1 border shadow pt-2 rounded-xl bg-background md:flex items-center justify-between px-4">
-        <div className="grid grid-cols-3 w-full ml-2">
-          <div>
+      <div className="sticky bottom-12 border md:bottom-0 w-full pb-1 shadow pt-2 rounded-xl bg-background px-4">
+        <div className="flex items-center justify-between">
+          <div className="grid md:grid-cols-3 w-full">
+            <div className="hidden md:block">
+              <p className="text-muted-foreground text-xs">Total Belanja</p>
+              <p className="text-foreground font-medium text-md">
+                {priceMask(
+                  data.product?.discounted_price || data.product?.price
+                )}
+              </p>
+            </div>
+            <div className="hidden md:block">
+              <p className="text-muted-foreground text-xs">Biaya Payment</p>
+              <p className="text-foreground font-medium text-md">
+                {priceMask(data.payment?.fee_amount)}
+              </p>
+            </div>
+            <div>
+              <div className="flex items-center space-x-1">
+                <p className="text-foreground text-xs">Total Bayar</p>
+                <ChevronDownIcon
+                  className={`transition-all md:hidden duration-300 cursor-pointer ${
+                    open ? "rotate-180" : ""
+                  }`}
+                  onClick={() => setOpen((prev) => !prev)}
+                />
+              </div>
+              <p className="text-foreground text-lg text-green-500 font-medium">
+                {getTotal()}
+              </p>
+            </div>
+          </div>
+          <div className="mb-2 md:mb-0">
+            <Button
+              size="sm"
+              className="w-full mt-2 md:mt-0 bg-green-500 hover:bg-green-600 space-x-2"
+              onClick={checkout}
+            >
+              <ShoppingCartIcon className="text-white h-4 w-4" />
+              <div className="text-white">Pesan Sekarang</div>
+            </Button>
+          </div>
+        </div>
+        <div
+          className={`md:hidden transition-all duration-300 ease-in-out w-full ${
+            open
+              ? "h-full border-t mt-2  pt-2 opacity-100"
+              : "h-0 opacity-0 overflow-hidden"
+          }`}
+        >
+          <div className="flex justify-between">
             <p className="text-muted-foreground text-xs">Total Belanja</p>
             <p className="text-foreground font-medium text-md">
               {priceMask(data.product?.discounted_price || data.product?.price)}
             </p>
           </div>
-          <div>
-            <p className="text-muted-foreground text-xs">Payment Charge</p>
+          <div className="flex justify-between">
+            <p className="text-muted-foreground text-xs">Biaya Payment</p>
             <p className="text-foreground font-medium text-md">
               {priceMask(data.payment?.fee_amount)}
             </p>
           </div>
-          <div>
-            <p className="text-foreground text-xs">Total Bayar</p>
-            <p className="text-foreground text-lg text-green-500 font-medium">
-              {getTotal()}
-            </p>
-          </div>
-        </div>
-        <div className="mb-2 md:mb-0">
-          <Button
-            size="sm"
-            className="w-full mt-2 md:mt-0 bg-green-500 hover:bg-green-600 space-x-2"
-            onClick={checkout}
-          >
-            <ShoppingCartIcon className="text-white h-4 w-4" />
-            <div className="text-white">Pesan Sekarang</div>
-          </Button>
         </div>
       </div>
       <Purchase

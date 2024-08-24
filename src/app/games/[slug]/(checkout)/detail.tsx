@@ -51,13 +51,15 @@ export function Purchase({
       return setLoading(false);
     }
 
+    let phone = session ? "" : "62";
+
     var payload: ITransactionCreate = {
       category_key: category?.key,
       product_key: product?.key,
       payment_method: payment.payment_method,
       payment_channel: payment.payment_channel,
       email: account?.email,
-      phone: account?.noWhatsapp,
+      phone: phone + account?.noWhatsapp,
     };
 
     if (promo) payload.promo_code = promo.promo_code;

@@ -1,9 +1,9 @@
 "use client";
-import React, { useContext, useEffect, useState } from "react";
+import React, { RefObject, useContext, useEffect, useState } from "react";
 import PaymentList from "./payment-list";
 import { IPaymentGroup } from "@/types/transaction";
 
-function Payment() {
+function Payment({ nextRef }: { nextRef: RefObject<HTMLDivElement> }) {
   const [paymentGroups, setPaymentGroups] = useState<IPaymentGroup[]>([]);
 
   const getBank = async () => {
@@ -22,7 +22,7 @@ function Payment() {
     getBank();
   }, []);
 
-  return <PaymentList paymentGroup={paymentGroups} />;
+  return <PaymentList nextRef={nextRef} paymentGroup={paymentGroups} />;
 }
 
 export default Payment;
