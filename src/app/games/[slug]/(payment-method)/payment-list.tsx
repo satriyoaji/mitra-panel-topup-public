@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext, useState } from "react";
+import React, { RefObject, useContext, useState } from "react";
 import Image from "next/image";
 import { priceMask } from "@/Helpers";
 import TransactionContext, {
@@ -15,16 +15,22 @@ import {
 import { IPaymentGroup } from "@/types/transaction";
 import { Card } from "@/components/ui/card";
 
-function PaymentList({ paymentGroup }: { paymentGroup: IPaymentGroup[] }) {
+function PaymentList({
+  paymentGroup,
+  nextRef,
+}: {
+  paymentGroup: IPaymentGroup[];
+  nextRef: RefObject<HTMLDivElement>;
+}) {
   const { dispatch, data } = useContext(
     TransactionContext
   ) as ITransactionContext;
 
   return (
     <>
-      <Accordion type="multiple">
+      <Accordion type="multiple" value={paymentGroup.map((i) => i.name)}>
         {paymentGroup.map((group, idx) => (
-          <AccordionItem key={idx.toString()} value={idx.toString()}>
+          <AccordionItem key={idx.toString()} value={group.name}>
             <AccordionTrigger>
               <p className="text-muted-foreground text-xs">{group.name}</p>
             </AccordionTrigger>
@@ -41,6 +47,9 @@ function PaymentList({ paymentGroup }: { paymentGroup: IPaymentGroup[] }) {
                       dispatch({
                         action: "SET_PAYMENT_METHOD",
                         payload: item,
+                      });
+                      nextRef.current?.scrollIntoView({
+                        behavior: "smooth",
                       });
                     }}
                   >

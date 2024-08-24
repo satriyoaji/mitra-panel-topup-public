@@ -91,6 +91,7 @@ function List() {
                       ...prev,
                       status: filter.status,
                     }));
+                    setPage(1);
                     setfilterOpen(false);
                   }}
                 />

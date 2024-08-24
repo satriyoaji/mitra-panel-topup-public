@@ -1,23 +1,24 @@
 import { Badge } from "@/components/ui/badge";
+import { ETransactionStatus } from "@/types/enums";
 import React from "react";
 
 function BadgeTransaksi({ status }: { status: number }) {
   return (
     <>
-      {status === 1 ? (
-        <Badge variant="warning">Pending</Badge>
-      ) : status === 2 ? (
+      {status === ETransactionStatus.Unpaid ? (
+        <Badge variant="destructive">Unpaid</Badge>
+      ) : status === ETransactionStatus.Paid ? (
         <Badge variant="success">Paid</Badge>
-      ) : status === 3 ? (
-        <Badge variant="warning">On Process</Badge>
-      ) : status === 4 ? (
+      ) : status === ETransactionStatus["On Process"] ? (
+        <Badge variant="blue">On Process</Badge>
+      ) : status === ETransactionStatus.Delivered ? (
         <Badge variant="success">Delivered</Badge>
-      ) : status === 5 ? (
+      ) : status === ETransactionStatus.Failed ? (
         <Badge variant="destructive">Failed</Badge>
-      ) : status === 6 ? (
-        <Badge variant="black">Refunded</Badge>
-      ) : status === 7 ? (
-        <Badge variant="destructive">Aborted</Badge>
+      ) : status === ETransactionStatus.Refunded ? (
+        <Badge variant="purple">Refunded</Badge>
+      ) : status === ETransactionStatus.Expired ? (
+        <Badge variant="destructive">Expired</Badge>
       ) : (
         <></>
       )}
