@@ -15,7 +15,7 @@ export default async function Home() {
           <Stats />
         </div>
       </div>
-      <Promo />
+      {/* <Promo /> */}
     </>
   );
 }
