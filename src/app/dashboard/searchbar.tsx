@@ -85,25 +85,10 @@ function Searchbar() {
         />
       </div>
       <CommandDialog open={isOpen} onOpenChange={setIsOpen}>
-        <CommandInput placeholder="Cari Produk..." onValueChange={doSearch} />
-        {/* <CommandList className="min-h-[15rem]">
-          {data.length > 0 ? (
-            data.map((i, idx) => (
-              <div
-                key={idx}
-                className="px-5 py-2 hover:bg-slate-50 cursor-pointer"
-                onClick={() => {
-                  router.push(`/games/${i.key}`);
-                  setIsOpen(false);
-                }}
-              >
-                <div className="text-sm">{i.name}</div>
-              </div>
-            ))
-          ) : (
-            <CommandEmpty>No results found.</CommandEmpty>
-          )}
-        </CommandList> */}
+        <h5 className="w-full font-semibold text-center mt-4 mb-2">
+          Pencarian
+        </h5>
+        <CommandInput placeholder="Cari Produk" onValueChange={doSearch} />
         <CommandList className="min-h-[15rem] mt-4">
           {data.length > 0 ? (
             data.map((i, idx) => (
