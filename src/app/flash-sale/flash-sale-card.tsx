@@ -49,7 +49,7 @@ function FlashSaleCard({
                     </p>
                   </div>
                   <p
-                    className="text-red-500 text-xs font-medium"
+                    className="text-green-500 text-xs font-medium"
                     style={{ fontSize: "80%" }}
                   >
                     {priceMask(data.discounted_price)}
