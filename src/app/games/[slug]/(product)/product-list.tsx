@@ -1,5 +1,4 @@
 import { TProductItem, TProduct } from "@/Type";
-import { Input } from "@/components/ui/input";
 import React, {
   ChangeEvent,
   RefObject,
@@ -9,8 +8,6 @@ import React, {
   useState,
 } from "react";
 import ProductCard from "./product-card";
-import { debounce, priceMask } from "@/Helpers";
-import { LightningBoltIcon } from "@radix-ui/react-icons";
 import TransactionContext, {
   ITransactionContext,
 } from "@/infrastructures/context/transaction/transaction.context";
@@ -22,11 +19,6 @@ interface IProductList {
   nextRef: RefObject<HTMLDivElement>;
 }
 
-interface productType {
-  title: React.JSX.Element;
-  type: "flash-sale";
-}
-
 function ProductList(prop: IProductList) {
   const { data, dispatch } = useContext(
     TransactionContext
@@ -36,10 +28,6 @@ function ProductList(prop: IProductList) {
 
   const ref = useRef<HTMLDivElement>(null);
 
-  const doSearch = debounce((e: ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-  }, 500);
-
   useEffect(() => {
     const data = prop.products.filter((item) => item.name.includes(search));
     setProductSearch(data);
@@ -47,11 +35,6 @@ function ProductList(prop: IProductList) {
 
   return (
     <>
-      <Input
-        placeholder="Cari Produk..."
-        onChange={doSearch}
-        className="mb-4 w-full"
-      />
       <div
         className="relative max-h-[30rem] overflow-y-auto pt-4 -mx-2 px-2"
         ref={ref}

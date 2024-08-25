@@ -5,11 +5,11 @@ import ProductList from "./(product)/product-list";
 import Payment from "./(payment-method)/payment";
 import Promo from "./(promo)/promo-list";
 import FormConfirmation from "./(account-confirmation)/form-confirmation";
-import CheckoutAction from "./(checkout)/checkout-action";
 import { IUseCategoryData } from "./useCategory";
 import FormAccount from "./(form-id)/form-account";
 import FormWrapper from "./form-wrapper";
 import { Session } from "next-auth";
+import CheckoutAction from "./(checkout)/checkout-action";
 
 interface Props extends IUseCategoryData {
   session: Session | null;
@@ -43,7 +43,13 @@ function DetailCategory(props: Props) {
             </div>
             <div className="my-4" ref={props.methodRef}>
               <FormWrapper number={2} title="Pilih Pembayaran">
-                <Payment />
+                <Payment
+                  nextRef={
+                    props.data.category.forms
+                      ? props.formRef
+                      : props.confirmationRef
+                  }
+                />
               </FormWrapper>
             </div>
             {props.data.category.forms ? (

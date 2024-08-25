@@ -23,27 +23,28 @@ export interface ITransactionHistory {
 }
 
 export interface IBasePaymentInformation {
-    invoice_code: string;
-    payment_channel: string;
-    payment_amount: number;
-    expired_at: string;
-    guide: string;
-    image_url: string;
+  invoice_code: string;
+  payment_channel: string;
+  payment_amount: number;
+  expired_at: string;
+  guide: string;
+  image_url: string;
 }
 
 export interface IVAPayment extends IBasePaymentInformation {
-    payment_method: "VIRTUAL_ACCOUNT";
-    virtual_account_number: string;
-    virtual_account_name: string;
+  payment_method: "VIRTUAL_ACCOUNT";
+  virtual_account_number: string;
+  virtual_account_name: string;
 }
 export interface ILinkPayment extends IBasePaymentInformation {
-    payment_method: "EWALLET";
-    web_url: string;
-    mobile_url: string;
+  payment_method: "EWALLET";
+  deeplink_url: string;
+  mobile_url: string;
+  web_url: string;
 }
 export interface IQRPayment extends IBasePaymentInformation {
-    payment_method: "QR_CODE";
-    qr_code: string;
+  payment_method: "QR_CODE";
+  qr_code: string;
 }
 
 export interface IPaymentInfo {
@@ -70,6 +71,9 @@ export interface ITransactionHistoryDetail {
   customer_data: string;
   price: number;
   paid_price: number;
+  discount: number;
+  admin_fee: number;
+  grand_total: number;
   status_name: string;
   status: number;
   history_status: ITransactionHistory[];

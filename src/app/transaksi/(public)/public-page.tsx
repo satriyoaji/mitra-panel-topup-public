@@ -7,7 +7,7 @@ function PublicPage() {
       <div className="h-full min-h-[80vh] flex pt-4 md:pt-16 md:px-0 bg-gradient-to-b from-background to-white/50 items-center flex-col">
         <div className="max-w-[60rem] bg-opacity-90 min-h-full w-full">
           <div className="px-4">
-            <p>LACAK TRANSAKSI</p>
+            <p>RIWAYAT TRANSAKSI</p>
             <h3 className="text-3xl max-w-[40rem] mt-4 font-semibold">
               Lacak Pesananmu
             </h3>

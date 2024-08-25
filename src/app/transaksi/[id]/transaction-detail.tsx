@@ -7,9 +7,9 @@ import {
 } from "@radix-ui/react-icons";
 import { priceMask } from "@/Helpers";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Loading from "@/app/loading";
-import { ITransactionHistoryDetail } from "@/types/transaction";
+import { ILinkPayment, ITransactionHistoryDetail } from "@/types/transaction";
 import CopyToClipboard from "@/components/copy-to-clipboard";
 import { Separator } from "@/components/ui/separator";
 import VAPayment from "./(payment)/va-payment";
@@ -18,7 +18,7 @@ import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import BadgeTransaksi from "../badge-transaksi";
 import LinkPayment from "./(payment)/link-payment";
-import { isFuture, parseISO } from "date-fns";
+import { format, isFuture, parseISO } from "date-fns";
 import CountdownCard from "@/app/dashboard/countdown-card";
 import { useSession } from "next-auth/react";
 import PrintInvoice from "./print-invoice";
@@ -51,6 +51,16 @@ function TransactionHistoryDetail({
       setData(res.data);
     })();
   }, [id]);
+
+  const isPaymentNotExpired = useMemo(() => {
+    if (!data) return false;
+    return (
+      data.payment_information &&
+      data.payment_information.expired_at &&
+      data.payment_information.payment_channel &&
+      isFuture(parseISO(data.payment_information.expired_at))
+    );
+  }, [data]);
 
   if (loading) return <Loading />;
 
@@ -93,24 +103,31 @@ function TransactionHistoryDetail({
                   </AlertDescription>
                 </Alert>
               ) : null}
-              <div className="w-full bg-background px-4 pt-3 pb-6 rounded-lg shadow border flex-1 h-full">
+              <div className="w-full bg-background h-full px-4 pt-3 pb-6 rounded-lg shadow flex-1">
                 <p className="font-medium text-lg text-primary">
                   Rincian Transaksi
                 </p>
                 <div className="mt-4 space-y-4 h-full">
                   <div className="flex justify-between w-full">
-                    <p className="text-muted-foreground text-sm">
-                      Order Expired
-                    </p>
-                    {data.payment_information &&
-                    data.payment_information.expired_at &&
-                    isFuture(parseISO(data.payment_information.expired_at)) ? (
+                    <p className="text-muted-foreground text-sm">Status</p>
+                    <div>
+                      <BadgeTransaksi status={data.status} />
+                    </div>
+                  </div>
+                  {isPaymentNotExpired &&
+                  data.status === ETransactionStatus.Unpaid ? (
+                    <div className="flex justify-between w-full">
+                      <p className="text-muted-foreground text-sm">
+                        Order Expired
+                      </p>
                       <CountdownCard
                         date={parseISO(data.payment_information.expired_at)}
                       />
-                    ) : (
-                      <Badge variant="destructive">Expired</Badge>
-                    )}
+                    </div>
+                  ) : null}
+                  <div className="flex justify-between w-full">
+                    <p className="text-muted-foreground text-sm">Tanggal</p>
+                    <p>{format(parseISO(data.date), "dd MMM yyyy hh:mm")}</p>
                   </div>
                   <div className="flex justify-between w-full">
                     <p className="text-muted-foreground text-sm">Produk</p>
@@ -120,18 +137,14 @@ function TransactionHistoryDetail({
                     <p className="text-muted-foreground text-sm">Item</p>
                     <p className="">{data.product_name}</p>
                   </div>
-                  <div className="flex justify-between w-full">
-                    <p className="text-muted-foreground text-sm">Informasi</p>
-                    <div>
-                      <p>{data.customer_data}</p>
+                  {data.customer_data ? (
+                    <div className="flex justify-between w-full">
+                      <p className="text-muted-foreground text-sm">Informasi</p>
+                      <div>
+                        <p>{data.customer_data}</p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex justify-between w-full">
-                    <p className="text-muted-foreground text-sm">Status</p>
-                    <div>
-                      <BadgeTransaksi status={data.status} />
-                    </div>
-                  </div>
+                  ) : null}
                   <div className="flex justify-between w-full">
                     <p className="text-muted-foreground text-sm">
                       Informasi Kontak
@@ -141,12 +154,42 @@ function TransactionHistoryDetail({
                       <p>{data.phone}</p>
                     </div>
                   </div>
+                  <div className="flex justify-between w-full">
+                    <p className="text-muted-foreground text-sm">Harga</p>
+                    <div>
+                      <p>{priceMask(data.price)}</p>
+                    </div>
+                  </div>
+                  {data.discount != 0 ? (
+                    <div className="flex justify-between w-full">
+                      <p className="text-muted-foreground text-sm">Promo</p>
+                      <div>
+                        <p>-{priceMask(data.discount)}</p>
+                      </div>
+                    </div>
+                  ) : null}
+                  <div className="flex justify-between w-full">
+                    <p className="text-muted-foreground text-sm">
+                      Biaya Payment
+                    </p>
+                    <div>
+                      <p>{priceMask(data.admin_fee)}</p>
+                    </div>
+                  </div>
+                  <div className="flex justify-between w-full">
+                    <p className="text-muted-foreground text-sm">
+                      Total Pembayaran
+                    </p>
+                    <div>
+                      <p>{priceMask(data.grand_total)}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
             {data.payment_information ? (
               <div className="h-max">
-                <div className="bg-background border h-full pt-3 rounded-lg shadow relative overflow-clip">
+                <div className="w-full bg-background h-full pt-3 min-h-[16rem] rounded-lg shadow flex-1 relative overflow-clip">
                   <div className="px-4">
                     <p className="font-medium text-lg text-primary">
                       Rincian Pembayaran
@@ -158,10 +201,14 @@ function TransactionHistoryDetail({
                         </p>
                         <div className="flex flex-col items-end">
                           <p className="text-sm">
-                            {`${data.payment_information.payment_method.replace(
-                              "_",
-                              " "
-                            )} - ${data.payment_information.payment_channel}`}
+                            {data.payment_information.payment_channel
+                              ? `${data.payment_information.payment_method.replace(
+                                  "_",
+                                  " "
+                                )} - ${
+                                  data.payment_information.payment_channel
+                                }`
+                              : "🪙 Saldo Point"}
                           </p>
                           {data.payment_information.image_url ? (
                             <Image
@@ -171,9 +218,7 @@ function TransactionHistoryDetail({
                               width={50}
                               height={50}
                             />
-                          ) : (
-                            <p className="text-xl text-left">💳</p>
-                          )}
+                          ) : null}
                         </div>
                       </div>
                       <div className="flex justify-between w-full">
@@ -181,31 +226,39 @@ function TransactionHistoryDetail({
                           Total Pembayaran
                         </p>
                         <p className="font-semibold text-green-600">
-                          {priceMask(data.payment_information.payment_amount)}
+                          {priceMask(data.grand_total)}
                         </p>
                       </div>
                     </div>
                   </div>
-                  <Separator className="my-3 w-full" />
-                  <div className="px-4 pb-12">
-                    <p className="font-medium text-lg text-primary">
-                      Tujuan Pembayaran
-                    </p>
-                    <div className="mt-4 space-y-4 h-full">
-                      {data.payment_information.payment_method ==
-                      "VIRTUAL_ACCOUNT" ? (
-                        <VAPayment payment={data.payment_information} />
-                      ) : data.payment_information.payment_method ==
-                        "EWALLET" ? (
-                        <LinkPayment payment={data.payment_information} />
-                      ) : (
-                        <QRPayment payment={data.payment_information} />
-                      )}
-                    </div>
-                  </div>
-                  <div className="w-full bottom-0 mt-6 absolute">
+                  {isPaymentNotExpired ? (
+                    (data.payment_information as ILinkPayment).deeplink_url ||
+                    (data.payment_information as ILinkPayment).mobile_url ||
+                    (data.payment_information as ILinkPayment).web_url ? (
+                      <>
+                        <Separator className="my-3 w-full" />
+                        <div className="px-4 pb-24">
+                          <p className="font-medium text-lg text-primary">
+                            Tujuan Pembayaran
+                          </p>
+                          <div className="mt-4 space-y-4 h-full">
+                            {data.payment_information.payment_method ==
+                            "VIRTUAL_ACCOUNT" ? (
+                              <VAPayment payment={data.payment_information} />
+                            ) : data.payment_information.payment_method ==
+                              "EWALLET" ? (
+                              <LinkPayment payment={data.payment_information} />
+                            ) : (
+                              <QRPayment payment={data.payment_information} />
+                            )}
+                          </div>
+                        </div>
+                      </>
+                    ) : null
+                  ) : null}
+                  <div className="w-full bottom-0 absolute">
                     {data.status !== ETransactionStatus.Refunded ? (
-                      <div className="bg-amber-50 border-t flex items-center rounded-b-lg space-x-2 text-amber-800 px-4 py-1.5">
+                      <div className="bg-amber-50 border flex items-center rounded-b-lg space-x-2 text-amber-800 px-4 py-1.5">
                         <InfoCircledIcon />
                         <p className="text-xs">
                           Jika transaksi gagal, saldo anda akan dikembalikan
@@ -227,7 +280,13 @@ function TransactionHistoryDetail({
                 </div>
                 {data.payment_information.guide ? (
                   <div className="bg-background mt-3 border px-4 pt-3 pb-6 rounded-lg shadow text-muted-foreground">
+                    <div className="flex justify-between items-center">
+                      <p className="font-medium text-lg text-primary">
+                        Cara Pembayaran
+                      </p>
+                    </div>
                     <div
+                      className="mt-4"
                       dangerouslySetInnerHTML={{
                         __html: data.payment_information.guide,
                       }}

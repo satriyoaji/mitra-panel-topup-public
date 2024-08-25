@@ -1,4 +1,5 @@
 "use client";
+import { Badge } from "@/components/ui/badge";
 import {
   Select,
   SelectContent,
@@ -10,6 +11,7 @@ import {
 } from "@/components/ui/select";
 import { ETransactionStatus } from "@/types/enums";
 import React, { useCallback, useState } from "react";
+import BadgeTransaksi from "../badge-transaksi";
 
 function StatusSelect({
   onChange,
@@ -38,7 +40,7 @@ function StatusSelect({
             .filter((v) => isNaN(Number(v)))
             .map((k, i) => (
               <SelectItem key={`${i}`} value={(++i).toString()}>
-                {k}
+                <BadgeTransaksi status={i} />
               </SelectItem>
             ))}
         </SelectGroup>

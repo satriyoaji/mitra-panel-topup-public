@@ -7,6 +7,7 @@ import { SketchLogoIcon } from "@radix-ui/react-icons";
 import { format, parseISO } from "date-fns";
 import Link from "next/link";
 import BadgeTransaksi from "../badge-transaksi";
+import Image from "next/image";
 
 export interface TItemsCard {
   onEditClick?: (transaction_code: string) => void;
@@ -36,8 +37,8 @@ function ItemsCard(props: TItemsCard) {
             </div>
           </div>
           <Separator className="my-2" />
-          <div className="md:flex justify-between pt-1">
-            <div className="flex justify-between">
+          <div className="md:flex justify-between pt-1 space-y-2">
+            <div className="flex justify-between w-full">
               <div className="flex space-x-4 h-full ml-2">
                 <div className="mt-1">
                   <SketchLogoIcon />
@@ -60,7 +61,21 @@ function ItemsCard(props: TItemsCard) {
                 <BadgeTransaksi status={props.data.status} />
               </div>
             </div>
-            <div className="flex items-end justify-between ml-10 md:ml-0 mt-1 md:mt-0 space-x-4">
+            <div className="space-y-2 flex ml-10 md:ml-0 md:justify-end items-end space-x-2 w-full">
+              {props.data.payment_logo ? (
+                <Image
+                  alt={props.data.payment_channel}
+                  src={props.data.payment_logo}
+                  height={50}
+                  width={50}
+                />
+              ) : (
+                <p className="text-sm font-medium text-right p-0">
+                  🪙 {props.data.payment_channel}
+                </p>
+              )}
+            </div>
+            <div className="flex items-end w-full md:max-w-[13rem] justify-between space-x-4 pl-10 md:pl-4">
               <div>
                 <p className="text-xs text-muted-foreground mb-0.5">Total</p>
                 <p className="text-sm font-medium">
