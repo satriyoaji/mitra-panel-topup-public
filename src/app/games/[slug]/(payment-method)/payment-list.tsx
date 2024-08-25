@@ -14,6 +14,8 @@ import {
 } from "@/components/ui/accordion";
 import { IPaymentGroup } from "@/types/transaction";
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 
 function PaymentList({
   paymentGroup,
@@ -25,16 +27,17 @@ function PaymentList({
   const { dispatch, data } = useContext(
     TransactionContext
   ) as ITransactionContext;
+  const [length, setLength] = useState(2);
 
   return (
     <>
-      <Accordion type="multiple" value={paymentGroup.map((i) => i.name)}>
-        {paymentGroup.map((group, idx) => (
-          <AccordionItem key={idx.toString()} value={group.name}>
-            <AccordionTrigger>
+      <div className="space-y-4">
+        {paymentGroup.slice(0, length).map((group, idx) => (
+          <div key={idx.toString()} className="pb-4">
+            <div>
               <p className="text-muted-foreground text-xs">{group.name}</p>
-            </AccordionTrigger>
-            <AccordionContent>
+            </div>
+            <div className="mt-3">
               <div className="grid sm:grid-cols-3 grid-cols-2 gap-2">
                 {group.payment_method.map((item) => (
                   <Card
@@ -91,10 +94,22 @@ function PaymentList({
                   </Card>
                 ))}
               </div>
-            </AccordionContent>
-          </AccordionItem>
+            </div>
+          </div>
         ))}
-      </Accordion>
+        <Separator className="my-2" />
+        <Button
+          variant="link"
+          className="w-full"
+          onClick={() => {
+            if (length < paymentGroup.length)
+              return setLength(paymentGroup.length);
+            setLength(2);
+          }}
+        >
+          {length < paymentGroup.length ? "Pembayaran Lainnya" : "Sembunyikan"}
+        </Button>
+      </div>
     </>
   );
 }

@@ -27,7 +27,9 @@ export interface IBanner {
   id: number;
   name: string;
   image_url: string;
-  is_clickable: string;
+  is_clickable: boolean;
+  is_hyperlink: boolean;
+  hyperlink_url: string;
 }
 
 export interface ISosmed {

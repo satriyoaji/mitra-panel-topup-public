@@ -181,37 +181,31 @@ function Page() {
         <div className="px-4">
           <Tabs defaultValue="profile">
             <div className="flex w-full mb-5">
-              <div className="w-full">
-                <TabsContent value="profile">
-                  <div className="flex justify-start gap-4 items-center">
-                    <h5 className="font-semibold p-0">Detail Profile</h5>
-                    <Pencil1Icon
-                      onClick={() => setProfileOpen(true)}
-                      className="cursor-pointer"
-                    />
-                  </div>
-                  <p className="text-xs text-muted-foreground">
-                    Pastikan profil anda adalah data terbaru
-                  </p>
-                </TabsContent>
-                <TabsContent value="saldo">
-                  <div className="flex justify-start gap-4 items-center">
-                    <h5 className="font-semibold p-0">History Saldo Point</h5>
-                  </div>
-                  <p className="text-xs text-muted-foreground">
-                    Merupakan Saldo Refund dari Transaksi Anda
-                  </p>
-                </TabsContent>
-              </div>
-              <TabsList className="flex w-fit">
+              <TabsList className="flex md:w-fit w-full">
                 <TabsTrigger value="profile">Profile</TabsTrigger>
                 <TabsTrigger value="saldo">Saldo Points</TabsTrigger>
               </TabsList>
             </div>
             <TabsContent value="profile">
+              <div className="flex justify-start gap-4 items-center">
+                <h5 className="font-semibold p-0">Detail Profile</h5>
+                <Pencil1Icon
+                  onClick={() => setProfileOpen(true)}
+                  className="cursor-pointer"
+                />
+              </div>
+              <p className="text-xs text-muted-foreground mb-4">
+                Pastikan profil anda adalah data terbaru
+              </p>
               <Profile data={dataProfile} />
             </TabsContent>
             <TabsContent value="saldo">
+              <div className="flex justify-start gap-4 items-center">
+                <h5 className="font-semibold p-0">History Saldo Point</h5>
+              </div>
+              <p className="text-xs text-muted-foreground mb-4">
+                Merupakan Saldo Refund dari Transaksi Anda
+              </p>
               <SaldoPointHistory />
             </TabsContent>
           </Tabs>

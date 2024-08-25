@@ -17,14 +17,13 @@ export async function GET(
       "category_key"
     )}`;
   }
+
   var re = await fetch(urlFetch, {
     headers: GetAuthHeader(req),
     next: {
       revalidate: 60,
     },
   });
-
   var result = await re.json();
-
-  return NextResponse.json(result, { status: 200 });
+  return NextResponse.json(result, { status: re.status });
 }

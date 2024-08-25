@@ -1,8 +1,6 @@
 import {
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
   Carousel,
   CarouselApi,
 } from "@/components/ui/carousel";
@@ -11,9 +9,11 @@ import React, { useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
+import { useRouter } from "next/navigation";
 
 function CarouselV2({ data }: { data: IBanner[] }) {
   const [api, setApi] = useState<CarouselApi>();
+  const router = useRouter();
 
   return (
     <div>
@@ -32,13 +32,20 @@ function CarouselV2({ data }: { data: IBanner[] }) {
           ]}
         >
           <CarouselContent
-            style={{ aspectRatio: 27 / 9 }}
+            style={{ aspectRatio: 3 / 1 }}
             className="md:rounded-lg"
           >
             {data.map((item, index) => (
               <CarouselItem
                 key={index.toString()}
-                className="flex justify-center md:rounded-lg overflow-clip"
+                onClick={() =>
+                  item.is_clickable || item.is_hyperlink
+                    ? router.push(item.hyperlink_url)
+                    : null
+                }
+                className={`flex justify-center md:rounded-lg overflow-clip ${
+                  item.is_clickable || item.is_hyperlink ? "cursor-pointer" : ""
+                }`}
               >
                 <Image
                   key={index}
@@ -46,7 +53,7 @@ function CarouselV2({ data }: { data: IBanner[] }) {
                   alt={item.name}
                   width={3000}
                   height={1000}
-                  style={{ aspectRatio: 27 / 9 }}
+                  style={{ aspectRatio: 3 / 1 }}
                   className={`object-cover h-full w-auto md:rounded-lg duration-500 bg-zinc-200`}
                 />
               </CarouselItem>

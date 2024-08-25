@@ -34,12 +34,12 @@ function Footer({ profile }: { profile?: ISiteProfile }) {
   return (
     <div
       // style={{ backgroundImage: 'url("/assets/illustration/v1/footer.svg")' }}
-      className="bg-no-repeat bg-right bg-background pt-2 w-full border-t"
+      className="bg-no-repeat bg-right bg-background pt-2 w-full"
     >
       <div className="flex justify-center w-full">
-        <div className="w-full mb-8 max-w-6xl">
-          <div className="max-w-6xl px-6">
-            <div className="grid my-4 md:grid-cols-5 sm:grid-cols-2 grid-cols-1 sm:gap-8">
+        <div className="w-full mb-8 md:container">
+          <div className="px-4 md:px-6">
+            <div className="grid my-4 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-2 grid-cols-1 sm:gap-8">
               <div className="md:col-span-2 mt-8">
                 {profile?.logo_url && (
                   <Image
@@ -81,14 +81,17 @@ function Footer({ profile }: { profile?: ISiteProfile }) {
                 <p className="font-bold text-foreground text-sm">Kontak</p>
                 <div className="space-y-1 mt-2 text-sm">
                   <div className="flex items-center space-x-2">
-                    <EnvelopeClosedIcon /> <p>cs@topmur.com</p>
+                    <EnvelopeClosedIcon />
+                    <p>cs@topmur.com</p>
                   </div>
                   <div className="flex items-center space-x-2">
                     <ChatBubbleIcon /> <p>Hubungi CS</p>
                   </div>
                 </div>
               </div>
-              <div className={`bg-background flex flex-col mt-8`}>
+              <div
+                className={`bg-background flex flex-col mt-8 md:col-span-full lg:col-span-1`}
+              >
                 <p className="font-bold text-foreground text-sm">
                   Ikuti kami di
                 </p>

@@ -1,7 +1,7 @@
 import { IProfile } from "@/Type";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { PhoneInput } from "@/components/ui/custom-input";
+import { PhoneInput, PhoneInputIndo } from "@/components/ui/custom-input";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -37,7 +37,7 @@ function DetailProfile(props: prop) {
       body: JSON.stringify({
         name,
         email,
-        phone,
+        phone: `62${phone}`,
       }),
     });
 
@@ -71,7 +71,7 @@ function DetailProfile(props: prop) {
         </Avatar>
         {/* <h5 className="font-bold text-xl">{session?.profile?.name}</h5>
         <h6 className="text-xs">{session?.profile?.email}</h6> */}
-        <div className="w-full my-1.5 px-12">
+        <div className="w-full my-1.5">
           <Label htmlFor="invoice">Nama</Label>
           <Input
             id="name"
@@ -82,7 +82,7 @@ function DetailProfile(props: prop) {
             value={name}
           />
         </div>
-        <div className="w-full my-1.5 px-12">
+        <div className="w-full my-1.5">
           <Label htmlFor="invoice">Email</Label>
           <Input
             id="email"
@@ -93,13 +93,13 @@ function DetailProfile(props: prop) {
             value={email}
           />
         </div>
-        <div className="w-full my-1.5 px-12">
+        <div className="w-full my-1.5">
           <Label htmlFor="invoice">No. Whatsapp</Label>
-          <PhoneInput
+          <PhoneInputIndo
             onValueChange={(e) => {
               setPhone(`${e}`);
             }}
-            value={phone}
+            value={phone ?? ""}
             placeholder="Masukan No. Whatsapp"
           />
         </div>

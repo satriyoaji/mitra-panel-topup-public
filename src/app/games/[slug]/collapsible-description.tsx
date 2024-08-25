@@ -29,8 +29,8 @@ function Description({ description }: { description: string }) {
     <div>
       <p
         ref={overflowingText}
-        className={`text-xs text-muted-foreground leading-5 ${
-          !show ? "overflow-ellipsis line-clamp-3" : null
+        className={`text-xs text-muted-foreground leading-5 transition-all duration-200 ${
+          !show ? "overflow-ellipsis line-clamp-3" : "line-clamp-none"
         } `}
         dangerouslySetInnerHTML={{ __html: description }}
       ></p>

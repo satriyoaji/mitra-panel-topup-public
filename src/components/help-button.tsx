@@ -7,6 +7,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { ISosmed } from "@/types/utils";
 import Socmed from "./socmed-icon";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 function HelpButton() {
   const [data, setData] = useState<ISosmed[]>([]);
@@ -44,6 +45,20 @@ function HelpButton() {
                 Anda bisa meminta bantuan melalui link dibawah.
               </p>
               {data.map((item) => (
+                <Link
+                  href={`${item.value}`}
+                  className={`flex hover:bg-zinc-50 gap-4 px-2 cursor-pointer items-center`}
+                  key={item.key}
+                >
+                  <div
+                    className={`w-7  p-0.5 rounded-full flex items-center justify-center`}
+                  >
+                    <Socmed type={item.key} />
+                  </div>
+                  <p className={`text-xs text-primary`}>{item.name}</p>
+                </Link>
+              ))}
+              {/* {data.map((item) => (
                 <div
                   className="flex hover:bg-slate-50 gap-4 px-2 cursor-pointer items-center"
                   key={item.key}
@@ -53,7 +68,7 @@ function HelpButton() {
                   </div>
                   <p className="text-xs hover:text-primary">{item.name}</p>
                 </div>
-              ))}
+              ))} */}
             </div>
           </PopoverContent>
         </Popover>
