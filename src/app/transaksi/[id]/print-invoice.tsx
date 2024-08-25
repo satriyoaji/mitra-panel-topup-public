@@ -11,6 +11,7 @@ import QRPayment from "./(payment)/qr-payment";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { ITransactionHistoryDetail } from "@/types/transaction";
 import { ISiteProfile } from "@/types/utils";
+import { format, parseISO } from "date-fns";
 
 interface Props extends ITransactionHistoryDetail {
   profile?: ISiteProfile;
@@ -61,21 +62,14 @@ function PrintInvoice(data: Props) {
           </div>
           <div className="flex flex-row justify-stretch items-center mt-2">
             <div className="grid w-full gap-3 h-full mt-1 grid-rows-2">
-              <div className="w-full bg-background h-full px-4 pt-4 pb-6 rounded-lg border flex-1 row-span-full">
+              <div className="w-full bg-background h-full px-4 pt-3 pb-6 rounded-lg shadow flex-1">
                 <p className="font-medium text-lg text-primary">
                   Rincian Transaksi
                 </p>
                 <div className="mt-4 space-y-4 h-full">
                   <div className="flex justify-between w-full">
-                    <p className="text-muted-foreground text-sm">
-                      Order Expired at
-                    </p>
-                    {data.payment_information &&
-                    data.payment_information.expired_at ? (
-                      data.payment_information.expired_at
-                    ) : (
-                      <Badge variant="destructive">Expired</Badge>
-                    )}
+                    <p className="text-muted-foreground text-sm">Tanggal</p>
+                    <p>{format(parseISO(data.date), "dd MMM yyyy hh:mm")}</p>
                   </div>
                   <div className="flex justify-between w-full">
                     <p className="text-muted-foreground text-sm">Produk</p>
@@ -85,12 +79,14 @@ function PrintInvoice(data: Props) {
                     <p className="text-muted-foreground text-sm">Item</p>
                     <p className="">{data.product_name}</p>
                   </div>
-                  <div className="flex justify-between w-full">
-                    <p className="text-muted-foreground text-sm">Informasi</p>
-                    <div>
-                      <p>{data.customer_data}</p>
+                  {data.customer_data ? (
+                    <div className="flex justify-between w-full">
+                      <p className="text-muted-foreground text-sm">Informasi</p>
+                      <div>
+                        <p>{data.customer_data}</p>
+                      </div>
                     </div>
-                  </div>
+                  ) : null}
                   <div className="flex justify-between w-full">
                     <p className="text-muted-foreground text-sm">
                       Informasi Kontak
@@ -98,6 +94,36 @@ function PrintInvoice(data: Props) {
                     <div className="text-right space-y-1">
                       <p>{data.email}</p>
                       <p>{data.phone}</p>
+                    </div>
+                  </div>
+                  <div className="flex justify-between w-full">
+                    <p className="text-muted-foreground text-sm">Harga</p>
+                    <div>
+                      <p>{priceMask(data.price)}</p>
+                    </div>
+                  </div>
+                  {data.discount != 0 ? (
+                    <div className="flex justify-between w-full">
+                      <p className="text-muted-foreground text-sm">Promo</p>
+                      <div>
+                        <p>-{priceMask(data.discount)}</p>
+                      </div>
+                    </div>
+                  ) : null}
+                  <div className="flex justify-between w-full">
+                    <p className="text-muted-foreground text-sm">
+                      Biaya Payment
+                    </p>
+                    <div>
+                      <p>{priceMask(data.admin_fee)}</p>
+                    </div>
+                  </div>
+                  <div className="flex justify-between w-full">
+                    <p className="text-muted-foreground text-sm">
+                      Total Pembayaran
+                    </p>
+                    <div>
+                      <p>{priceMask(data.grand_total)}</p>
                     </div>
                   </div>
                 </div>
@@ -164,7 +190,7 @@ function PrintInvoice(data: Props) {
                         )}
                       </div>
                     </div>
-                    <div className="w-full bottom-0 mt-6">
+                    <div className="w-full bottom-0 mt-6 absolute">
                       <div className="bg-amber-50 border flex items-center rounded-b-lg space-x-2 text-amber-800 px-4 py-1.5">
                         <InfoCircledIcon />
                         <p className="text-xs">
