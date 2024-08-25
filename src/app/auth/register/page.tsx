@@ -34,13 +34,19 @@ function Page() {
 
     setLoading(false);
     if (!res.ok) {
+      let response = await res.json()
       return toast({
-        title: "Failed",
-        description: "Registrasi Akun Gagal",
+        title: `Failed: ${res.statusText}`,
+        description: `Registrasi Akun Gagal: ${response.data}`,
         variant: "destructive",
       });
     }
-
+    
+    toast({
+      title: "Success",
+      description: "Registrasi Akun Berhasil",
+      variant: "success",
+    });
     window.location.replace("/auth/login");
   };
 

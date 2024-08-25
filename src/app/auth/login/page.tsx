@@ -35,6 +35,11 @@ function Page() {
         variant: "destructive",
       });
 
+    toast({
+      title: "Success",
+      description: "Login",
+      variant: "success",
+    });
     window.location.replace(searchParams.get("callback") ?? "/");
   };
 
