@@ -32,4 +32,33 @@ const PhoneInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
 );
 PhoneInput.displayName = "PhoneInput";
 
-export { PhoneInput };
+const PhoneInputIndo = React.forwardRef<HTMLInputElement, NumberInputProps>(
+  ({ className, type, value, ...props }, ref) => {
+    return (
+      <div
+        className={cn(
+          "overflow-clip flex items-center h-9 w-full rounded border border-input bg-transparent  text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
+          className
+        )}
+      >
+        <div className="bg-slate-100 h-full flex justify-center items-center px-3 text-muted-foreground font-semibold">
+          <p>+62</p>
+        </div>
+        <PatternFormat
+          className="w-full file:border-0 focus-visible:outline-none px-3 h-full disabled:cursor-not-allowed disabled:opacity-50"
+          format="### ### ### ###"
+          type="tel"
+          value={(value as string).replace(/\D/g, "").slice(-12)}
+          disabled={props.disabled}
+          onValueChange={(v, s) => {
+            if (props.onValueChange) props.onValueChange(v.floatValue);
+          }}
+          placeholder={props.placeholder}
+        />
+      </div>
+    );
+  }
+);
+PhoneInputIndo.displayName = "PhoneInputIndo";
+
+export { PhoneInput, PhoneInputIndo };

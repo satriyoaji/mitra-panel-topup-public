@@ -1,7 +1,7 @@
 import { IProfile } from "@/Type";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { PhoneInput } from "@/components/ui/custom-input";
+import { PhoneInput, PhoneInputIndo } from "@/components/ui/custom-input";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -37,7 +37,7 @@ function DetailProfile(props: prop) {
       body: JSON.stringify({
         name,
         email,
-        phone,
+        phone: `62${phone}`,
       }),
     });
 
@@ -95,7 +95,7 @@ function DetailProfile(props: prop) {
         </div>
         <div className="w-full my-1.5 px-12">
           <Label htmlFor="invoice">No. Whatsapp</Label>
-          <PhoneInput
+          <PhoneInputIndo
             onValueChange={(e) => {
               setPhone(`${e}`);
             }}

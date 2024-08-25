@@ -15,6 +15,7 @@ import {
 import { IPaymentGroup } from "@/types/transaction";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 
 function PaymentList({
   paymentGroup,
@@ -96,6 +97,7 @@ function PaymentList({
             </div>
           </div>
         ))}
+        <Separator className="my-2" />
         <Button
           variant="link"
           className="w-full"

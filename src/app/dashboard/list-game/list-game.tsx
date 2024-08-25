@@ -6,6 +6,7 @@ import { CubeIcon } from "@radix-ui/react-icons";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import Image from "next/image";
 // import Image from "next/image";
 
 export default function ListGame() {
@@ -98,7 +99,7 @@ export default function ListGame() {
               {groups.map((val, idx) => (
                 <Badge
                   className={`mx-1 cursor-pointer inline-block whitespace-nowrap`}
-                  variant={val.id == group.id ? "default" : "secondary"}
+                  variant={val.id == group.id ? "default" : "outline"}
                   key={`${idx}`}
                   onClick={() => {
                     setData([]);
@@ -116,7 +117,7 @@ export default function ListGame() {
           className="bg-background md:max-w-xs"
         /> */}
         </div>
-        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 md:gap-4 gap-2 place-items-center justify-center px-2">
+        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 md:gap-4 gap-2 mt-2 place-items-center justify-center px-2">
           {loading
             ? [...Array(10)].map((x, i) => (
                 <Skeleton key={i} className="w-full aspect-square" />
@@ -129,9 +130,11 @@ export default function ListGame() {
                 >
                   <Card className="w-full h-full min-w-fit rounded-xl hover:shadow-md hover:text-primary transition duration-300">
                     <div className="p-4 md:p-5 flex flex-col items-center">
-                      <div className="overflow-clip rounded-xl w-full bg-background aspect-square flex justify-center items-center">
+                      <div className="overflow-clip h-20 md:h-28 w-auto rounded-xl bg-background aspect-square flex justify-center items-center">
                         {val.image_url !== "" ? (
-                          <img
+                          <Image
+                            height={1000}
+                            width={1000}
                             alt={val.name}
                             className="rounded-xl w-full hover:scale-125 transition duration-300"
                             src={val.image_url}
