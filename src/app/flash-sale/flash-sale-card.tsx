@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { priceMask } from "@/Helpers";
 import { IFlashSaleInProduct } from "@/types/flash-sale";
+import { Progress } from "@/components/ui/progress";
 
 function FlashSaleCard({
   data,
@@ -43,13 +44,26 @@ function FlashSaleCard({
                     </p>
                   </div>
                   <p
-                    className="text-red-500 text-xs font-medium"
+                    className="text-green-500 text-xs font-medium"
                     style={{ fontSize: "80%" }}
                   >
                     {priceMask(data.discounted_price)}
                   </p>
                 </div>
               </div>
+              <Progress
+                value={
+                  (100 * data.flash_sale_info.remaining) /
+                  data.flash_sale_info.total
+                }
+                className="mt-2"
+              />
+              <p
+                className="text-xs mt-0.5 text-muted-foreground"
+                style={{ fontSize: "65%" }}
+              >
+                Tersisa {data.flash_sale_info.remaining} Lagi
+              </p>
             </div>
             <div className="h-full w-full flex items-end mt-2.5">
               <div className="bg-zinc-100 text-zinc-400 w-full">
