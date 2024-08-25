@@ -8,7 +8,8 @@ import {
   CommandInput,
   CommandList,
 } from "@/components/ui/command";
-import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import { CubeIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { ChangeEvent, useState } from "react";
 
@@ -33,7 +34,7 @@ function Searchbar() {
     let searchParams = new URLSearchParams({
       page: `1`,
       limit: "10",
-      key: search,
+      search,
     });
 
     var res = await fetch(`/api/products/categories?` + searchParams);
@@ -85,7 +86,7 @@ function Searchbar() {
       </div>
       <CommandDialog open={isOpen} onOpenChange={setIsOpen}>
         <CommandInput placeholder="Cari Produk..." onValueChange={doSearch} />
-        <CommandList className="min-h-[15rem]">
+        {/* <CommandList className="min-h-[15rem]">
           {data.length > 0 ? (
             data.map((i, idx) => (
               <div
@@ -97,6 +98,38 @@ function Searchbar() {
                 }}
               >
                 <div className="text-sm">{i.name}</div>
+              </div>
+            ))
+          ) : (
+            <CommandEmpty>No results found.</CommandEmpty>
+          )}
+        </CommandList> */}
+        <CommandList className="min-h-[15rem] mt-4">
+          {data.length > 0 ? (
+            data.map((i, idx) => (
+              <div
+                key={idx}
+                className="px-5 py-2 hover:bg-zinc-50 cursor-pointer flex items-center gap-4"
+                onClick={() => {
+                  router.push(`/games/${i.key}`);
+                  setIsOpen(false);
+                }}
+              >
+                {i.image_url !== "" ? (
+                  <div className="rounded overflow-clip bg-white aspect-square flex justify-center items-center">
+                    <Image
+                      width={45}
+                      height={45}
+                      alt={i.name}
+                      src={i.image_url}
+                    />
+                  </div>
+                ) : (
+                  <div className="w-full aspect-square hover:scale-125 flex justify-center items-center transition z-0 duration-300 hover:rotate-12">
+                    <CubeIcon className="text-white m-auto h-4 w-4" />
+                  </div>
+                )}
+                <div className="">{i.name}</div>
               </div>
             ))
           ) : (
