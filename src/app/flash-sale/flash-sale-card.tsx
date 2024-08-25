@@ -20,20 +20,25 @@ function FlashSaleCard({
       className="w-full h-full"
     >
       <div
-        className={`min-h-[6rem] h-full bg-white hover:bg-zinc-50 rounded-xl overflow-clip border-t-0 border-r-0 ${
+        className={`min-h-[6rem] h-full bg-white hover:bg-zinc-50 text-[85%] md:text-[100%] rounded-xl overflow-clip border-t-0 border-r-0 ${
           selected ? "border-4" : "border"
         }`}
       >
         <div className="p-0 flex flex-col m-0 h-full">
           <div className="pt-3 flex flex-col justify-between h-full items-start">
             <div className="flex space-x-0.5 px-3 ">
-              <p className="text-xs font-semibold">{data.name}</p>
+              <p className="text-xs font-semibold" style={{ fontSize: "80%" }}>
+                {data.name}
+              </p>
             </div>
             <div className="w-full px-3 ">
               <div className="flex justify-between items-end">
                 <div>
                   <div className="flex items-center gap-1">
-                    <p className="px-1 pt-1 pb-0.5 font-semibold text-xs my-0.5 rounded-md bg-amber-300">
+                    <p
+                      className="px-1.5 py-0.5 text-xs my-0.5 font-semibold rounded-md bg-amber-300 "
+                      style={{ fontSize: "75%" }}
+                    >
                       {disc}%
                     </p>
                     <p
@@ -67,7 +72,12 @@ function FlashSaleCard({
             </div>
             <div className="h-full w-full flex items-end mt-2.5">
               <div className="bg-zinc-100 text-zinc-400 w-full">
-                <p className="text-xs text-center p-1">{data.category_key}</p>
+                <p
+                  className="text-xs text-center md:py-0.5"
+                  style={{ fontSize: "75%" }}
+                >
+                  {data.category_name}
+                </p>
               </div>
             </div>
           </div>
