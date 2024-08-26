@@ -143,7 +143,9 @@ function Page() {
                 </p>
               </div>
               <SaldoCard balance={dataProfile?.saldo ?? 0} />
-              <SaldoPointHistory />
+              <div className="max-h-[62vh] overflow-auto">
+                <SaldoPointHistory />
+              </div>
             </DialogContent>
           </Dialog>
           <Link
