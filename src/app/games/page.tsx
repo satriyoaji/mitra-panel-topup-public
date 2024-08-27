@@ -89,6 +89,7 @@ function Page() {
                   }
                   className="opacity-50"
                   alt="dw"
+                  title="dw"
                   width={500}
                   height={500}
                 />

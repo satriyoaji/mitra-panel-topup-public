@@ -106,6 +106,7 @@ function Searchbar() {
                       width={45}
                       height={45}
                       alt={i.name}
+                      title={i.name}
                       src={i.image_url}
                     />
                   </div>

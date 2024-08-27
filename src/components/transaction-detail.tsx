@@ -77,6 +77,7 @@ function TransactionDetail({
                   <div className="flex justify-end">
                     {payment?.image_url ? (
                       <Image
+                        title={payment.name}
                         alt={payment.name}
                         src={payment.image_url}
                         width={50}

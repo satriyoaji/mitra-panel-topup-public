@@ -58,6 +58,7 @@ function ProductCard(props: prop) {
                   width={30}
                   height={30}
                   alt={props.name}
+                  title={props.name}
                   className="rounded hover:scale-125 transition duration-300 hover:rotate-12"
                   src={props.imageURL}
                 />

@@ -83,6 +83,7 @@ function PaymentList({
                       {item.image_url ? (
                         <Image
                           alt={item.name}
+                          title={item.name}
                           src={item.image_url}
                           width={50}
                           height={50}

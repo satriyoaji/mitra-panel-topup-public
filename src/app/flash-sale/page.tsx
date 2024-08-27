@@ -65,6 +65,7 @@ function Page() {
                 <Image
                   src={"/assets/illustration/lightning.gif"}
                   alt="flash"
+                  title="flash"
                   width={20}
                   height={20}
                 />
@@ -103,6 +104,7 @@ function Page() {
                     }
                     className="opacity-50"
                     alt="dw"
+                    title="dw"
                     height={400}
                     width={400}
                   />

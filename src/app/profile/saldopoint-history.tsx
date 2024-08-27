@@ -68,6 +68,7 @@ function SaldoPointHistory() {
                 <div className="space-y-2 flex justify-end items-end space-x-2 mt-1.5">
                   {item.payment_logo ? (
                     <Image
+                      title={item.payment_name}
                       alt={item.payment_name}
                       src={item.payment_logo}
                       height={50}

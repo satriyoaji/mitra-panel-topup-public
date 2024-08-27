@@ -40,6 +40,7 @@ function Footer({ profile }: { profile?: ISiteProfile }) {
                   <Image
                     src={profile?.logo_url}
                     alt="logo"
+                    title="logo"
                     width={40}
                     height={40}
                   />

@@ -65,6 +65,7 @@ function ItemsCard(props: TItemsCard) {
               {props.data.payment_logo ? (
                 <Image
                   alt={props.data.payment_channel}
+                  title={props.data.payment_channel}
                   src={props.data.payment_logo}
                   height={50}
                   width={50}

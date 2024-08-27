@@ -50,6 +50,7 @@ function Header({ profile }: { profile?: ISiteProfile }) {
               <Image
                 src={profile?.logo_url}
                 alt="logo"
+                title="logo"
                 width={35}
                 height={35}
               />

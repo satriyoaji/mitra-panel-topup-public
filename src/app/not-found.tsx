@@ -12,6 +12,7 @@ function NotFound() {
           "/assets/illustration/DrawKit Larry Character Illustration (1).svg"
         }
         alt="dw"
+        title="dw"
         width={500}
         height={500}
       />

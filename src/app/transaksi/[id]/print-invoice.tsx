@@ -38,6 +38,7 @@ function PrintInvoice(data: Props) {
             {data.profile?.logo_url && (
               <Image
                 src={data.profile?.logo_url}
+                title={data.profile?.logo_url}
                 alt="logo"
                 width={40}
                 height={40}
@@ -151,6 +152,7 @@ function PrintInvoice(data: Props) {
                               <Image
                                 className="mt-1.5"
                                 alt={data.payment_information.payment_method}
+                                title={data.payment_information.payment_method}
                                 src={data.payment_information.image_url}
                                 width={50}
                                 height={50}

@@ -213,6 +213,7 @@ function TransactionHistoryDetail({
                           {data.payment_information.image_url ? (
                             <Image
                               className="mt-1.5"
+                              title={data.payment_information.payment_method}
                               alt={data.payment_information.payment_method}
                               src={data.payment_information.image_url}
                               width={50}

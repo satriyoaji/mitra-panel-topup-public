@@ -51,6 +51,7 @@ function CarouselV2({ data }: { data: IBanner[] }) {
                   key={index}
                   src={item.image_url}
                   alt={item.name}
+                  title={item.name}
                   width={3000}
                   height={1000}
                   style={{ aspectRatio: 3 / 1 }}
