@@ -4,6 +4,19 @@ const nextConfig = {
     eslint: {
         ignoreDuringBuilds: true,
     },
+    async headers() {
+        return [
+          {
+            source: '/:path*',
+            headers: [
+              {
+                key: 'X-Robots-Tag',
+                value: 'index, follow',
+              },
+            ],
+          },
+        ];
+      },
     images: {
         remotePatterns: [
             {
@@ -19,6 +32,11 @@ const nextConfig = {
             {
                 protocol: "https",
                 hostname: "cdn-panel.vcg.my.id",
+                port: "",
+            },
+            {
+                protocol: "https",
+                hostname: "s3-alpha-sig.figma.com",
                 port: "",
             },
         ],

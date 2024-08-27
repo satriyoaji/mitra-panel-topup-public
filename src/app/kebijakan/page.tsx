@@ -27,7 +27,6 @@ const getData = async () => {
 
 async function Page() {
   var data: ISiteProfile | undefined = await getData();
-  console.log(data);
   return (
     <div className="flex justify-center w-full px-4">
       <div className="max-w-6xl w-full my-4 flex flex-col justify-center items-center">

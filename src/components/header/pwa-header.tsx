@@ -28,7 +28,6 @@ function PWAAlert({ profile }: { profile?: ISiteProfile }) {
     }
     promptInstall.prompt();
   };
-  console.log(supportsPWA);
   if (!supportsPWA) return null;
 
   if (open)

@@ -2,9 +2,11 @@ import RootTemplateLayout from "./root-layout";
 import { Metadata } from "next";
 import { GetCredHeader } from "./api/api-utils";
 import { ISiteProfile } from "@/types/utils";
+import { headers } from "next/headers";
 
 export async function generateMetadata(): Promise<Metadata> {
   var credentialHeader = GetCredHeader();
+  var url = headers().get("host") ?? "/";
 
   // fetch data
   const res = await fetch(`${process.env.NEXT_API_URL}/v2/panel/site-profile`, {
@@ -22,14 +24,27 @@ export async function generateMetadata(): Promise<Metadata> {
 
     return {
       manifest: "/api/manifest.json",
-      title: setting.name,
+      title: {
+        template: `%s | ${setting.name}`,
+        default: setting.name,
+      },
       description: setting.description,
       keywords: setting.keywords,
       openGraph: {
         images: [setting.logo_url],
+        title: `${setting.name} - ${setting.title}`,
+        url,
+        type: "website",
       },
       icons: {
         icon: setting.logo_url,
+      },
+      alternates: {
+        canonical: url,
+      },
+      robots: {
+        index: true,
+        follow: true,
       },
     };
   }

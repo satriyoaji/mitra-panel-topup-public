@@ -36,6 +36,7 @@ export interface ISosmed {
   key: string;
   name: string;
   value: string;
+  type: "social" | "contact";
 }
 
 export interface ISiteProfile {
