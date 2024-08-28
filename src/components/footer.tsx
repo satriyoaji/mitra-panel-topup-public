@@ -32,7 +32,7 @@ function Footer({ profile }: { profile?: ISiteProfile }) {
       className="bg-no-repeat bg-right bg-background pt-2 w-full"
     >
       <div className="flex justify-center w-full">
-        <div className="w-full mb-8 md:container">
+        <div className="w-full mb-8 mx-auto max-w-6xl">
           <div className="px-4 md:px-6">
             <div className="grid my-4 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-2 grid-cols-1 sm:gap-8">
               <div className="md:col-span-2 mt-8">

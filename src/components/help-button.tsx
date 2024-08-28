@@ -32,7 +32,7 @@ function HelpButton() {
         <Popover>
           <PopoverTrigger asChild>
             <Button
-              className={`gap-2 md:bottom-8 opacity-100 flex justify-center items-center fixed z-90 bottom-16 right-4 rounded-full drop-shadow-lg text-white transition-all bg-primary hover:drop-shadow-2xl duration-300`}
+              className={`gap-2 md:bottom-8 opacity-100 flex justify-center items-center fixed z-90 bottom-14 right-2 rounded-full drop-shadow-lg text-white transition-all bg-primary hover:drop-shadow-2xl duration-300`}
             >
               <ChatBubbleIcon />
               <p>Bantuan</p>

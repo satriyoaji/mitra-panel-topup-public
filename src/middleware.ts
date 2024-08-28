@@ -28,16 +28,8 @@ export default async function middleware(
   if (req.nextUrl.pathname.includes("/auth") && token)
     return NextResponse.redirect(new URL("/", req.url));
 
-  // if (
-  //   // req.nextUrl.pathname.includes("/games") &&
-  //   !req.nextUrl.pathname.includes("/v1")
-  // )
-  //   return NextResponse.redirect(
-  //     new URL(
-  //       `/v1/${req.nextUrl.pathname}?${req.nextUrl.searchParams}`,
-  //       req.url
-  //     )
-  //   );
+  var res = NextResponse.next();
+  res.headers.set("x-url", req.url);
 
   if (
     req.nextUrl.pathname.includes("/profile") ||
@@ -54,5 +46,5 @@ export default async function middleware(
     return authMiddleware(req, event);
   }
 
-  return NextResponse.next();
+  return res;
 }
