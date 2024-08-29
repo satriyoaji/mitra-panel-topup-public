@@ -84,7 +84,7 @@ export default function ListGame() {
     <div className="pb-4 flex justify-center rounded-t-xl">
       <div className="w-full px-2">
         {" "}
-        <div className="md:flex md:items-end md:justify-between sticky z-10 top-12 py-2 rounded-t-lg bg-background backdrop-blur-md">
+        <div className="md:flex md:items-end md:justify-between sticky z-10 top-10 py-2 rounded-t-lg bg-background backdrop-blur-md">
           <div className="flex items-center w-full justify-between mt-2">
             <p className="mr-8 font-semibold px-2 text-lg">Kategori</p>
             <div

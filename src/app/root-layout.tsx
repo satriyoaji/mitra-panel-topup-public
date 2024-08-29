@@ -56,7 +56,7 @@ export default function RootTemplateLayout({
             <Header profile={profile} />
             <div className={`w-full flex justify-center`}>
               <div
-                className={`min-h-screen md:max-w-6xl bg-background pt-2 px-2 pb-4 w-full`}
+                className={`min-h-screen md:max-w-6xl bg-background pb-4 w-full`}
               >
                 {children}
               </div>

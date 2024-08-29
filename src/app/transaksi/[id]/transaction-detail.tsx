@@ -70,11 +70,11 @@ function TransactionHistoryDetail({
         <div className="flex justify-between items-center pt-4">
           <div className="flex items-center space-x-1">
             <ArrowLeftIcon
-              className="h-5 w-5 text-primary cursor-pointer"
+              className="h-5 w-5 text-primary cursor-pointer md:block hidden"
               onClick={() => router.back()}
             />
             <div className="sm:flex items-center space-x-2">
-              <h4 className="font-medium ml-2 p-0 text-primary">
+              <h4 className="font-medium ml-2 p-0 text-primary hidden md:block">
                 Detail Transaksi
               </h4>
               <div className="flex items-center justify-between">

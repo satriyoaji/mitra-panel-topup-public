@@ -61,8 +61,10 @@ function List() {
 
   return (
     <div className="mx-2">
-      <div className="flex -mx-2 px-2 sticky top-12 py-4 bg-background flex-col space-y-1.5">
-        <h4 className="font-semibold text-primary p-0">Riwayat Transaksi🧾</h4>
+      <div className="flex px-2 sticky top-10 py-4 bg-background flex-col space-y-1.5">
+        <p className="font-semibold text-primary p-0 text-xl">
+          Riwayat Transaksi🧾
+        </p>
         <div className="flex space-x-1">
           <Input
             id="invoice"

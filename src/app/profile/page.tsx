@@ -6,6 +6,7 @@ import { Separator } from "@/components/ui/separator";
 import {
   DiscIcon,
   ExitIcon,
+  LockClosedIcon,
   Pencil1Icon,
   ReaderIcon,
 } from "@radix-ui/react-icons";
@@ -91,9 +92,9 @@ function Page() {
               </Avatar>
             </div>
             <div className="flex">
-              <h5 className="font-bold">
+              <p className="font-bold text-lg">
                 {dataProfile?.name ? dataProfile?.name : session?.profile?.name}
-              </h5>
+              </p>
               <Pencil1Icon
                 onClick={() => setProfileOpen(true)}
                 className="cursor-pointer ml-1 mt-1 md:hidden"
@@ -116,7 +117,7 @@ function Page() {
           <Dialog>
             <DialogTrigger className="w-full">
               <p className="flex px-3 space-x-3 py-2 items-center text-sm w-full cursor-pointer hover:bg-slate-50">
-                <DiscIcon className="mr-3" /> Reset Password
+                <LockClosedIcon className="mr-3" /> Reset Password
               </p>
             </DialogTrigger>
             <DialogContent>
@@ -143,7 +144,7 @@ function Page() {
                 </p>
               </div>
               <SaldoCard balance={dataProfile?.saldo ?? 0} />
-              <div className="max-h-[62vh] overflow-auto">
+              <div className="max-h-[72vh] overflow-auto">
                 <SaldoPointHistory />
               </div>
             </DialogContent>
@@ -190,7 +191,7 @@ function Page() {
             </div>
             <TabsContent value="profile">
               <div className="flex justify-start gap-4 items-center">
-                <h5 className="font-semibold p-0">Detail Profile</h5>
+                <p className="font-semibold p-0 text-lg">Detail Profil</p>
                 <Pencil1Icon
                   onClick={() => setProfileOpen(true)}
                   className="cursor-pointer"
@@ -203,7 +204,7 @@ function Page() {
             </TabsContent>
             <TabsContent value="saldo">
               <div className="flex justify-start gap-4 items-center">
-                <h5 className="font-semibold p-0">History Saldo Point</h5>
+                <p className="font-semibold p-0 text-lg">History Saldo Point</p>
               </div>
               <p className="text-xs text-muted-foreground mb-4">
                 Merupakan Saldo Refund dari Transaksi Anda

@@ -21,9 +21,9 @@ function DetailCategory(props: Props) {
       <>
         <div className="lg:grid lg:grid-cols-5 lg:space-x-4 w-full px-2 md:px-0">
           <div className="col-span-full mt-4">
-            <h4 className="text-lg font-bold ml-4 text-primary p-0 hidden md:block">
+            <h1 className="text-lg font-bold ml-4 text-primary p-0 hidden md:block">
               {props.data.category.name}
-            </h4>
+            </h1>
           </div>
           <div className="col-span-2 my-0.5">
             <div className="md:sticky md:top-16">

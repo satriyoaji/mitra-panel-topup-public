@@ -61,7 +61,7 @@ function ItemsCard(props: TItemsCard) {
                 <BadgeTransaksi status={props.data.status} />
               </div>
             </div>
-            <div className="space-y-2 flex ml-10 md:ml-0 md:justify-end items-end space-x-2 w-full">
+            <div className="space-y-2 flex ml-10 md:ml-0 md:justify-end items-end space-x-2">
               {props.data.payment_logo ? (
                 <Image
                   alt={props.data.payment_channel}

@@ -44,9 +44,9 @@ function Header({ category }: { category: IProductCategory }) {
                   }
                 />
               </div>
-              <h4 className="text-lg font-bold ml-2 md:ml-0 text-primary p-0 md:hidden">
+              <h2 className="text-lg font-bold ml-2 md:ml-0 text-primary p-0 md:hidden">
                 {category.name}
-              </h4>
+              </h2>
             </div>
             <div className="mt-4 md:mt-0 w-full pr-2">
               <Description description={category?.description} />

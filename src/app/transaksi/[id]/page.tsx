@@ -2,6 +2,7 @@ import React from "react";
 import TransactionHistoryDetail from "./transaction-detail";
 import { GetCredHeader } from "@/app/api/api-utils";
 import { ISiteProfile } from "@/types/utils";
+import BackHeader from "@/components/header/back-header";
 
 const getData = async () => {
   const credentialHeader = GetCredHeader();
@@ -28,7 +29,12 @@ const getData = async () => {
 
 async function DetailPage({ params }: { params: { id: string } }) {
   var profile: ISiteProfile | undefined = await getData();
-  return <TransactionHistoryDetail id={params.id} profile={profile} />;
+  return (
+    <>
+      <BackHeader title="Detail Transaksi" />
+      <TransactionHistoryDetail id={params.id} profile={profile} />;
+    </>
+  );
 }
 
 export default DetailPage;
