@@ -28,6 +28,7 @@ function FlashSale({ data }: { data: IFlashSaleInfo }) {
                   <Image
                     src={"/assets/illustration/lightning.gif"}
                     alt="flash"
+                    title="flash"
                     width={20}
                     height={20}
                   />

@@ -84,9 +84,9 @@ export default function ListGame() {
     <div className="pb-4 flex justify-center rounded-t-xl">
       <div className="w-full px-2">
         {" "}
-        <div className="md:flex md:items-end md:justify-between sticky z-10 top-12 py-2 rounded-t-lg bg-background backdrop-blur-md">
+        <div className="md:flex md:items-end md:justify-between sticky z-10 top-10 py-2 rounded-t-lg bg-background backdrop-blur-md">
           <div className="flex items-center w-full justify-between mt-2">
-            <h5 className="mr-8 font-semibold px-2">Kategori</h5>
+            <p className="mr-8 font-semibold px-2 text-lg">Kategori</p>
             <div
               className="no-scrollbar z-10 md:mb-0"
               style={{
@@ -136,6 +136,7 @@ export default function ListGame() {
                             height={1000}
                             width={1000}
                             alt={val.name}
+                            title={val.name}
                             className="rounded-xl w-full hover:scale-125 transition duration-300"
                             src={val.image_url}
                           />

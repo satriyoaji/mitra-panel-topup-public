@@ -17,17 +17,11 @@ function Header({ category }: { category: IProductCategory }) {
               width={900}
               height={300}
               alt={category.name}
+              title={category.name}
               src={category?.banner_url}
               style={{ aspectRatio: 3 / 1 }}
               className={`object-cover w-full md:rounded-xl rounded-t-xl border`}
             />
-            {/* <Image
-            fill
-            alt={category.name}
-            src={"/assets/hero-games.svg"}
-            style={{ aspectRatio: 64 / 9 }}
-            className={`relative object-cover w-full rounded-t-xl`}
-            /> */}
           </div>
         )}
         <div className="py-3 px-6">
@@ -42,6 +36,7 @@ function Header({ category }: { category: IProductCategory }) {
                   width={300}
                   height={300}
                   alt={category.name}
+                  title={category.name}
                   className="h-auto w-16  absolute"
                   src={
                     category.image_url ??
@@ -49,9 +44,9 @@ function Header({ category }: { category: IProductCategory }) {
                   }
                 />
               </div>
-              <h4 className="text-lg font-bold ml-2 md:ml-0 text-primary p-0 md:hidden">
+              <h2 className="text-lg font-bold ml-2 md:ml-0 text-primary p-0 md:hidden">
                 {category.name}
-              </h4>
+              </h2>
             </div>
             <div className="mt-4 md:mt-0 w-full pr-2">
               <Description description={category?.description} />

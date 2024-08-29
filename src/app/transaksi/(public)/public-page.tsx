@@ -8,9 +8,9 @@ function PublicPage() {
         <div className="max-w-[60rem] bg-opacity-90 min-h-full w-full">
           <div className="px-4">
             <p>RIWAYAT TRANSAKSI</p>
-            <h3 className="text-3xl max-w-[40rem] mt-4 font-semibold">
+            <p className="text-3xl max-w-[40rem] mt-4 font-semibold">
               Lacak Pesananmu
-            </h3>
+            </p>
           </div>
           <SearchList />
         </div>

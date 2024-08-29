@@ -78,6 +78,7 @@ function PromoDetail({
                     width={100}
                     height={100}
                     alt={promo.name}
+                    title={promo.name}
                   />
                   <div
                     className="text-xs text-muted-foreground"

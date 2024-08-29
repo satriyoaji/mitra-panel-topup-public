@@ -21,6 +21,7 @@ function Promo() {
           height={2000}
           width={2000}
           alt="promo"
+          title="promo"
           className="rounded-xl"
         />
       </DialogContent>

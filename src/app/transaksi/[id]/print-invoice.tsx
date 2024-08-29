@@ -9,7 +9,7 @@ import VAPayment from "./(payment)/va-payment";
 import LinkPayment from "./(payment)/link-payment";
 import QRPayment from "./(payment)/qr-payment";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
-import { ITransactionHistoryDetail } from "@/types/transaction";
+import { ILinkPayment, ITransactionHistoryDetail } from "@/types/transaction";
 import { ISiteProfile } from "@/types/utils";
 import { format, parseISO } from "date-fns";
 
@@ -61,7 +61,7 @@ function PrintInvoice(data: Props) {
             </div>
           </div>
           <div className="flex flex-row justify-stretch items-center mt-2">
-            <div className="grid w-full gap-3 h-full mt-1 grid-rows-2">
+            <div className="space-y-4 w-full gap-3 h-full mt-1">
               <div className="w-full bg-background h-full px-4 pt-3 pb-6 rounded-lg shadow flex-1">
                 <p className="font-medium text-lg text-primary">
                   Rincian Transaksi
@@ -142,10 +142,14 @@ function PrintInvoice(data: Props) {
                           </p>
                           <div className="flex flex-col items-end">
                             <p className="text-sm">
-                              {`${data.payment_information.payment_method.replace(
-                                "_",
-                                " "
-                              )} - ${data.payment_information.payment_channel}`}
+                              {data.payment_information.payment_channel
+                                ? `${data.payment_information.payment_method.replace(
+                                    "_",
+                                    " "
+                                  )} - ${
+                                    data.payment_information.payment_channel
+                                  }`
+                                : "🪙 Saldo Point"}
                             </p>
                             {data.payment_information.image_url ? (
                               <Image
@@ -155,9 +159,7 @@ function PrintInvoice(data: Props) {
                                 width={50}
                                 height={50}
                               />
-                            ) : (
-                              <p className="text-xl text-left">💳</p>
-                            )}
+                            ) : null}
                           </div>
                         </div>
                         <div className="flex justify-between w-full">
@@ -165,32 +167,38 @@ function PrintInvoice(data: Props) {
                             Total Pembayaran
                           </p>
                           <p className="font-semibold text-green-600">
-                            {priceMask(data.payment_information.payment_amount)}
+                            {priceMask(data.grand_total)}
                           </p>
                         </div>
                       </div>
                     </div>
-                    <Separator className="my-3 w-full" />
-                    <div className="px-4">
-                      <p className="font-medium text-lg text-primary">
-                        Tujuan Pembayaran
-                      </p>
-                      <div className="mt-4 space-y-4 h-full">
-                        {data.payment_information.payment_method ==
-                        "VIRTUAL_ACCOUNT" ? (
-                          <VAPayment
-                            payment={data.payment_information}
-                            printable={true}
-                          />
-                        ) : data.payment_information.payment_method ==
-                          "EWALLET" ? (
-                          <LinkPayment payment={data.payment_information} />
-                        ) : (
-                          <QRPayment payment={data.payment_information} />
-                        )}
-                      </div>
-                    </div>
-                    <div className="w-full bottom-0 mt-6 absolute">
+                    {(data.payment_information as ILinkPayment).deeplink_url ||
+                    (data.payment_information as ILinkPayment).mobile_url ||
+                    (data.payment_information as ILinkPayment).web_url ? (
+                      <>
+                        <Separator className="my-3 w-full" />
+                        <div className="px-4">
+                          <p className="font-medium text-lg text-primary">
+                            Tujuan Pembayaran
+                          </p>
+                          <div className="mt-4 space-y-4 h-full">
+                            {data.payment_information.payment_method ==
+                            "VIRTUAL_ACCOUNT" ? (
+                              <VAPayment
+                                payment={data.payment_information}
+                                printable={true}
+                              />
+                            ) : data.payment_information.payment_method ==
+                              "EWALLET" ? (
+                              <LinkPayment payment={data.payment_information} />
+                            ) : (
+                              <QRPayment payment={data.payment_information} />
+                            )}
+                          </div>
+                        </div>
+                      </>
+                    ) : null}
+                    <div className="w-full bottom-0 mt-6">
                       <div className="bg-amber-50 border flex items-center rounded-b-lg space-x-2 text-amber-800 px-4 py-1.5">
                         <InfoCircledIcon />
                         <p className="text-xs">
