@@ -19,14 +19,12 @@ function DetailCategory(props: Props) {
   if (props.data.category !== null && props.data.category !== undefined)
     return (
       <>
-        <div className="lg:grid lg:grid-cols-5 lg:space-x-4 w-full px-2 md:px-0">
-          <div className="col-span-full mt-4">
-            <h1 className="text-lg font-bold ml-4 text-primary p-0 hidden md:block">
-              {props.data.category.name}
-            </h1>
-          </div>
+        <div className="lg:grid lg:grid-cols-5 lg:space-x-4 w-full px-2 md:px-0 mt-4">
           <div className="col-span-2 my-0.5">
             <div className="md:sticky md:top-16">
+              <h1 className="text-lg font-bold ml-4 text-primary p-0 hidden md:block">
+                {props.data.category.name}
+              </h1>
               <Header category={props.data.category} />
             </div>
           </div>

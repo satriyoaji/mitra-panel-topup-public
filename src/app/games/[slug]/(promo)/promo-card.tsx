@@ -57,16 +57,16 @@ function PromoCard({
               ) : null}
             </div>
             <div className="items-center justify-center w-full bg-background">
-              <div className="pr-4 pl-6 space-y-2">
+              <div className="pr-4 pl-6 pb-6 space-y-2">
                 <div className="flex pt-3 justify-between items-center">
-                  <p className="text-xs py-1 px-2 bg-primary-200 text-primary-900 font-medium w-fit">
+                  <p className="text-xs bg-primary-200 text-primary-900 font-bold bg-slate-100 px-1.5 py-0.5 w-fit">
                     {promo.promo_code}
                   </p>
                 </div>
-                <div className="flex-row justify-between items-center rounded-xl px-2 py-1 bg-background">
+                <div className="flex-row justify-between items-center rounded-xl bg-background">
                   <p className="text-sm font-medium">{promo.name}</p>
+                  <p className="text-xs mt-0.5">{promo.short_description}</p>
                 </div>
-                <p className="text-xs pl-1 pb-3">{promo.short_description}</p>
               </div>
               {isSecret ? (
                 <div className="bg-primary-400 text-white mt-4 rounded-br">
@@ -75,20 +75,22 @@ function PromoCard({
                   </p>
                 </div>
               ) : null}
-              <div className="flex justify-between">
-                <div
-                  className={`px-3 py-2 bg-red-500 text-white rounded-tr-xl`}
-                >
-                  <p className="text-xs">
-                    Berakhir dalam
-                    <span className="font-semibold ml-1">
-                      {days != null && days != 0
-                        ? `${days} hari`
-                        : hours != null && hours != 0
-                        ? `${hours} jam`
-                        : `${minutes} menit`}
-                    </span>
-                  </p>
+              <div className="flex justify-between items-end">
+                <div>
+                  <div
+                    className={`px-3 py-1.5 bg-red-500 text-white rounded-tr-xl`}
+                  >
+                    <p className="text-xs">
+                      Berakhir dalam
+                      <span className="font-semibold ml-1">
+                        {days != null && days != 0
+                          ? `${days} hari`
+                          : hours != null && hours != 0
+                          ? `${hours} jam`
+                          : `${minutes} menit`}
+                      </span>
+                    </p>
+                  </div>
                 </div>
                 {onDetailClicked && (
                   <Button
