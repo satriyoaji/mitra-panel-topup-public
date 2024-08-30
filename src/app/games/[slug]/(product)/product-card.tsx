@@ -1,9 +1,7 @@
 "use client";
 
 import { priceMask } from "@/Helpers";
-import { SketchLogoIcon } from "@radix-ui/react-icons";
-import Image from "next/image";
-import React, { useCallback, useContext, useMemo } from "react";
+import React, { useMemo } from "react";
 
 type prop = {
   selected?: boolean;
@@ -28,7 +26,7 @@ function ProductCard(props: prop) {
 
   return (
     <div
-      className={`min-h-[4rem] overflow-clip flex items-center py-1 pr-1 relative h-full bg-white hover:bg-slate-50 rounded-xl cursor-pointer ${
+      className={`min-h-[4.2rem] overflow-clip flex items-center p-2 relative h-full bg-white hover:bg-slate-50 rounded-xl cursor-pointer ${
         props.selected ? `border-2 border-primary` : "border"
       }`}
       onClick={props.onClick}
@@ -39,37 +37,22 @@ function ProductCard(props: prop) {
         </div>
       ) : null}
       <div className="p-0 flex flex-col m-0">
-        {/* <div className="flex flex-row-reverse">
-                        <div>
-                            <div
-                                style={{ fontSize: "65%" }}
-                                className="text-xs bg-red-500 w-fit flex text-white font-semibold space-x-1 px-2 py-0.5 rounded-bl-lg rounded-tr"
-                            >
-                                <p>Hemat {priceMask(data?.discount_price)}</p>
-                                <LightningBoltIcon />
-                            </div>
-                        </div>
-                    </div> */}
         <div className="flex h-full items-start">
-          <div className="flex space-x-0.5 pl-3 ">
+          {/* <div className="flex space-x-0.5 pl-3 ">
             <div className="overflow-clip rounded w-fit min-w-[2rem]">
-              {props.imageURL ? (
-                <Image
-                  width={30}
-                  height={30}
-                  alt={props.name}
-                  title={props.name}
-                  className="rounded hover:scale-125 transition duration-300 hover:rotate-12"
-                  src={props.imageURL}
-                />
-              ) : (
-                <div className="p-1 aspect-square hover:scale-125 transition duration-300 hover:rotate-12 flex justify-center items-center">
-                  <SketchLogoIcon className="m-auto w-5 h-5" />
-                </div>
-              )}
+              <Image
+                width={30}
+                height={30}
+                alt={props.name}
+                className="rounded hover:scale-125 transition duration-300 hover:rotate-12"
+                src={
+                  props.imageURL ??
+                  "https://s3-alpha-sig.figma.com/img/933a/09a5/c2747dd0ee221420e9c6686f29720965?Expires=1725235200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=K3KMtkf5K~~yfNXa2ea9tssgpbLWFv1iMb8SsvtvV3ge91j3ZZW4AmC0xllLpF4amUV-ynFUhLL-V67bEY1ZVqHfVomDFdxW920v8ewfTclN1ZVIp1u2LgV1AmDbyh~SvyFud9HrNh1H5tP-9Rnm-RKir5IS8mJaSDzNi20CeDaossF7AONxvkwNQnZCunulKYElAo133CzmYW~VeNY4WiGIAdMo-pHrAPdXLKSJ9k56scwyeUVy6gVXPe6ePXg3UnqsojH6T43JeQL2qB0O-vU~Fgmbf60Ybt-lz-DzJe21vr2RXgC8Hmb0M8n53D5~gIndUD7CSa~Cjcakv5Cduw__"
+                }
+              />
             </div>
-          </div>
-          <div className="w-full pl-2.5 ">
+          </div> */}
+          <div className="w-full pl-1 ">
             <p
               className={`text-xs font-semibold ${
                 props.selected ? `text-primary` : ""
