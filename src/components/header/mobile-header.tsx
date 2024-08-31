@@ -11,6 +11,7 @@ const ignorePath = [
   "/transaksi/",
   "/kebijakan",
   "/syarat-ketentuan",
+  "/saldo",
 ];
 
 function MobileHeader({ profile }: { profile?: ISiteProfile }) {

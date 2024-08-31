@@ -130,25 +130,12 @@ function Page() {
               <Password />
             </DialogContent>
           </Dialog>
-          <Dialog>
-            <DialogTrigger className="md:hidden w-full">
-              <p className="flex px-3 space-x-3 py-2 items-center text-sm w-full cursor-pointer hover:bg-slate-50">
-                <DiscIcon className="mr-3" /> Saldo Point History
-              </p>
-            </DialogTrigger>
-            <DialogContent>
-              <div>
-                <h4 className="font-semibold p-0">Saldo Point History</h4>
-                <p className="text-xs text-muted-foreground">
-                  Merupakan Saldo Refund dari Transaksi Anda
-                </p>
-              </div>
-              <SaldoCard balance={dataProfile?.saldo ?? 0} />
-              <div className="max-h-[72vh] overflow-auto">
-                <SaldoPointHistory />
-              </div>
-            </DialogContent>
-          </Dialog>
+          <Link
+            href="/saldo"
+            className="flex px-3 py-2 space-x-3 items-center text-sm hover:bg-slate-50"
+          >
+            <DiscIcon className="mr-3" /> Saldo Point History
+          </Link>
           <Link
             href="/transaksi"
             className="flex px-3 py-2 space-x-3 items-center text-sm hover:bg-slate-50"

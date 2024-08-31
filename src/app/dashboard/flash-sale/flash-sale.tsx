@@ -19,22 +19,23 @@ import Autoplay from "embla-carousel-autoplay";
 function FlashSale({ data }: { data: IFlashSaleInfo }) {
   if (data)
     return (
-      <div className="relative md:rounded-xl bg-cover mb-2 mt-4">
+      <div className="relative md:rounded-xl bg-cover mb-2 sm:mt-4">
         <div className="w-full md:rounded-xl bg-gradient-to-tl from-zinc-300 to-zinc-100 overflow-clip pb-1">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center bg-red-500 backdrop-blur-sm py-1 pr-1 rounded-2xl">
-              <p className="px-2 text-sm font-semibold flex text-white">
-                <span className="mr-3">
-                  <Image
-                    src={"/assets/illustration/lightning.gif"}
-                    alt="flash"
-                    title="flash"
-                    width={20}
-                    height={20}
-                  />
-                </span>
-                {data.name}
-              </p>
+          <div className="flex justify-between items-center mx-2 pt-2 sm:pt-0">
+            <div className="flex items-center justify-between sm:justify-start bg-red-500 backdrop-blur-sm py-1 pr-1 w-full sm:w-fit rounded-2xl">
+              <div className="flex">
+                <Image
+                  src={"/assets/illustration/lightning.gif"}
+                  alt="flash"
+                  title="flash"
+                  width={20}
+                  height={20}
+                  className="ml-3"
+                />
+                <p className="px-2 text-sm font-semibold flex text-white">
+                  {data.name}
+                </p>
+              </div>
               <CountdownCard
                 theme="light"
                 date={parseISO(data.expired_at)}

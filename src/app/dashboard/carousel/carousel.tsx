@@ -52,8 +52,8 @@ function CarouselV2({ data }: { data: IBanner[] }) {
                   src={item.image_url}
                   alt={item.name}
                   title={item.name}
-                  width={3000}
-                  height={1000}
+                  width={1200}
+                  height={400}
                   style={{ aspectRatio: 3 / 1 }}
                   className={`object-cover h-full w-auto md:rounded-lg duration-500 bg-zinc-200`}
                 />

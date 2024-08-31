@@ -60,7 +60,7 @@ function List() {
   }, 500);
 
   return (
-    <div className="mx-2">
+    <div>
       <div className="flex px-2 sticky top-10 py-4 bg-background flex-col space-y-1.5">
         <p className="font-semibold text-primary p-0 text-xl">
           Riwayat Transaksi🧾
@@ -102,7 +102,7 @@ function List() {
           ) : null}
         </div>
       </div>
-      <div className="flex flex-col space-y-4">
+      <div className="flex flex-col space-y-4 px-2">
         {!loading ? (
           lists.map((val, idx) => <ItemsCard key={`${idx}`} data={val} />)
         ) : (
