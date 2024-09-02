@@ -13,57 +13,12 @@ export async function GET(req: NextRequest) {
   var result = await re.json();
   var data: ISiteProfile = result.data;
 
-  var manifest = {
-    name: data.name,
-    short_name: data.title,
-    theme_color: data.theme_color ?? "#fff",
-    background_color: "#fff",
-    display: "standalone",
-    orientation: "portrait",
-    scope: "/",
-    start_url: "/",
-    icons: [
-      {
-        src: data.logo_url,
-        sizes: "16x16",
-        type: "image/png",
-        purpose: "maskable any",
-      },
-      {
-        src: data.logo_url,
-        sizes: "32x32",
-        type: "image/png",
-        purpose: "maskable any",
-      },
-      {
-        src: data.logo_url,
-        sizes: "180x180",
-        type: "image/png",
-        purpose: "maskable any",
-      },
-      {
-        src: data.logo_url,
-        sizes: "192x192",
-        type: "image/png",
-        purpose: "maskable any",
-      },
-      {
-        src: data.logo_url,
-        sizes: "512x512",
-        type: "image/png",
-        purpose: "maskable any",
-      },
-    ],
-    splash_pages: null,
-  };
+  data.manifest.start_url = "/";
 
-  return NextResponse.json(
-    { ...manifest },
-    {
-      status: 200,
-      headers: {
-        "Content-Type": "application/manifest+json",
-      },
-    }
-  );
+  return NextResponse.json(data.manifest, {
+    status: 200,
+    headers: {
+      "Content-Type": "application/manifest+json",
+    },
+  });
 }

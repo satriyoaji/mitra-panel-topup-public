@@ -3,24 +3,18 @@
 import { debounce } from "@/Helpers";
 import { IProductCategory } from "@/Type";
 import { Combobox, TValue } from "@/components/ui/combobox";
-import { Input } from "@/components/ui/input";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function Filter({ onChange }: { onChange: (val: TValue | undefined) => void }) {
   const [data, setData] = useState<TValue[]>([]);
-  const [search, setSearch] = useState("");
   const [value, setValue] = useState<TValue | undefined>();
+  const [search, setSearch] = useState<string>("");
 
-  const getList = async () => {
+  const getList = async (isSearch = false) => {
     let searchParams = new URLSearchParams({
       page: `1`,
       limit: "10",
-      key: search,
+      search,
     });
 
     var res = await fetch(`/api/products/categories?` + searchParams);
@@ -35,7 +29,7 @@ function Filter({ onChange }: { onChange: (val: TValue | undefined) => void }) {
           };
         });
         setData(resData);
-        if (resData.length > 0) {
+        if (resData.length > 0 && !isSearch) {
           setValue(resData[0]);
           onChange(resData[0]);
         }
@@ -50,15 +44,23 @@ function Filter({ onChange }: { onChange: (val: TValue | undefined) => void }) {
       await getList();
     })();
   }, []);
+  useEffect(() => {
+    (async () => {
+      await getList(true);
+    })();
+  }, [search]);
 
-  const doSearch = debounce((e: ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
+  const doSearch = debounce((e: string) => {
+    setSearch(e);
   }, 500);
+
+  console.log(search);
 
   return (
     <div className="md:flex md:space-x-1 space-y-1 md:space-y-0 w-full">
       <div className="w-full">
         <Combobox
+          onSearch={doSearch}
           onChange={(val) => {
             setValue(val);
             onChange(val);
@@ -69,14 +71,6 @@ function Filter({ onChange }: { onChange: (val: TValue | undefined) => void }) {
           defaultValue={value}
         />
       </div>
-      {/* <div className="w-full">
-        <Input
-          id="invoice"
-          placeholder="Search..."
-          className="bg-background w-full"
-          onChange={doSearch}
-        />
-      </div> */}
     </div>
   );
 }

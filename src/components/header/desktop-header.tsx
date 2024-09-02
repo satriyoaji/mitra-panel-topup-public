@@ -1,7 +1,7 @@
 "use client";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";

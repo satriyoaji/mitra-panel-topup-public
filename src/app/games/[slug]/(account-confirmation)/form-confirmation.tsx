@@ -1,9 +1,7 @@
 "use client";
-import { Card, CardContent } from "@/components/ui/card";
-import { PhoneInput, PhoneInputIndo } from "@/components/ui/custom-input";
+import { PhoneInputIndo } from "@/components/ui/custom-input";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
 import TransactionContext, {
   ITransactionContext,
 } from "@/infrastructures/context/transaction/transaction.context";

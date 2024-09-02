@@ -43,11 +43,6 @@ function ItemsCard(props: TItemsCard) {
                 <div className="mt-1">
                   <SketchLogoIcon />
                 </div>
-                {/* <img
-                alt="Remy Sharp"
-                className="rounded-sm border bg-card text-card-foreground shadow w-12 object-cover"
-                src={""}
-              /> */}
                 <div>
                   <div className="flex flex-col">
                     <p className="text-xs font-medium">

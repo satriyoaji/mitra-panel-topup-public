@@ -13,8 +13,8 @@ function NotFound() {
         }
         alt="dw"
         title="dw"
-        width={200}
-        height={200}
+        width={500}
+        height={500}
       />
       <h3 className="text-4xl -mt-14 font-bold">Halaman Tidak Ditemukan</h3>
       <Link className="mb-3 mt-12" href="/">

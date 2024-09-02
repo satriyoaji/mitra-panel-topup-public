@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  ArrowLeftIcon,
-  InfoCircledIcon,
-  SketchLogoIcon,
-} from "@radix-ui/react-icons";
+import { ArrowLeftIcon, InfoCircledIcon } from "@radix-ui/react-icons";
 import { priceMask } from "@/Helpers";
 import Link from "next/link";
 import React, { useEffect, useMemo, useState } from "react";
@@ -14,7 +10,6 @@ import CopyToClipboard from "@/components/copy-to-clipboard";
 import { Separator } from "@/components/ui/separator";
 import VAPayment from "./(payment)/va-payment";
 import QRPayment from "./(payment)/qr-payment";
-import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import BadgeTransaksi from "../badge-transaksi";
 import LinkPayment from "./(payment)/link-payment";

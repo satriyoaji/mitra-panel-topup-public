@@ -28,9 +28,7 @@ import Password from "./password";
 
 function Page() {
   const { data: session } = useSession();
-  const { data, dispatch } = useContext(
-    TransactionContext
-  ) as ITransactionContext;
+  const { dispatch } = useContext(TransactionContext) as ITransactionContext;
   const [loading, setLoading] = useState(false);
   const [dataProfile, setDataProfile] = useState<IProfile | null>(null);
   const [profileOpen, setProfileOpen] = useState<boolean>(false);

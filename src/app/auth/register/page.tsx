@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { redirect } from "next/navigation";
-import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -34,14 +32,14 @@ function Page() {
 
     setLoading(false);
     if (!res.ok) {
-      let response = await res.json()
+      let response = await res.json();
       return toast({
         title: `Failed: ${res.statusText}`,
         description: `Registrasi Akun Gagal: ${response.data}`,
         variant: "destructive",
       });
     }
-    
+
     toast({
       title: "Success",
       description: "Registrasi Akun Berhasil",

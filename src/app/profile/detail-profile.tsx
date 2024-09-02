@@ -1,7 +1,7 @@
 import { IProfile } from "@/Type";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { PhoneInput, PhoneInputIndo } from "@/components/ui/custom-input";
+import { PhoneInputIndo } from "@/components/ui/custom-input";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";

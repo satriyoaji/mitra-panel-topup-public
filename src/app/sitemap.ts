@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
 import { headers } from "next/headers";
-import { NextRequest } from "next/server";
 
 export default function robots(): MetadataRoute.Sitemap {
   var url = headers().get("host") ?? "/";

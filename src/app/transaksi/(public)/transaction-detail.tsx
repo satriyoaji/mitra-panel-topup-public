@@ -1,7 +1,7 @@
 "use client";
 
 import { Card } from "@/components/ui/card";
-import { PlusIcon, SketchLogoIcon } from "@radix-ui/react-icons";
+import { SketchLogoIcon } from "@radix-ui/react-icons";
 import {
   Table,
   TableBody,
@@ -10,11 +10,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Separator } from "@/components/ui/separator";
-import Image from "next/image";
-import { getTotalPrice, nPlainFormatter, priceMask } from "@/Helpers";
-import { Button } from "@/components/ui/button";
+import { priceMask } from "@/Helpers";
 import HorizontalStepper from "@/components/ui/horizontal-stepper";
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Loading from "@/app/loading";
 import { ITransactionHistoryDetail } from "@/types/transaction";
@@ -46,17 +43,9 @@ function TransactionHistoryDetail({ id }: { id: string }) {
             <div className="grid gap-4 py-4">
               <Card className="bg-slate-50  p-4">
                 <div className="text-xs mb-4 flex items-center space-x-4">
-                  {/* {val.logo_image !== "" ? (
-                                            <img
-                                                alt="Remy Sharp"
-                                                className="rounded hover:scale-125 transition duration-300 hover:rotate-12"
-                                                src={val.logo_image}
-                                            />
-                                        ) : ( */}
                   <div className="h-fit w-fit p-2">
                     <SketchLogoIcon className="m-auto" />
                   </div>
-                  {/* )} */}
                   <div>
                     <p>{data.category_name}</p>
                     <p className="font-semibold">{data.product_name}</p>

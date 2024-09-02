@@ -90,10 +90,9 @@ function Page() {
                   className="opacity-50"
                   alt="dw"
                   title="dw"
-                  width={200}
-                  height={200}
+                  width={400}
+                  height={400}
                 />
-                <h5 className="text-xl font-bold -mt-10">Item Kosong</h5>
               </div>
             )}
           </>
