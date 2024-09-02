@@ -14,7 +14,7 @@ export default function ListGame() {
     id: "",
     name: "All",
   });
-  const [data, setData] = useState<Array<IProductCategory>>([]);
+  const [data, setData] = useState<IProductCategory[]>([]);
   const [pageIndex, setPageIndex] = useState(0);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -118,41 +118,48 @@ export default function ListGame() {
         /> */}
         </div>
         <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 md:gap-4 gap-2 mt-2 place-items-center justify-center px-2">
-          {loading
-            ? [...Array(10)].map((x, i) => (
-                <Skeleton key={i} className="w-full aspect-square" />
-              ))
-            : data.map((val: IProductCategory, idx) => (
-                <Link
-                  href={`/games/${val.key}`}
-                  key={idx}
-                  className="w-full h-full"
-                >
-                  <Card className="w-full h-full min-w-fit rounded-xl hover:shadow-md hover:text-primary transition duration-300">
-                    <div className="p-4 md:p-5 flex flex-col items-center">
-                      <div className="overflow-clip h-20 md:h-28 w-auto rounded-xl bg-background aspect-square flex justify-center items-center">
-                        {val.image_url !== "" ? (
-                          <Image
-                            height={100}
-                            width={100}
-                            alt={val.name}
-                            title={val.name}
-                            className="rounded-xl w-full hover:scale-125 transition duration-300"
-                            src={val.image_url}
-                          />
-                        ) : (
-                          <div className="w-full aspect-square hover:scale-125 flex justify-center items-center transition z-0 duration-300 hover:rotate-12">
-                            <CubeIcon className="text-white m-auto h-20 w-20" />
-                          </div>
-                        )}
-                      </div>
-                      <p className="md:text-xs text-[70%] text-center mt-3 p-0">
-                        {val.name}
-                      </p>
+          {loading ? (
+            [...Array(3)].map((x, i) => (
+              <Skeleton key={i} className="w-full aspect-square" />
+            ))
+          ) : data && data.length > 0 ? (
+            data.map((val: IProductCategory, idx) => (
+              <Link
+                href={`/games/${val.key}`}
+                key={idx}
+                className="w-full h-full"
+              >
+                <Card className="w-full h-full min-w-fit rounded-xl hover:shadow-md hover:text-primary transition duration-300">
+                  <div className="p-4 md:p-5 flex flex-col items-center">
+                    <div className="overflow-clip h-20 md:h-28 w-auto rounded-xl bg-background aspect-square flex justify-center items-center">
+                      {val.image_url !== "" ? (
+                        <Image
+                          height={1000}
+                          width={1000}
+                          alt={val.name}
+                          className="rounded-xl w-full hover:scale-125 transition duration-300"
+                          src={val.image_url}
+                        />
+                      ) : (
+                        <div className="w-full aspect-square hover:scale-125 flex justify-center items-center transition z-0 duration-300 hover:rotate-12">
+                          <CubeIcon className="text-white m-auto h-20 w-20" />
+                        </div>
+                      )}
                     </div>
-                  </Card>
-                </Link>
-              ))}
+                    <p className="md:text-xs text-[70%] text-center mt-2 p-0">
+                      {val.name}
+                    </p>
+                  </div>
+                </Card>
+              </Link>
+            ))
+          ) : (
+            <div className="col-span-full h-60 flex items-center justify-center">
+              <h4 className="text-slate-300 font-semibold">
+                Data Tidak Ditemukan
+              </h4>
+            </div>
+          )}
         </div>
         {/* {pageIndex < totalPage ? (
         <div className="flex items-center justify-center my-2 mt-6">
