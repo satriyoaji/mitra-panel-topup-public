@@ -35,7 +35,7 @@ async function Page() {
         <div className="max-w-6xl w-full my-4 flex flex-col justify-center items-center">
           <div className="w-full space-y-4">
             <div className="bg-background rounded-lg w-full hidden md:block">
-              <h3 className="font-semibold text-primary">Kebijkan Privasi</h3>
+              <h3 className="font-semibold text-primary">Kebijakan Privasi</h3>
             </div>
             {data ? (
               <div

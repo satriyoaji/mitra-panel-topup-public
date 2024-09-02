@@ -145,7 +145,7 @@ function Page() {
             href="/kebijakan"
             className="flex px-3 py-2 space-x-3 items-center text-sm hover:bg-slate-50"
           >
-            <ShieldCheckIcon className="mr-3 h-4 w-4" /> Kebijikan Privasi
+            <ShieldCheckIcon className="mr-3 h-4 w-4" /> Kebijakan Privasi
           </Link>
           <Link
             href="/syarat-ketentuan"
