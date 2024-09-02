@@ -38,20 +38,6 @@ function ProductCard(props: prop) {
       ) : null}
       <div className="p-0 flex flex-col m-0">
         <div className="flex h-full items-start">
-          {/* <div className="flex space-x-0.5 pl-3 ">
-            <div className="overflow-clip rounded w-fit min-w-[2rem]">
-              <Image
-                width={30}
-                height={30}
-                alt={props.name}
-                className="rounded hover:scale-125 transition duration-300 hover:rotate-12"
-                src={
-                  props.imageURL ??
-                  "https://s3-alpha-sig.figma.com/img/933a/09a5/c2747dd0ee221420e9c6686f29720965?Expires=1725235200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=K3KMtkf5K~~yfNXa2ea9tssgpbLWFv1iMb8SsvtvV3ge91j3ZZW4AmC0xllLpF4amUV-ynFUhLL-V67bEY1ZVqHfVomDFdxW920v8ewfTclN1ZVIp1u2LgV1AmDbyh~SvyFud9HrNh1H5tP-9Rnm-RKir5IS8mJaSDzNi20CeDaossF7AONxvkwNQnZCunulKYElAo133CzmYW~VeNY4WiGIAdMo-pHrAPdXLKSJ9k56scwyeUVy6gVXPe6ePXg3UnqsojH6T43JeQL2qB0O-vU~Fgmbf60Ybt-lz-DzJe21vr2RXgC8Hmb0M8n53D5~gIndUD7CSa~Cjcakv5Cduw__"
-                }
-              />
-            </div>
-          </div> */}
           <div className="w-full pl-1 ">
             <p
               className={`text-xs font-semibold ${

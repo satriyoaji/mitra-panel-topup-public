@@ -40,7 +40,9 @@ function PWAAlert({ profile }: { profile?: ISiteProfile }) {
                 <DownloadIcon className="w-3 h-3" />
                 <p className="text-xs">Install {profile?.name}</p>
               </Button>
-              <p className="text-xs">Akses cepat dari home screen</p>
+              <p className="text-xs hidden md:block">
+                Akses cepat dari home screen
+              </p>
             </div>
             <div>
               <Button size="sm" variant="ghost" onClick={() => setOpen(false)}>

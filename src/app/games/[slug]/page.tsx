@@ -18,7 +18,7 @@ function Page({ params }: { params: { slug: string } }) {
       <>
         <BackHeader title="Beli Produk" />
         <div className="flex justify-center w-full">
-          <div className="w-full mb-12 sm:mb-0">
+          <div className="w-full mb-8 sm:mb-0">
             <DetailCategory session={session} {...data} />
           </div>
         </div>

@@ -68,10 +68,10 @@ function SearchList() {
 
   return (
     <>
-      <div className="flex items-center w-full mt-2 gap-2 sticky top-10 bg-white/50 z-10 rounded-lg backdrop-blur-sm p-4">
+      <div className="flex items-center w-full mt-2 gap-2 sticky top-10 bg-white z-10 rounded-lg backdrop-blur-sm p-4">
         <Input
           className="w-full bg-background"
-          placeholder="Masukkan nomor handphone atau invoice"
+          placeholder="Masukkan No. HP atau No. Invoice"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />

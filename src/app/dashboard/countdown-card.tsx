@@ -23,7 +23,7 @@ function CountdownCard({
   if (days > 0)
     return (
       <div
-        className={`flex rounded-xl py-1 px-2 space-x-1 text-center text-xs items-center justify-center ${
+        className={`flex rounded-xl py-0.5 px-2 space-x-1 text-center text-xs items-center justify-center ${
           theme === "red" ? "bg-red-500 text-white" : "bg-white/95 text-red-500"
         } backdrop-blur  font-medium`}
       >

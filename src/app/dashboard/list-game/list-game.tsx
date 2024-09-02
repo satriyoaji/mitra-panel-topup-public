@@ -82,7 +82,7 @@ export default function ListGame() {
 
   return (
     <div className="pb-4 flex justify-center rounded-t-xl">
-      <div className="w-full px-2">
+      <div className="w-full px-2 md:px-0">
         {" "}
         <div className="md:flex md:items-end md:justify-between sticky z-10 top-10 py-2 rounded-t-lg bg-background backdrop-blur-md">
           <div className="flex items-center w-full justify-between mt-2">
@@ -133,8 +133,8 @@ export default function ListGame() {
                       <div className="overflow-clip h-20 md:h-28 w-auto rounded-xl bg-background aspect-square flex justify-center items-center">
                         {val.image_url !== "" ? (
                           <Image
-                            height={1000}
-                            width={1000}
+                            height={100}
+                            width={100}
                             alt={val.name}
                             title={val.name}
                             className="rounded-xl w-full hover:scale-125 transition duration-300"

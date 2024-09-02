@@ -67,13 +67,13 @@ function TransactionHistoryDetail({
   if (data)
     return (
       <>
-        <div className="flex justify-between items-center pt-4">
+        <div className="flex justify-between items-center pt-4 px-2 md:px-0">
           <div className="flex items-center space-x-1">
             <ArrowLeftIcon
               className="h-5 w-5 text-primary cursor-pointer md:block hidden"
               onClick={() => router.back()}
             />
-            <div className="sm:flex items-center space-x-2">
+            <div className="sm:flex items-center md:space-x-2">
               <h4 className="font-medium ml-2 p-0 text-primary hidden md:block">
                 Detail Transaksi
               </h4>
@@ -87,10 +87,12 @@ function TransactionHistoryDetail({
               </div>
             </div>
           </div>
-          <PrintInvoice {...data} profile={profile} />
+          <div className="mr-2">
+            <PrintInvoice {...data} profile={profile} />
+          </div>
         </div>
 
-        <div className="flex flex-row justify-stretch items-center mt-2 mb-4">
+        <div className="flex flex-row justify-stretch items-center mt-2 mb-4 px-2 md:px-0">
           <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-3 h-full mt-1">
             <div className="h-max">
               {!session ? (
