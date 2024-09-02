@@ -1,7 +1,6 @@
-import { TProduct, TProductItem } from "@/Type";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PromoCard from "./promo-card";
 import { useToast } from "@/components/ui/use-toast";
 import {

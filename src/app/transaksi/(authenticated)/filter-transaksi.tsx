@@ -1,9 +1,7 @@
-import { DatePickerWithRange } from "@/components/ui/daterange-picker";
 import { DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import React, { useState } from "react";
 import StatusSelect from "./status-select";
 import { Button } from "@/components/ui/button";
-import { DateRange } from "react-day-picker";
 
 export type TFilter = {
   search: string | undefined;

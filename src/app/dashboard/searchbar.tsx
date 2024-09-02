@@ -11,7 +11,7 @@ import {
 import { CubeIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { ChangeEvent, useState } from "react";
+import React, { useState } from "react";
 
 function Searchbar() {
   const router = useRouter();

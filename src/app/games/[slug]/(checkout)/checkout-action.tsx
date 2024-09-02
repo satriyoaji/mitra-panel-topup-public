@@ -6,13 +6,7 @@ import TransactionContext, {
   ITransactionContext,
 } from "@/infrastructures/context/transaction/transaction.context";
 import { useSession } from "next-auth/react";
-import React, {
-  RefObject,
-  useCallback,
-  useContext,
-  useMemo,
-  useState,
-} from "react";
+import React, { RefObject, useCallback, useContext, useState } from "react";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import { Purchase } from "./detail";

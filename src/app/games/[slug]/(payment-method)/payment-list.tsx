@@ -6,12 +6,6 @@ import { priceMask } from "@/Helpers";
 import TransactionContext, {
   ITransactionContext,
 } from "@/infrastructures/context/transaction/transaction.context";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import { IPaymentGroup } from "@/types/transaction";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";

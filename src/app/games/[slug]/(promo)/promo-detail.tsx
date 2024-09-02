@@ -1,5 +1,4 @@
 import CountdownCard from "@/app/dashboard/countdown-card";
-import Loading from "@/app/loading";
 import CopyToClipboard from "@/components/copy-to-clipboard";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -11,7 +10,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { IPromo, IPromoDetail } from "@/types/transaction";
-import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import { parseISO } from "date-fns";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";

@@ -29,15 +29,18 @@ export function Combobox({
   placeholder,
   className,
   defaultValue,
+  onSearch,
 }: {
   data: TValue[];
   onChange: (e: TValue) => void;
   placeholder?: string;
   className?: string;
   defaultValue?: TValue;
+  onSearch?: (e: string) => void;
 }) {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState<TValue | undefined>();
+  const [search, setSearch] = useState<string>("");
 
   useEffect(() => {
     setValue(defaultValue);
@@ -64,7 +67,14 @@ export function Combobox({
       </PopoverTrigger>
       <PopoverContent className="w-full min-w-[20rem] p-0">
         <Command>
-          <CommandInput placeholder={placeholder ?? "Search item..."} />
+          <CommandInput
+            placeholder={placeholder ?? "Search item..."}
+            value={search}
+            onValueChange={(e) => {
+              setSearch(e);
+              if (onSearch) onSearch(e);
+            }}
+          />
           <CommandEmpty>No item found.</CommandEmpty>
           <CommandGroup className="w-full max-h-32 overflow-y-auto">
             {data.map((item) => (

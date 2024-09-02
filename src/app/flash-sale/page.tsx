@@ -1,12 +1,6 @@
 "use client";
 import { Input } from "@/components/ui/input";
-import React, {
-  ChangeEvent,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import FlashSaleCard from "./flash-sale-card";
 import { debounce } from "@/Helpers";
 import Image from "next/image";
@@ -16,18 +10,11 @@ import CountdownCard from "../dashboard/countdown-card";
 import { parseISO } from "date-fns";
 
 function Page() {
-  const [total, setTotal] = useState(0);
-  const [pageIndex, setPageIndex] = useState(1);
   const [data, setData] = useState<IFlashSaleInfo | undefined>();
-  const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
 
   const getFlashSale = async () => {
-    let searchParams = new URLSearchParams({
-      page_num: "1",
-      page_size: "12",
-      product_search: search,
-    });
+    let searchParams = new URLSearchParams({});
 
     setLoading(true);
     var res = await fetch(`/api/flash-sales?` + searchParams);
@@ -41,7 +28,6 @@ function Page() {
         return;
       }
       setData(undefined);
-      setTotal(0);
     }
   };
 
@@ -49,16 +35,12 @@ function Page() {
     (async () => {
       await getFlashSale();
     })();
-  }, [search, pageIndex]);
-
-  const doSearch = debounce((e: ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-  }, 500);
+  }, []);
 
   if (data && data.products.length > 0)
     return (
       <div className={`container max-w-6xl`}>
-        <div className="flex px-2 sticky top-10 py-4 bg-transparent backdrop-blur-lg rounded-b-xl flex-col space-y-1.5 mb-3 z-10">
+        <div className="flex px-2 sticky top-10 py-4 bg-background backdrop-blur-lg rounded-b-xl flex-col space-y-1.5 mb-3 z-10">
           <div className="flex items-center justify-between">
             <p className="font-semibold text-lg flex">
               <span className="mr-3">
@@ -73,14 +55,6 @@ function Page() {
               {data.name}
             </p>
             <CountdownCard date={parseISO(data.expired_at)} />
-          </div>
-          <div className="flex space-x-1">
-            <Input
-              id="invoice"
-              placeholder="Search..."
-              className="bg-background"
-              onChange={doSearch}
-            />
           </div>
         </div>
         <div className="min-h-[68vh]">
@@ -114,14 +88,6 @@ function Page() {
             </>
           )}
         </div>
-        {/* <Pagination
-        onChange={setPageIndex}
-        meta={{
-          limit: 12,
-          page: pageIndex,
-          total,
-        }}
-      /> */}
       </div>
     );
 

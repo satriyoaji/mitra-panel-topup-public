@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import Image from "next/image";
-// import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
 export default function ListGame() {
   const [group, setGroup] = useState<TProductGroup>({
@@ -15,21 +15,27 @@ export default function ListGame() {
     name: "All",
   });
   const [data, setData] = useState<IProductCategory[]>([]);
-  const [pageIndex, setPageIndex] = useState(0);
+  const [pageIndex, setPageIndex] = useState(1);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
   const [groups, setGroups] = useState<TProductGroup[]>([]);
 
-  const totalPage = useMemo(() => Math.ceil(total / 8), [total]);
+  const totalPage = useMemo(() => Math.ceil(total / 12), [total]);
 
   const getData = async (more: boolean) => {
     setLoading(true);
     var res = await fetch(
-      `/api/products/categories/?` +
+      `/api/products/categories?` +
         new URLSearchParams({
           page: `${pageIndex}`,
           label_id: `${group?.id ?? ""}`,
-        })
+          limit: "12",
+        }),
+      {
+        next: {
+          revalidate: 30,
+        },
+      }
     );
 
     setLoading(false);
@@ -37,7 +43,7 @@ export default function ListGame() {
       var result = await res.json();
 
       if (result.data) {
-        if (more) setData((prev) => [...prev, result.data]);
+        if (more) setData((prev) => [...prev, ...result.data]);
         else setData(result.data);
       } else {
         if (!more) setData([]);
@@ -48,7 +54,7 @@ export default function ListGame() {
   };
 
   const getGroup = async () => {
-    var res = await fetch(`/api/products/groups/?`);
+    var res = await fetch(`/api/products/groups?`);
 
     if (res.ok) {
       let data: TProductGroup[] = [
@@ -73,7 +79,7 @@ export default function ListGame() {
   }, [group]);
 
   useEffect(() => {
-    if (pageIndex > 0) getData(true);
+    if (pageIndex > 1) getData(true);
   }, [pageIndex]);
 
   const showMore = () => {
@@ -111,11 +117,6 @@ export default function ListGame() {
               ))}
             </div>
           </div>
-          {/* <Input
-          onChange={doSearch}
-          placeholder="Search..."
-          className="bg-background md:max-w-xs"
-        /> */}
         </div>
         <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 md:gap-4 gap-2 mt-2 place-items-center justify-center px-2">
           {loading ? (
@@ -161,13 +162,13 @@ export default function ListGame() {
             </div>
           )}
         </div>
-        {/* {pageIndex < totalPage ? (
-        <div className="flex items-center justify-center my-2 mt-6">
-          <Button size="sm" onClick={showMore}>
-            Show More
-          </Button>
-        </div>
-      ) : null} */}
+        {pageIndex < totalPage ? (
+          <div className="flex items-center justify-center my-2 mt-6">
+            <Button size="sm" onClick={showMore}>
+              Show More
+            </Button>
+          </div>
+        ) : null}
       </div>
     </div>
   );

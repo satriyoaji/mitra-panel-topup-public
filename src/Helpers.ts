@@ -1,9 +1,4 @@
-import {
-  IFlashSaleInProduct,
-  IProductCategory,
-  TProduct,
-  TProductItem,
-} from "./Type";
+import { IProductCategory, TProduct, TProductItem } from "./Type";
 import { IPayment, IPromo } from "./types/transaction";
 
 const thousandMask = (val: number | undefined) => {
