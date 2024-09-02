@@ -30,10 +30,6 @@ function DetailProfile(props: prop) {
   const handleSubmit = async () => {
     const response = await fetch("/api/profile", {
       method: "POST",
-      // headers: {
-      //   "Content-Type": "application/json",
-      //   Authorization: `Bearer ${session?.token}`,
-      // },
       body: JSON.stringify({
         name,
         email,
@@ -69,8 +65,6 @@ function DetailProfile(props: prop) {
           />
           <AvatarFallback>{session?.user?.name?.at(0) ?? ""}</AvatarFallback>
         </Avatar>
-        {/* <h5 className="font-bold text-xl">{session?.profile?.name}</h5>
-        <h6 className="text-xs">{session?.profile?.email}</h6> */}
         <div className="w-full my-1.5">
           <Label htmlFor="invoice">Nama</Label>
           <Input
