@@ -41,7 +41,13 @@ function ItemsCard(props: TItemsCard) {
             <div className="flex justify-between w-full">
               <div className="flex space-x-4 h-full ml-2">
                 <div className="mt-1">
-                  <SketchLogoIcon />
+                  <Image
+                    alt="alt"
+                    title="alt"
+                    src="/assets/diamond.png"
+                    height={15}
+                    width={15}
+                  />
                 </div>
                 <div>
                   <div className="flex flex-col">
