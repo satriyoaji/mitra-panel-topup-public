@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ISiteProfile, ISosmed } from "@/types/utils";
 import Socmed from "./socmed-icon";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
@@ -10,6 +10,7 @@ import Image from "next/image";
 
 function Footer({ profile }: { profile?: ISiteProfile }) {
   const path = usePathname();
+  const router = useRouter();
   const [data, setData] = useState<ISosmed[]>([]);
 
   useEffect(() => {
@@ -87,8 +88,19 @@ function Footer({ profile }: { profile?: ISiteProfile }) {
                     ?.filter((i) => i.type === "contact")
                     .map((item, idx) => (
                       <div
+                        onClick={() => {
+                          var link = "";
+                          if (item.key === "email")
+                            link = "mailto:" + item.value;
+                          else if (item.key === "telegram")
+                            link = "https://telegram.me/" + item.value;
+                          else if (item.key === "whatsapp")
+                            link = "https://wa.me/" + item.value;
+
+                          if (link) router.push(link);
+                        }}
                         key={idx.toString()}
-                        className="flex items-center text-xs space-x-2"
+                        className="cursor-pointer flex items-center text-xs space-x-2"
                       >
                         <Socmed black={true} type={item.key} />
                         <p className="text-xs">{item.value}</p>
