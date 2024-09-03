@@ -1,29 +1,38 @@
 "use client";
+import { Button } from "@/components/ui/button";
 import { ILinkPayment } from "@/types/transaction";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 function LinkPayment({ payment }: { payment: ILinkPayment }) {
+  const router = useRouter();
+
   return (
     <>
-      <div className="w-full space-y-2">
-        <p className="text-muted-foreground w-full">Link Pembayaran</p>
-        {payment.mobile_url ? (
-          <Link
-            href={payment.mobile_url}
-            className="text-right text-sm w-full hover:underline md:hidden text-blue-600 hover:text-blue-800"
+      <div className="w-full">
+        <p className="text-muted-foreground w-full">
+          Klik tombol untuk link pembayaran
+        </p>
+        <div className="block md:hidden">
+          <Button
+            className="w-full bg-green-500 text-white mt-2"
+            size="sm"
+            onClick={() =>
+              router.push(payment.deeplink_url || payment.mobile_url)
+            }
           >
-            {payment.mobile_url}
-          </Link>
-        ) : null}
-        {payment.web_url ? (
-          <Link
-            href={payment.web_url}
-            className="text-right text-sm w-full hover:underline hidden md:block text-blue-600 hover:text-blue-800"
+            Bayar Sekarang
+          </Button>
+        </div>
+        <div className="hidden md:block">
+          <Button
+            className="w-full bg-green-500 text-white mt-2"
+            size="sm"
+            onClick={() => router.push(payment.deeplink_url || payment.web_url)}
           >
-            {payment.web_url}
-          </Link>
-        ) : null}
+            Bayar Sekarang
+          </Button>
+        </div>
       </div>
     </>
   );
