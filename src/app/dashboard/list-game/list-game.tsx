@@ -124,36 +124,38 @@ export default function ListGame() {
               <Skeleton key={i} className="w-full aspect-square" />
             ))
           ) : data && data.length > 0 ? (
-            data.map((val: IProductCategory, idx) => (
-              <Link
-                href={`/games/${val.key}`}
-                key={idx}
-                className="w-full h-full"
-              >
-                <Card className="w-full h-full min-w-fit rounded-xl hover:shadow-md hover:text-primary transition duration-300">
-                  <div className="p-4 md:p-5 flex flex-col items-center">
-                    <div className="overflow-clip h-20 md:h-28 w-auto rounded-xl bg-background aspect-square flex justify-center items-center">
-                      {val.image_url !== "" ? (
-                        <Image
-                          height={1000}
-                          width={1000}
-                          alt={val.name}
-                          className="rounded-xl w-full hover:scale-125 transition duration-300"
-                          src={val.image_url}
-                        />
-                      ) : (
-                        <div className="w-full aspect-square hover:scale-125 flex justify-center items-center transition z-0 duration-300 hover:rotate-12">
-                          <CubeIcon className="text-white m-auto h-20 w-20" />
-                        </div>
-                      )}
+            data.map((val: IProductCategory, idx) =>
+              val.name ? (
+                <Link
+                  href={`/games/${val.key}`}
+                  key={idx}
+                  className="w-full h-full"
+                >
+                  <Card className="w-full h-full min-w-fit rounded-xl hover:shadow-md hover:text-primary transition duration-300">
+                    <div className="p-4 md:p-5 flex flex-col items-center">
+                      <div className="overflow-clip h-20 md:h-28 w-auto rounded-xl bg-background aspect-square flex justify-center items-center">
+                        {val.image_url !== "" ? (
+                          <Image
+                            height={1000}
+                            width={1000}
+                            alt={val.name}
+                            className="rounded-xl w-full hover:scale-125 transition duration-300"
+                            src={val.image_url}
+                          />
+                        ) : (
+                          <div className="w-full aspect-square hover:scale-125 flex justify-center items-center transition z-0 duration-300 hover:rotate-12">
+                            <CubeIcon className="text-white m-auto h-20 w-20" />
+                          </div>
+                        )}
+                      </div>
+                      <p className="md:text-xs text-[70%] text-center mt-2 p-0">
+                        {val.name}
+                      </p>
                     </div>
-                    <p className="md:text-xs text-[70%] text-center mt-2 p-0">
-                      {val.name}
-                    </p>
-                  </div>
-                </Card>
-              </Link>
-            ))
+                  </Card>
+                </Link>
+              ) : null
+            )
           ) : (
             <div className="col-span-full h-60 flex items-center justify-center">
               <h4 className="text-slate-300 font-semibold">

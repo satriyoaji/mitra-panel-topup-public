@@ -183,7 +183,7 @@ function TransactionHistoryDetail({
             </div>
             {data.payment_information ? (
               <>
-                <div className="w-full bg-background h-full pt-3 min-h-[16rem] rounded-lg shadow flex-1 relative overflow-clip">
+                <div className="w-full bg-background h-full pb-24 pt-3 min-h-[16rem] rounded-lg shadow flex-1 relative overflow-clip">
                   <div className="px-4">
                     <p className="font-medium text-lg text-primary">
                       Rincian Pembayaran
@@ -225,10 +225,26 @@ function TransactionHistoryDetail({
                       </div>
                     </div>
                   </div>
-                  {isPaymentNotExpired || isHavePaymentDetail() ? (
+                  {data.order_description ? (
                     <>
                       <Separator className="my-3 w-full" />
-                      <div className="px-4 pb-24">
+                      <div className="px-4">
+                        <p className="font-medium text-lg text-primary">
+                          Catatan
+                        </p>
+                        <div
+                          className="mt-4 text-sm text-muted-foreground"
+                          dangerouslySetInnerHTML={{
+                            __html: data.order_description,
+                          }}
+                        ></div>
+                      </div>
+                    </>
+                  ) : null}
+                  {isPaymentNotExpired ? (
+                    <>
+                      <Separator className="my-3 w-full" />
+                      <div className="px-4">
                         <p className="font-medium text-lg text-primary">
                           Tujuan Pembayaran
                         </p>
