@@ -85,11 +85,9 @@ function Searchbar() {
         />
       </div>
       <CommandDialog open={isOpen} onOpenChange={setIsOpen}>
-        <h5 className="w-full font-semibold text-center mt-4 mb-2">
-          Pencarian
-        </h5>
+        <h5 className="w-full font-semibold text-center mt-4">Pencarian</h5>
         <CommandInput placeholder="Cari Produk" onValueChange={doSearch} />
-        <CommandList className="min-h-[15rem] mt-4">
+        <CommandList className="min-h-[15rem]">
           {data.length > 0 ? (
             data.map((i, idx) => (
               <div
