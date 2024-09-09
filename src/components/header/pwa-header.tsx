@@ -38,11 +38,12 @@ function PWAAlert({ profile }: { profile?: ISiteProfile }) {
             <div className="flex items-center p-1 space-x-4">
               <Button className="flex space-x-1" size="sm" onClick={onClick}>
                 <DownloadIcon className="w-3 h-3" />
-                <p className="text-xs">Install {profile?.name}</p>
+                <p className="text-xs">
+                  Install{" "}
+                  <span className="hidden md:block">{profile?.name}</span>
+                </p>
               </Button>
-              <p className="text-xs hidden md:block">
-                Akses cepat dari home screen
-              </p>
+              <p className="text-xs">Akses cepat dari home screen</p>
             </div>
             <div>
               <Button size="sm" variant="ghost" onClick={() => setOpen(false)}>

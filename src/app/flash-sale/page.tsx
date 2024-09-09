@@ -72,7 +72,7 @@ function Page() {
                 </div>
               ) : (
                 <div className="flex flex-col items-center justify-center h-full w-full">
-                  <Image
+                  {/* <Image
                     src={
                       "/assets/illustration/DrawKit Larry Character Illustration (10).svg"
                     }
@@ -81,7 +81,7 @@ function Page() {
                     title="dw"
                     height={400}
                     width={400}
-                  />
+                  /> */}
                   <h5 className="text-xl font-bold">Tidak ada Flash Sale</h5>
                 </div>
               )}
