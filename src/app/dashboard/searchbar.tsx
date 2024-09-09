@@ -80,7 +80,7 @@ function Searchbar() {
       </div>
       <div className="md:hidden text-white p-2 mr-2">
         <MagnifyingGlassIcon
-          className="cursor-pointer"
+          className="cursor-pointer h-5 w-5"
           onClick={() => setIsOpen(true)}
         />
       </div>
