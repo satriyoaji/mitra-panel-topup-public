@@ -88,6 +88,7 @@ export interface IPayment {
   image_url: string;
   fee_percent: number;
   fee_amount: number;
+  saldo?: number;
 }
 
 export interface IPaymentGroup {
