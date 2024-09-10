@@ -54,7 +54,7 @@ function Page() {
   }, [pageIndex, category]);
 
   return (
-    <div className="bg-background w-full min-h-[92vh]">
+    <div className="bg-background w-full min-h-[64vh]">
       <div className="flex px-2 sticky top-10 py-4 bg-background rounded-b-xl flex-col space-y-1.5 z-10">
         <p className="font-semibold text-primary p-0 text-xl">Produk 🕹️</p>
         <Filter onChange={setCategory} />
