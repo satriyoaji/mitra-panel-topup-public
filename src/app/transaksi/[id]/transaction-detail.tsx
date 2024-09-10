@@ -262,27 +262,20 @@ function TransactionHistoryDetail({
                       </div>
                     </>
                   ) : null}
-                  <div className="w-full bottom-0 absolute">
-                    {data.status !== ETransactionStatus.Refunded ? (
+                  {data.status === ETransactionStatus.Refunded ||
+                  data.status === ETransactionStatus.Failed ? (
+                    <div className="w-full bottom-0 absolute">
                       <div className="bg-amber-50 border flex items-center rounded-b-lg space-x-2 text-amber-800 px-4 py-1.5">
                         <InfoCircledIcon />
                         <p className="text-xs">
-                          Jika transaksi gagal, saldo anda akan dikembalikan
-                          dalam bentuk point
-                        </p>
-                      </div>
-                    ) : (
-                      <div className="bg-blue-50 border flex items-center rounded-b-lg space-x-2 text-blue-800 px-4 py-1.5">
-                        <InfoCircledIcon />
-                        <p className="text-xs">
                           Saldo anda sudah dikembalikan. Silahkan cek{" "}
-                          <Link href="/profile" className="font-semibold">
+                          <Link href="/saldo" className="font-semibold">
                             Saldo Point
                           </Link>
                         </p>
                       </div>
-                    )}
-                  </div>
+                    </div>
+                  ) : null}
                 </div>
                 <>
                   {data.payment_information.guide ? (

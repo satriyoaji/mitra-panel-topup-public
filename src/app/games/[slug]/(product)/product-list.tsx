@@ -24,31 +24,26 @@ function ProductList(prop: IProductList) {
         ref={ref}
       >
         <div className="grid md:grid-cols-3 grid-cols-2 gap-2 -mt-2">
-          {prop.products.map((val) => {
-            const item = (
-              <div className="h-full">
-                <ProductCard
-                  key={val.key}
-                  selected={val.key === data.product?.key}
-                  onClick={() => {
-                    dispatch({
-                      action: "SET_PRODUCT",
-                      payload: val,
-                    });
-                    prop.nextRef.current?.scrollIntoView({
-                      behavior: "smooth",
-                    });
-                  }}
-                  discountedPrice={val.discounted_price}
-                  name={val.name}
-                  imageURL={val.image_url}
-                  price={val.price}
-                />
-              </div>
-            );
-
-            return item;
-          })}
+          {prop.products.map((val) => (
+            <div className="h-full" key={val.key}>
+              <ProductCard
+                selected={val.key === data.product?.key}
+                onClick={() => {
+                  dispatch({
+                    action: "SET_PRODUCT",
+                    payload: val,
+                  });
+                  prop.nextRef.current?.scrollIntoView({
+                    behavior: "smooth",
+                  });
+                }}
+                discountedPrice={val.discounted_price}
+                name={val.name}
+                imageURL={val.image_url}
+                price={val.price}
+              />
+            </div>
+          ))}
         </div>
       </div>
     </>
