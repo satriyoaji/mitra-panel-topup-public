@@ -31,7 +31,7 @@ async function Page() {
   return (
     <>
       <BackHeader title="Syarat dan Ketentuan" />
-      <div className="flex justify-center w-full px-4">
+      <div className="flex justify-center w-full px-4 pb-20 md:pb-0">
         <div className="max-w-6xl w-full my-4 flex flex-col justify-center items-center">
           <div className="w-full space-y-4">
             <div className="bg-background rounded-lg w-full hidden md:block">

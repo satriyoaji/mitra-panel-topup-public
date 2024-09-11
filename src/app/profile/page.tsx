@@ -161,10 +161,7 @@ function Page() {
           </p>
         </div>
       </div>
-      <Separator
-        orientation="vertical"
-        className="ml-4 hidden md:block h-[82vh]"
-      />
+      <Separator orientation="vertical" className="ml-4 hidden md:block" />
       <div className="w-full hidden md:block">
         <div className="px-4">
           <Tabs defaultValue="profile">

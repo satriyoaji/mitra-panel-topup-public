@@ -4,13 +4,7 @@ import { priceMask } from "@/Helpers";
 import { IFlashSaleInProduct } from "@/types/flash-sale";
 import { Progress } from "@/components/ui/progress";
 
-function FlashSaleCard({
-  data,
-  selected,
-}: {
-  data: IFlashSaleInProduct;
-  selected?: boolean;
-}) {
+function FlashSaleCard({ data }: { data: IFlashSaleInProduct }) {
   const disc = Math.ceil(
     ((data.price - data.discounted_price) / data.price) * 100
   );
@@ -20,9 +14,7 @@ function FlashSaleCard({
       className="w-full h-full"
     >
       <div
-        className={`min-h-[6rem] h-full bg-white hover:bg-zinc-50 text-[85%] md:text-[100%] rounded-xl overflow-clip border-t-0 border-r-0 ${
-          selected ? "border-4" : "border"
-        }`}
+        className={`min-h-[6rem] h-full bg-white hover:bg-zinc-50 text-[85%] md:text-[100%] rounded-xl overflow-clip border`}
       >
         <div className="p-0 flex flex-col m-0 h-full">
           <div className="pt-3 flex flex-col justify-between h-full items-start">

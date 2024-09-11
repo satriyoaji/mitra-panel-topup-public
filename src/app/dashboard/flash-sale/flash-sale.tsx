@@ -54,7 +54,7 @@ function FlashSale({ data }: { data: IFlashSaleInfo }) {
             <div className="bg-cover rounded-xl">
               <Carousel
                 opts={{
-                  align: "center",
+                  align: "start",
                   dragFree: true,
                 }}
                 plugins={[
