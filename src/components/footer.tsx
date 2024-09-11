@@ -29,7 +29,7 @@ function Footer({ profile }: { profile?: ISiteProfile }) {
   return (
     <div
       // style={{ backgroundImage: 'url("/assets/illustration/v1/footer.svg")' }}
-      className="bg-no-repeat bg-right bg-background pt-2 w-full"
+      className="bg-no-repeat bg-right bg-background w-full"
     >
       {!path.includes("/games/") && !path.includes("/auth/") ? (
         <>
@@ -38,7 +38,7 @@ function Footer({ profile }: { profile?: ISiteProfile }) {
           !path.includes("/profile") &&
           !path.includes("/saldo") &&
           !path.includes("/kebijakan") ? (
-            <div className="flex justify-center w-full md:hidden">
+            <div className="flex pt-2 justify-center w-full md:hidden">
               <div className="w-full mb-8 md:container">
                 <div className="px-4 md:px-6">
                   <div className="grid my-4 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-2 grid-cols-1 sm:gap-8">
@@ -143,10 +143,8 @@ function Footer({ profile }: { profile?: ISiteProfile }) {
                 </div>
               </div>
             </div>
-          ) : (
-            <div className="mt-16"></div>
-          )}
-          <div className="md:flex justify-center w-full hidden">
+          ) : null}
+          <div className="md:flex pt-2 justify-center w-full hidden">
             <div className="w-full mb-8 md:container">
               <div className="px-4 md:px-6">
                 <div className="grid my-4 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-2 grid-cols-1 sm:gap-8">

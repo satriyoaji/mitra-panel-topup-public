@@ -32,7 +32,9 @@ async function DetailPage({ params }: { params: { id: string } }) {
   return (
     <>
       <BackHeader title="Detail Transaksi" />
-      <TransactionHistoryDetail id={params.id} profile={profile} />;
+      <div className="pb-20 md:pb-0">
+        <TransactionHistoryDetail id={params.id} profile={profile} />
+      </div>
     </>
   );
 }

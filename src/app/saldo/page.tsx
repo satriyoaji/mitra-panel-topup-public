@@ -50,7 +50,7 @@ function Page() {
           Merupakan Saldo Refund dari Transaksi Anda
         </p>
       </div>
-      <div className="gap-3 grid text-sm overflow-y-auto px-2 md:px-0 pt-2">
+      <div className="gap-3 grid text-sm overflow-y-auto px-2 md:px-0 pt-2 pb-12 md:pb-0">
         {balances.map((item, i) => (
           <Link
             href={`/transaksi/${item.transaction_code}`}
