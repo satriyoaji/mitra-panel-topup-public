@@ -121,18 +121,24 @@ function PaymentList({
             </div>
           </div>
         ))}
-        <Separator className="my-2" />
-        <Button
-          variant="link"
-          className="w-full"
-          onClick={() => {
-            if (length < paymentGroup.length)
-              return setLength(paymentGroup.length);
-            setLength(2);
-          }}
-        >
-          {length < paymentGroup.length ? "Pembayaran Lainnya" : "Sembunyikan"}
-        </Button>
+        {paymentGroup.length > 2 ? (
+          <>
+            <Separator className="my-2" />
+            <Button
+              variant="link"
+              className="w-full"
+              onClick={() => {
+                if (length < paymentGroup.length)
+                  return setLength(paymentGroup.length);
+                setLength(2);
+              }}
+            >
+              {length < paymentGroup.length
+                ? "Pembayaran Lainnya"
+                : "Sembunyikan"}
+            </Button>
+          </>
+        ) : null}
       </div>
     </>
   );
