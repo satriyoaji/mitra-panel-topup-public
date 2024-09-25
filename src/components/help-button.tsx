@@ -18,7 +18,18 @@ function HelpButton() {
       var res = await fetch("/api/social-media");
       if (res.ok) {
         var data = await res.json();
-        setData(data.data);
+
+        var linkData = data.data.map((item: ISosmed) => {
+          if (item.key === "email") item.value = "mailto:" + item.value;
+          else if (item.key === "telegram")
+            item.value = "https://telegram.me/" + item.value;
+          else if (item.key === "whatsapp")
+            item.value = "https://wa.me/" + item.value;
+
+          return item;
+        });
+
+        setData(linkData);
         return;
       }
 
