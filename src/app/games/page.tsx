@@ -98,14 +98,14 @@ function Page() {
           </>
         )}
       </div>
-      <Pagination
+      {/* <Pagination
         onChange={setPageIndex}
         meta={{
           limit: 12,
           page: pageIndex,
           total,
         }}
-      />
+      /> */}
     </div>
   );
 }
