@@ -2,6 +2,8 @@ import React from "react";
 import { GetCredHeader } from "../api/api-utils";
 import { ISiteProfile } from "@/types/utils";
 import BackHeader from "@/components/header/back-header";
+import Head from "next/head";
+import { headers } from "next/headers";
 
 const getData = async () => {
   const credentialHeader = GetCredHeader();
@@ -28,8 +30,36 @@ const getData = async () => {
 
 async function Page() {
   var data: ISiteProfile | undefined = await getData();
+  var url = headers().get("host") ?? "";
+
   return (
     <>
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  item: { "@id": url, name: "Home" },
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  item: {
+                    "@id": url + "/kebijakan",
+                    name: "Kebijakan",
+                  },
+                },
+              ],
+            }),
+          }}
+        />
+      </Head>
       <BackHeader title="Kebijakan Privasi" />
       <div className="flex justify-center w-full px-4 pb-20 md:pb-0">
         <div className="max-w-6xl w-full my-4 flex flex-col justify-center items-center">
