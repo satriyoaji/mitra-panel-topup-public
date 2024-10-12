@@ -41,9 +41,9 @@ function FormAccount({ forms }: Prop) {
     <div className="grid w-full items-center gap-4">
       {forms.map((item) => (
         <div key={item.key} className="flex flex-col space-y-1.5">
-          <Label htmlFor="id" className="ml-1">
+          <h3 className="ml-1 text-sm font-semibold p-0">
             {item.alias.replace(/_/g, " ")} *
-          </Label>
+          </h3>
           {item.type === "option" ? (
             <Select
               onValueChange={(e) =>

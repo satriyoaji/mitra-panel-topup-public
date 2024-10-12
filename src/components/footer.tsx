@@ -53,9 +53,9 @@ function Footer({ profile }: { profile?: ISiteProfile }) {
                       )}
                       {profile ? (
                         <>
-                          <h1 className="text-lg font-medium mt-2">
+                          <p className="text-lg font-medium mt-2">
                             {profile.name} - {profile.title}
-                          </h1>
+                          </p>
                           <p
                             className="text-muted-foreground text-xs leading-5"
                             dangerouslySetInnerHTML={{
@@ -159,9 +159,9 @@ function Footer({ profile }: { profile?: ISiteProfile }) {
                     )}
                     {profile ? (
                       <>
-                        <h1 className="text-lg font-medium mt-2">
+                        <p className="text-lg font-medium mt-2">
                           {profile.name} - {profile.title}
-                        </h1>
+                        </p>
                         <p
                           className="text-muted-foreground text-xs leading-5"
                           dangerouslySetInnerHTML={{
