@@ -28,7 +28,7 @@ function InternalLink() {
   }, []);
 
   return (
-    <div>
+    <div className="px-2">
       <h2 className="font-medium text-lg ml-2 text-muted-foreground">
         Produk Lainnya
       </h2>

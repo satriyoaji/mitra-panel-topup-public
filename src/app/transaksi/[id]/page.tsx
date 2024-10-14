@@ -17,7 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
   var slug = split[split.length - 1];
 
   var host = headers().get("host") ?? "";
-  url = "http://" + host + "/transaksi/" + slug;
+  url = "https://" + host + "/transaksi/" + slug;
   var title = `Detail Pesanan | ${name}`;
   var description = `Lihat detail pesanan kamu di ${name}.`;
 
@@ -109,6 +109,9 @@ async function DetailPage({ params }: { params: { id: string } }) {
         />
       </Head>
       <BackHeader title="Detail Transaksi" />
+      <h1 className="font-medium text-xl text-primary hidden md:block">
+        Detail Transaksi
+      </h1>
       <div className="pb-20 md:pb-0">
         <TransactionHistoryDetail id={params.id} profile={profile} />
       </div>

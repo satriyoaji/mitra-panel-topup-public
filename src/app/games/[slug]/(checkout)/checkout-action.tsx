@@ -184,6 +184,7 @@ function CheckoutAction({
         product={data.product}
         promo={data.promo}
         form={data.form}
+        products={data.products}
         account={data.account}
       />
     </>

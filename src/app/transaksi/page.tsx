@@ -31,7 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
     var description = setting.description;
 
     var host = headers().get("host") ?? "";
-    var url = "http://" + host + "/transaksi";
+    var url = "https://" + host + "/transaksi";
     var title = `Daftar Pesanan | ${setting.name}`;
     description = `Temukan semua daftar pesanan kamu di ${setting.name}.`;
 
@@ -94,6 +94,7 @@ async function Page() {
           }}
         />
       </Head>
+      <h1 className="hidden">Cek Pesananku</h1>
       {session ? <AuthPage /> : <PublicPage />}
     </>
   );
