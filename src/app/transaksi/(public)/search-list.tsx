@@ -54,17 +54,9 @@ function SearchList() {
     }
   };
 
-  const getData = () => {
-    const params = new URLSearchParams(searchParams);
-    params.set("search", search);
-    params.set("page", `${page}`);
-    router.replace(`${pathname}?${params.toString()}`);
-    get();
-  };
-
   useEffect(() => {
-    getData();
-  }, []);
+    get();
+  }, [page]);
 
   return (
     <>
@@ -75,7 +67,7 @@ function SearchList() {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <Button onClick={getData}>Cari</Button>
+        <Button onClick={get}>Cari</Button>
       </div>
       <div className="flex flex-col space-y-4 pt-4 -mt-2 px-4 bg-white/50 mb-4 rounded-b-lg backdrop-blur-md">
         {!loading ? (
@@ -95,7 +87,6 @@ function SearchList() {
                 meta={meta}
                 onChange={(val) => {
                   setPage(val);
-                  getData();
                   window.scrollTo({ top: 0, behavior: "smooth" });
                 }}
               />

@@ -5,6 +5,7 @@ import { IUseCategoryData } from "./useCategory";
 import FormWrapper from "./form-wrapper";
 import { Session } from "next-auth";
 import dynamic from "next/dynamic";
+import InternalLink from "./internal-link";
 
 const ProductList = dynamic(() => import("./(product)/product-list"), {
   ssr: false,
@@ -30,6 +31,7 @@ const FormAccount = dynamic(() => import("./(form-id)/form-account"), {
 
 interface Props extends IUseCategoryData {
   session: Session | null;
+  appName: string;
 }
 
 function DetailCategory(props: Props) {
@@ -42,7 +44,10 @@ function DetailCategory(props: Props) {
               <h1 className="text-lg font-bold ml-4 text-primary p-0 hidden md:block">
                 {props.data.category.name}
               </h1>
-              <Header category={props.data.category} />
+              <Header name={props.appName} category={props.data.category} />
+              <div className="hidden md:block mt-4">
+                <InternalLink />
+              </div>
             </div>
           </div>
           <div className="col-span-3 ">

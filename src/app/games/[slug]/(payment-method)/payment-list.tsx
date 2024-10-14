@@ -77,7 +77,7 @@ function PaymentList({
         {paymentGroup.slice(0, length).map((group, idx) => (
           <div key={idx.toString()} className="pb-4">
             <div>
-              <p className="text-muted-foreground text-xs">{group.name}</p>
+              <h3 className="text-muted-foreground text-xs">{group.name}</h3>
             </div>
             <div className="mt-3">
               <div className="grid sm:grid-cols-3 grid-cols-2 gap-2">
@@ -121,18 +121,24 @@ function PaymentList({
             </div>
           </div>
         ))}
-        <Separator className="my-2" />
-        <Button
-          variant="link"
-          className="w-full"
-          onClick={() => {
-            if (length < paymentGroup.length)
-              return setLength(paymentGroup.length);
-            setLength(2);
-          }}
-        >
-          {length < paymentGroup.length ? "Pembayaran Lainnya" : "Sembunyikan"}
-        </Button>
+        {paymentGroup.length > 2 ? (
+          <>
+            <Separator className="my-2" />
+            <Button
+              variant="link"
+              className="w-full"
+              onClick={() => {
+                if (length < paymentGroup.length)
+                  return setLength(paymentGroup.length);
+                setLength(2);
+              }}
+            >
+              {length < paymentGroup.length
+                ? "Pembayaran Lainnya"
+                : "Sembunyikan"}
+            </Button>
+          </>
+        ) : null}
       </div>
     </>
   );

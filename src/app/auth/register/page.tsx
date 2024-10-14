@@ -51,9 +51,9 @@ function Page() {
   return (
     <div className="relative h-[88vh] md:h-[92vh] flex md:items-center justify-center w-full px-0">
       <div className="md:border p-8 md:rounded-lg md:shadow-md w-full max-w-md">
-        <h1 className="pt-4 text-2xl text-center font-semibold tracking-tight">
+        <p className="pt-4 text-2xl text-center font-semibold tracking-tight">
           🔐Register
-        </h1>
+        </p>
         <form className="w-full max-w-md grid gap-2 pt-4" onSubmit={onSubmit}>
           <div className="grid w-full max-w-sm gap-1.5">
             <Label htmlFor="nama" className="text-left">

@@ -18,7 +18,7 @@ function FormConfirmation() {
     <form>
       <div className="grid sm:grid-cols-2 w-full items-center gap-4">
         <div className="flex flex-col space-y-1.5">
-          <Label htmlFor="email">Email *</Label>
+          <h3 className="text-sm font-semibold p-0">Email *</h3>
           <Input
             id="email"
             type="email"
@@ -37,7 +37,7 @@ function FormConfirmation() {
           />
         </div>
         <div className="flex flex-col space-y-1.5">
-          <Label htmlFor="whatsapp">No. Whatsapp *</Label>
+          <h3 className="text-sm font-semibold p-0">No. Whatsapp *</h3>
           <PhoneInputIndo
             id="whatsapp"
             placeholder="Contoh: 81XXXXXXXXX"

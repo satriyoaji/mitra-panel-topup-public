@@ -13,6 +13,7 @@ function TransactionProvider({ children }: { children: React.ReactNode }) {
       email: session?.profile?.email ?? "",
       noWhatsapp: session?.profile?.phone ?? "",
     },
+    products: [],
   });
 
   const dispatch = (data: TransactionDispatch) => {
@@ -38,6 +39,9 @@ function TransactionProvider({ children }: { children: React.ReactNode }) {
         return;
       case "SET_PRODUCT":
         setTransaction((prev) => ({ ...prev, product: data.payload }));
+        return;
+      case "SET_PRODUCTS":
+        setTransaction((prev) => ({ ...prev, products: data.payload }));
         return;
       case "SET_PROMO":
         setTransaction((prev) => ({ ...prev, promo: data.payload }));

@@ -1,3 +1,5 @@
+"use client";
+
 import {
   CarouselContent,
   CarouselItem,
@@ -11,7 +13,7 @@ import Image from "next/image";
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import { useRouter } from "next/navigation";
 
-function CarouselV2({ data }: { data: IBanner[] }) {
+function CarouselV2({ data, name }: { data: IBanner[]; name: string }) {
   const [api, setApi] = useState<CarouselApi>();
   const router = useRouter();
 
@@ -50,8 +52,8 @@ function CarouselV2({ data }: { data: IBanner[] }) {
                 <Image
                   key={index}
                   src={item.image_url}
-                  alt={item.name}
-                  title={item.name}
+                  alt={`promo diskon/cashback ${name}`}
+                  title={`promo diskon/cashback ${name}`}
                   width={1200}
                   height={400}
                   style={{ aspectRatio: 3 / 1 }}

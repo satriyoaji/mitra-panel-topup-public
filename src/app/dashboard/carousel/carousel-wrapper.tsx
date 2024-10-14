@@ -1,36 +1,32 @@
-"use client";
-
 import { IBanner } from "@/types/utils";
-import { useEffect, useState } from "react";
 import Carousel from "./carousel";
-import Loading from "./loading";
+import { GetCredHeader } from "@/app/api/api-utils";
 
-const CarouselWrapper = () => {
-  const [banners, setBanners] = useState<IBanner[]>([]);
-  const [loading, setLoading] = useState(true);
+async function getData() {
+  var credentialHeader = GetCredHeader();
 
-  const getData = async () => {
-    setLoading(true);
-    var res = await fetch("/api/banners");
+  var re = await fetch(`${process.env.NEXT_API_URL}/v2/panel/banner/list`, {
+    headers: {
+      "Content-Type": "application/json",
+      "X-Sign": credentialHeader.sign,
+      "X-User-Id": credentialHeader.mitraid,
+      "X-Timestamp": credentialHeader.timestamp.toString(),
+    },
+    next: {
+      revalidate: 120,
+    },
+  });
 
-    var data = await res.json();
-    setBanners(data);
-    setLoading(false);
-  };
+  var result = await re.json();
 
-  useEffect(() => {
-    getData();
-  }, []);
+  return result.data;
+}
 
-  if (loading)
-    return (
-      <div className="bg-background flex justify-center items-center md:py-4">
-        <Loading />
-      </div>
-    );
+const CarouselWrapper = async ({ name }: { name: string }) => {
+  var banners: IBanner[] = await getData();
 
   if (banners && banners.length > 0) {
-    return <Carousel data={banners} />;
+    return <Carousel data={banners} name={name} />;
   }
 };
 
