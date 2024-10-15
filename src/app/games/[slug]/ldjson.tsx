@@ -42,11 +42,42 @@ function Ldjson({ appName, url }: { appName: string; url: string }) {
     });
   }, [date.getMonth]);
 
-  console.log(product);
-
   if (product.min && product.max)
     return (
       <>
+        <Script
+          id=""
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  item: { "@id": url, name: "Home" },
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  item: {
+                    "@id": url + "/games",
+                    name: "Daftar Produk",
+                  },
+                },
+                {
+                  "@type": "ListItem",
+                  position: 3,
+                  item: {
+                    "@id": url + "/games/" + data.category?.key,
+                    name: data.category?.name,
+                  },
+                },
+              ],
+            }),
+          }}
+        />
         <Script
           id=""
           type="application/ld+json"
