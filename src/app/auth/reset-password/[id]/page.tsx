@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { PasswordInput } from "@/components/ui/custom-input";
 
 function FormResetPassword({ params }: { params: { id: string } }) {
   const [loading, setLoading] = useState(false);
@@ -32,9 +33,8 @@ function FormResetPassword({ params }: { params: { id: string } }) {
             <Label htmlFor="password" className="text-left">
               New Password
             </Label>
-            <Input
+            <PasswordInput
               id="password"
-              type="password"
               placeholder="Masukan New Password"
               name="password"
               onChange={(e) => setPassword(e.target.value)}
@@ -44,9 +44,8 @@ function FormResetPassword({ params }: { params: { id: string } }) {
             <Label htmlFor="confirmPassword" className="text-left">
               Confirmation Password
             </Label>
-            <Input
+            <PasswordInput
               id="confirmPassword"
-              type="password"
               placeholder="Masukan New Password"
               name="confirmPassword"
               onChange={(e) => setConfirmPassword(e.target.value)}

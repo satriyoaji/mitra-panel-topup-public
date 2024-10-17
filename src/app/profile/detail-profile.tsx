@@ -28,13 +28,15 @@ function DetailProfile(props: prop) {
   }, []);
 
   const handleSubmit = async () => {
+    const body = {
+      name,
+      email,
+      phone: `62${phone}`,
+    };
+
     const response = await fetch("/api/profile", {
       method: "POST",
-      body: JSON.stringify({
-        name,
-        email,
-        phone: `62${phone}`,
-      }),
+      body: JSON.stringify(body),
     });
 
     if (!response.ok) {
@@ -46,6 +48,15 @@ function DetailProfile(props: prop) {
       });
     }
 
+    if (session) {
+      await update({
+        ...session,
+        profile: {
+          ...session.profile,
+          body,
+        },
+      });
+    }
     props.onSuccess();
     await update();
     return toast({

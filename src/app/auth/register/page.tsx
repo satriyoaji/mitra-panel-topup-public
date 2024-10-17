@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useToast } from "@/components/ui/use-toast";
-import { PhoneInput } from "@/components/ui/custom-input";
+import { PasswordInput, PhoneInput } from "@/components/ui/custom-input";
 
 function Page() {
   const [loading, setLoading] = useState(false);
@@ -82,9 +82,8 @@ function Page() {
             <Label htmlFor="password" className="text-left">
               Password
             </Label>
-            <Input
+            <PasswordInput
               id="password"
-              type="password"
               name="password"
               placeholder="Masukan Password"
               onChange={(e) => setPassword(e.target.value)}
