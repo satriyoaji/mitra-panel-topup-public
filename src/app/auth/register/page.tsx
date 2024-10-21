@@ -34,8 +34,8 @@ function Page() {
     if (!res.ok) {
       let response = await res.json();
       return toast({
-        title: `Failed: ${res.statusText}`,
-        description: `Registrasi Akun Gagal: ${response.data}`,
+        title: "Failed",
+        description: response.data,
         variant: "destructive",
       });
     }

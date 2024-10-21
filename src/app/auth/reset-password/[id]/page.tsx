@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { PasswordInput } from "@/components/ui/custom-input";
 
@@ -10,10 +9,6 @@ function FormResetPassword({ params }: { params: { id: string } }) {
   const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
-  useEffect(() => {
-    console.log("ID: ", params.id);
-  }, []);
 
   const onSubmitReset = async (e: React.FormEvent) => {
     e.preventDefault();

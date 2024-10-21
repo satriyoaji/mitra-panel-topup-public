@@ -54,8 +54,6 @@ function Filter({ onChange }: { onChange: (val: TValue | undefined) => void }) {
     setSearch(e);
   }, 500);
 
-  console.log(search);
-
   return (
     <div className="md:flex md:space-x-1 space-y-1 md:space-y-0 w-full">
       <div className="w-full">
