@@ -79,11 +79,11 @@ function Page() {
               {loading ? "Loading..." : "Login"}
             </Button>
             <div className="flex flex-col -space-y-2 items-center justify-center">
-              <Link href="/auth/reset-password">
+              {/* <Link href="/auth/reset-password">
                 <Button variant="link" size="sm" className="w-full">
                   Lupa Password?
                 </Button>
-              </Link>
+              </Link> */}
               <Link href="/auth/register">
                 <Button variant="link" size="sm" className="w-full">
                   Belum Punya Akun? Register

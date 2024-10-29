@@ -93,6 +93,7 @@ function DetailProfile(props: prop) {
             id="email"
             name="email"
             type="email"
+            disabled={true}
             placeholder="Masukan Email"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
@@ -104,6 +105,7 @@ function DetailProfile(props: prop) {
             onValueChange={(e) => {
               setPhone(`${e}`);
             }}
+            disabled={true}
             value={phone ?? ""}
             placeholder="Masukan No. Whatsapp"
           />
