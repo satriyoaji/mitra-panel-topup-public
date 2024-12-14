@@ -1,6 +1,6 @@
+import { debounce } from "@/Helpers";
 import { LooseObject, TProductForm } from "@/Type";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -8,34 +8,71 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useToast } from "@/components/ui/use-toast";
 import TransactionContext, {
   ITransactionContext,
 } from "@/infrastructures/context/transaction/transaction.context";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 
 interface Prop {
   forms: TProductForm[];
 }
 
 function FormAccount({ forms }: Prop) {
-  const { dispatch } = useContext(TransactionContext) as ITransactionContext;
+  const { dispatch, data: selectedData } = useContext(
+    TransactionContext
+  ) as ITransactionContext;
   const [data, setData] = useState<LooseObject>();
+  const { toast } = useToast();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const checkId = async () => {
+    if (data) {
+      let isNull = false;
+      Object.values(data).forEach((val) => {
+        if (!val) isNull = true;
+      });
+      if (forms.length == Object.keys(data).length && !isNull) {
+        const payload = {
+          category_key: selectedData.category?.key,
+          product_key: selectedData.product?.key,
+          form_data: Object.keys(data).map((key) => ({
+            key,
+            value: data[key],
+          })),
+        };
+        // check id
+        var res = await fetch(`/api/products/categories/check-id`, {
+          method: "POST",
+          body: JSON.stringify(payload),
+        });
+
+        if (res.ok) {
+          const resData = await res.json();
+          if (resData.data.is_valid) {
+            return dispatch({
+              action: "SET_FORM",
+              payload: data,
+            });
+          }
+          return toast({
+            title: "Failed",
+            description: "Akun tidak ditemukan",
+            variant: "destructive",
+          });
+        }
+      }
+    }
+  };
+
+  const handleChange = debounce((e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, valueAsNumber } = e.target;
     setData((prevState) => ({
       ...prevState,
       [name]: e.target.type == "number" ? valueAsNumber : value,
     }));
-  };
 
-  useEffect(() => {
-    if (data)
-      dispatch({
-        action: "SET_FORM",
-        payload: data,
-      });
-  }, [data]);
+    checkId();
+  }, 2500);
 
   return (
     <div className="grid w-full items-center gap-4">
