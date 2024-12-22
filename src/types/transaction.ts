@@ -1,4 +1,9 @@
-import { IProductCategory, LooseObject, TProduct, TProductItem } from "@/Type";
+import {
+  IProductCategory,
+  LooseObject,
+  TProductItem,
+  TProductItemWithTags,
+} from "@/Type";
 
 export interface ICategoryForm {
   key: string;
@@ -45,17 +50,6 @@ export interface ILinkPayment extends IBasePaymentInformation {
 export interface IQRPayment extends IBasePaymentInformation {
   payment_method: "QR_CODE";
   qr_code: string;
-}
-
-export interface IPaymentInfo {
-  invoice_code: string;
-  payment_method: string;
-  payment_channel: string;
-  virtual_account_number?: string;
-  virtual_account_name?: string;
-  payment_amount: number;
-  expired_at: string;
-  qr_code?: string;
 }
 
 export interface ITransactionHistoryDetail {
@@ -134,7 +128,7 @@ export interface IAccount {
 
 export interface ITransaction {
   product?: TProductItem;
-  products: TProductItem[];
+  products?: TProductItemWithTags;
   category?: IProductCategory | null;
   promo?: IPromo;
   payment?: IPayment;

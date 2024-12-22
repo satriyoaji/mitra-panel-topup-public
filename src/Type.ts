@@ -135,3 +135,18 @@ export interface ITransactionHistoryList {
   payment_logo: string;
   expired_at: string;
 }
+
+export type TTag = {
+  value: string;
+  label: string;
+};
+
+export type TProductItemTag = {
+  name: string;
+  products: TProductItem[];
+};
+
+export type TProductItemWithTags = {
+  tags: TTag[];
+  products: TProductItemTag[];
+};
